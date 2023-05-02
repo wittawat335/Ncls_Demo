@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCLS.WEB", "NCLS.WEB\NCLS.WEB.csproj", "{218CF0B4-E7D9-4BD5-B603-62F1158A43C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCLS.APPLICATION", "NCLS.APPLICATION\NCLS.APPLICATION.csproj", "{6E2B474F-CCD6-40C8-B992-E33FFBBCC7FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCLS.DOMAIN", "NCLS.DOMAIN\NCLS.DOMAIN.csproj", "{BF220F2B-1D93-4B2A-B8E9-C9BD2FA6F729}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{218CF0B4-E7D9-4BD5-B603-62F1158A43C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218CF0B4-E7D9-4BD5-B603-62F1158A43C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218CF0B4-E7D9-4BD5-B603-62F1158A43C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218CF0B4-E7D9-4BD5-B603-62F1158A43C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2B474F-CCD6-40C8-B992-E33FFBBCC7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2B474F-CCD6-40C8-B992-E33FFBBCC7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2B474F-CCD6-40C8-B992-E33FFBBCC7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2B474F-CCD6-40C8-B992-E33FFBBCC7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF220F2B-1D93-4B2A-B8E9-C9BD2FA6F729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF220F2B-1D93-4B2A-B8E9-C9BD2FA6F729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF220F2B-1D93-4B2A-B8E9-C9BD2FA6F729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF220F2B-1D93-4B2A-B8E9-C9BD2FA6F729}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

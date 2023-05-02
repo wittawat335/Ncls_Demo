@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>BMW Financial Services</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="~/Assets/img/logo-bmw-200.png" />
+    @Styles.Render("~/Contents/common", "~/Contents/datepicker", "~/Contents/select2")
+    @Scripts.Render("~/Scripts/jquery", "~/Scripts/common", "~/Scripts/datepicker", "~/Scripts/select2")
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+    <div class="page-header navbar navbar-fixed-top">
+        <div class="page-header-inner ">
+            <div class="page-logo">
+                <img src="~/Assets/img/bmw-logo1.png" alt="logo" class="logo-default">
+                <img src="~/Assets/img/bmw-logo2.png" alt="logo" class="logo-default">
+                <div class="menu-toggler sidebar-toggler"></div>
+            </div>
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+
+                    @Html.Action("_Notification", "Common")
+
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                            <i class="fa fa-angle-down"></i>&nbsp;
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            @*<li>
+                                    <a onclick="">
+                                        <i class="icon-user"></i>User Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="">
+                                        <i class="icon-key"></i>Change Password
+                                    </a>
+                                </li>*@
+                            <li>
+                                <a onclick="logout()">
+                                    <i class="icon-logout"></i>Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @Html.Action("_RoleList", "Common")
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            @Html.Action("_NavMenu", "Common")
+        </div>
+        <div class="page-content-wrapper">
+            <div class="page-content" style="min-height: 1136px">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="page-footer-inner">
+        </div>
+        <div class="scroll-to-top" style="display: none;">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+
+    @Html.Action("_Modal", "Common")
+    @Html.Action("_Loading", "Common")
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>
+
+
+

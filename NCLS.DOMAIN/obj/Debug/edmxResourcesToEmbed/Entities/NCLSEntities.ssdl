@@ -1,0 +1,2767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NCLS_SITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="COL_USER">
+    <Key>
+      <PropertyRef Name="USER_CODE" />
+    </Key>
+    <Property Name="USER_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_PASSWORD" Type="varchar" MaxLength="255" />
+    <Property Name="FIRST_NAME_EN" Type="varchar" MaxLength="255" />
+    <Property Name="FIRST_NAME_TH" Type="varchar" MaxLength="255" />
+    <Property Name="LAST_NAME_EN" Type="varchar" MaxLength="255" />
+    <Property Name="LAST_NAME_TH" Type="varchar" MaxLength="255" />
+    <Property Name="USER_GROUP" Type="varchar" MaxLength="20" />
+    <Property Name="USER_STATUS" Type="char" MaxLength="1" />
+    <Property Name="LOGIN_COUNTER" Type="int" />
+    <Property Name="CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="CREATE_DATE" Type="datetime" />
+    <Property Name="UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="COL_USER_CONTRACT">
+    <Key>
+      <PropertyRef Name="USER_CODE" />
+      <PropertyRef Name="CONTRACT_NO" />
+    </Key>
+    <Property Name="USER_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="CREATE_DATE" Type="datetime" />
+    <Property Name="UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="M_ACTION">
+    <Key>
+      <PropertyRef Name="ACT_CODE" />
+    </Key>
+    <Property Name="ACT_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ACT_PROG_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="ACT_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="ACT_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="ACT_CREATE_DATE" Type="datetime" />
+    <Property Name="ACT_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="ACT_UPDATE_DATE" Type="datetime" />
+    <Property Name="ACT_STATUS" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="M_BUCKET">
+    <Key>
+      <PropertyRef Name="BUCKET_CODE" />
+    </Key>
+    <Property Name="BUCKET_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="BUCKET_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="BUCKET_DESC" Type="varchar" MaxLength="200" />
+    <Property Name="BUCKET_OVDDAYS_START" Type="int" />
+    <Property Name="BUCKET_OVDDAYS_END" Type="int" />
+    <Property Name="BUCKET_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BUCKET_CREATE_DATE" Type="datetime" />
+    <Property Name="BUCKET_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BUCKET_UPDATE_DATE" Type="datetime" />
+    <Property Name="BUCKET_STATUS" Type="char" MaxLength="1" />
+    <Property Name="BUCKET_COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="BUCKET_BRANCH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="M_COURT">
+    <Key>
+      <PropertyRef Name="COURT_CODE" />
+    </Key>
+    <Property Name="COURT_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="COURT_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="COURT_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="COURT_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="COURT_AMT" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="COURT_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="COURT_CREATE_DATE" Type="datetime" />
+    <Property Name="COURT_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="COURT_UPDATE_DATE" Type="datetime" />
+    <Property Name="COURT_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_DOCUMENT">
+    <Key>
+      <PropertyRef Name="DOC_CASE_CODE" />
+      <PropertyRef Name="DOC_CODE" />
+    </Key>
+    <Property Name="DOC_CASE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DOC_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DOC_REQ_FLAG" Type="char" MaxLength="1" />
+    <Property Name="DOC_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="DOC_CREATE_DATE" Type="datetime" />
+    <Property Name="DOC_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="DOC_UPDATE_DATE" Type="datetime" />
+    <Property Name="DOC_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_FUNCTION">
+    <Key>
+      <PropertyRef Name="FUNC_CODE" />
+    </Key>
+    <Property Name="FUNC_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FUNC_PROG_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="FUNC_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="FUNC_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="FUNC_CREATE_DATE" Type="datetime" />
+    <Property Name="FUNC_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="FUNC_UPDATE_DATE" Type="datetime" />
+    <Property Name="FUNC_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_LEGAL_CASE">
+    <Key>
+      <PropertyRef Name="CASE_CODE" />
+    </Key>
+    <Property Name="CASE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CASE_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="CASE_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="CASE_GROUP_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="CASE_TYPE" Type="varchar" MaxLength="50" />
+    <Property Name="CASE_COLOR" Type="varchar" MaxLength="50" />
+    <Property Name="CASE_DOC_FLAG" Type="char" MaxLength="1" />
+    <Property Name="CASE_TABLE" Type="varchar" MaxLength="50" />
+    <Property Name="CASE_SEQ" Type="int" />
+    <Property Name="CASE_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="CASE_CREATE_DATE" Type="datetime" />
+    <Property Name="CASE_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="CASE_UPDATE_DATE" Type="datetime" />
+    <Property Name="CASE_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_LEGAL_STATUS">
+    <Key>
+      <PropertyRef Name="LGSTS_CASE_CODE" />
+      <PropertyRef Name="LGSTS_STS_CODE" />
+    </Key>
+    <Property Name="LGSTS_CASE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LGSTS_STS_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LGSTS_SUCC_FLAG" Type="char" MaxLength="1" />
+    <Property Name="LGSTS_START_1" Type="int" />
+    <Property Name="LGSTS_END_1" Type="int" />
+    <Property Name="LGSTS_COLOR_1" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_START_2" Type="int" />
+    <Property Name="LGSTS_END_2" Type="int" />
+    <Property Name="LGSTS_COLOR_2" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_START_3" Type="int" />
+    <Property Name="LGSTS_END_3" Type="int" />
+    <Property Name="LGSTS_COLOR_3" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_START_4" Type="int" />
+    <Property Name="LGSTS_END_4" Type="int" />
+    <Property Name="LGSTS_COLOR_4" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_START_5" Type="int" />
+    <Property Name="LGSTS_END_5" Type="int" />
+    <Property Name="LGSTS_COLOR_5" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_CREATE_DATE" Type="datetime" />
+    <Property Name="LGSTS_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="LGSTS_UPDATE_DATE" Type="datetime" />
+    <Property Name="LGSTS_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_MASTER">
+    <Key>
+      <PropertyRef Name="MASTER_CODE" />
+      <PropertyRef Name="MASTER_TYPE" />
+    </Key>
+    <Property Name="MASTER_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MASTER_TYPE" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MASTER_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="MASTER_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="MASTER_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="MASTER_CREATE_DATE" Type="datetime" />
+    <Property Name="MASTER_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="MASTER_UPDATE_DATE" Type="datetime" />
+    <Property Name="MASTER_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_OA">
+    <Key>
+      <PropertyRef Name="OA_CODE" />
+    </Key>
+    <Property Name="OA_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="OA_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="OA_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="OA_GROUP_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="OA_REPO_FLAG" Type="char" MaxLength="1" />
+    <Property Name="OA_LEGAL_FLAG" Type="char" MaxLength="1" />
+    <Property Name="OA_TYPE" Type="varchar" MaxLength="50" />
+    <Property Name="OA_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="OA_CREATE_DATE" Type="datetime" />
+    <Property Name="OA_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="OA_UPDATE_DATE" Type="datetime" />
+    <Property Name="OA_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_OA_CONFIG_AREA">
+    <Key>
+      <PropertyRef Name="MOA_OA_CODE" />
+      <PropertyRef Name="MOA_BUCKET_CODE" />
+      <PropertyRef Name="MOA_PROVINCE_CODE" />
+    </Key>
+    <Property Name="MOA_OA_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MOA_BUCKET_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MOA_PROVINCE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_OA_CONFIG_BUCKET">
+    <Key>
+      <PropertyRef Name="MOB_OA_CODE" />
+      <PropertyRef Name="MOB_BUCKET_CODE" />
+    </Key>
+    <Property Name="MOB_OA_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MOB_BUCKET_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MOB_LIMIT_PERCENTAGE" Type="int" />
+    <Property Name="MOB_LIMIT_JOBS" Type="int" />
+    <Property Name="MOB_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="MOB_CREATE_DATE" Type="datetime" />
+    <Property Name="MOB_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="MOB_UPDATE_DATE" Type="datetime" />
+    <Property Name="MOB_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_OA_GROUP">
+    <Key>
+      <PropertyRef Name="OAGROUP_CODE" />
+    </Key>
+    <Property Name="OAGROUP_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="OAGROUP_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="OAGROUP_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="OAGROUP_EXPIRED_DAY" Type="int" />
+    <Property Name="OAGROUP_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="OAGROUP_CREATE_DATE" Type="datetime" />
+    <Property Name="OAGROUP_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="OAGROUP_UPDATE_DATE" Type="datetime" />
+    <Property Name="OAGROUP_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_PARAMETER">
+    <Key>
+      <PropertyRef Name="PARA_CODE" />
+    </Key>
+    <Property Name="PARA_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PARA_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="PARA_DESC" Type="varchar" MaxLength="250" />
+    <Property Name="PARA_DATA_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="PARA_VALUE" Type="varchar" MaxLength="200" />
+    <Property Name="PARA_DEFAULT_VALUE" Type="varchar" MaxLength="200" />
+    <Property Name="PARA_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="PARA_CREATE_DATE" Type="datetime" />
+    <Property Name="PARA_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="PARA_UPDATE_DATE" Type="datetime" />
+    <Property Name="PARA_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_PERMISSION">
+    <Key>
+      <PropertyRef Name="PERM_ROLE_CODE" />
+      <PropertyRef Name="PERM_PROG_CODE" />
+      <PropertyRef Name="PERM_ACT_CODE" />
+    </Key>
+    <Property Name="PERM_ROLE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PERM_PROG_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PERM_ACT_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PERM_USE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="PERM_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="PERM_CREATE_DATE" Type="datetime" />
+    <Property Name="PERM_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="PERM_UPDATE_DATE" Type="datetime" />
+    <Property Name="PERM_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_PROGRAM">
+    <Key>
+      <PropertyRef Name="PROG_CODE" />
+    </Key>
+    <Property Name="PROG_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PROG_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="PROG_LEVEL" Type="int" />
+    <Property Name="PROG_PARENT_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="PROG_TARGET_URL" Type="varchar" MaxLength="200" />
+    <Property Name="PROG_ORDER" Type="int" />
+    <Property Name="PROG_ICON" Type="varchar" MaxLength="50" />
+    <Property Name="PROG_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="PROG_CREATE_DATE" Type="datetime" />
+    <Property Name="PROG_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="PROG_UPDATE_DATE" Type="datetime" />
+    <Property Name="PROG_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_PROVINCE">
+    <Key>
+      <PropertyRef Name="PROVINCE_CODE" />
+    </Key>
+    <Property Name="PROVINCE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PROVINCE_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="PROVINCE_GEOGRAPHYCODE" Type="varchar" MaxLength="20" />
+    <Property Name="PROVINCE_KM" Type="int" />
+    <Property Name="PROVINCE_CREATEBY" Type="varchar" MaxLength="100" />
+    <Property Name="PROVINCE_CREATEDATE" Type="datetime" />
+    <Property Name="PROVINCE_UPDATEBY" Type="varchar" MaxLength="100" />
+    <Property Name="PROVINCE_UPDATEDATE" Type="datetime" />
+    <Property Name="PROVINCE_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_REPO_FEE">
+    <Key>
+      <PropertyRef Name="REPO_ID" />
+    </Key>
+    <Property Name="REPO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="REPO_OVD_DAY_FROM" Type="int" />
+    <Property Name="REPO_OVD_DAY_TO" Type="int" />
+    <Property Name="REPO_BRAND" Type="varchar" MaxLength="50" />
+    <Property Name="REPO_MODEL" Type="varchar" MaxLength="50" />
+    <Property Name="REPO_BODY" Type="varchar" MaxLength="50" />
+    <Property Name="REPO_AMT_FROM" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="REPO_AMT_TO" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="REPO_FIELD" Type="varchar" MaxLength="50" />
+    <Property Name="REPO_AMT" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="M_ROLE">
+    <Key>
+      <PropertyRef Name="ROLE_CODE" />
+    </Key>
+    <Property Name="ROLE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ROLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ROLE_DATA_LEVEL" Type="int" Nullable="false" />
+    <Property Name="ROLE_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="ROLE_CREATE_DATE" Type="datetime" />
+    <Property Name="ROLE_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="ROLE_UPDATE_DATE" Type="datetime" />
+    <Property Name="ROLE_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_SIGNATURE">
+    <Key>
+      <PropertyRef Name="WO_ID" />
+    </Key>
+    <Property Name="WO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WO_C_PROPOSE_1" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_PROPOSE_2" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_APPROVED_1" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_APPROVED_2" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_APPROVED_3" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_APPROVED_4" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_POSITION_1" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_POSITION_2" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_POSITION_3" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_POSITION_4" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_POSITION_5" Type="varchar" MaxLength="200" />
+    <Property Name="WO_C_POSITION_6" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_REVIEWED_1" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_REVIEWED_2" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_REVIEWED_3" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_APPROVED_1" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_APPROVED_2" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_APPROVED_3" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_POSITION_1" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_POSITION_2" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_POSITION_3" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_POSITION_4" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_POSITION_5" Type="varchar" MaxLength="200" />
+    <Property Name="WO_S_POSITION_6" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="M_STATUS">
+    <Key>
+      <PropertyRef Name="STS_CODE" />
+    </Key>
+    <Property Name="STS_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="STS_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="STS_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="STS_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="STS_CREATE_DATE" Type="datetime" />
+    <Property Name="STS_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="STS_UPDATE_DATE" Type="datetime" />
+    <Property Name="STS_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_TAX_CONFIG">
+    <Key>
+      <PropertyRef Name="TAX_NO" />
+    </Key>
+    <Property Name="TAX_NO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TAX_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="TAX_START" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TAX_END" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TAX_RATE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TAX_SEQ" Type="int" />
+    <Property Name="EFF_FROM_DATE" Type="datetime" />
+    <Property Name="EFF_TO_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="M_TRANS_DETAIL">
+    <Key>
+      <PropertyRef Name="TRANSD_ID" />
+    </Key>
+    <Property Name="TRANSD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TRANSD_TRANS_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="TRANSD_EXPENSE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TRANSD_FROM" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TRANSD_TO" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TRANSD_VALUE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TRANSD_FIELD" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="M_TRANSACTION">
+    <Key>
+      <PropertyRef Name="TRANS_CODE" />
+      <PropertyRef Name="TRANS_GROUP_CODE" />
+    </Key>
+    <Property Name="TRANS_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TRANS_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="TRANS_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="TRANS_GROUP_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TRANS_AMT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TRANS_VAT_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TRANS_TAX_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TRANS_DUP_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TRANS_EST_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TRANS_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="TRANS_CREATE_DATE" Type="datetime" />
+    <Property Name="TRANS_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="TRANS_UPDATE_DATE" Type="datetime" />
+    <Property Name="TRANS_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_USER">
+    <Key>
+      <PropertyRef Name="USER_LOGIN" />
+    </Key>
+    <Property Name="USER_LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_PASSWORD" Type="varchar" MaxLength="255" />
+    <Property Name="USER_FIRST_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="USER_LAST_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="USER_AD_FLAG" Type="char" MaxLength="1" />
+    <Property Name="USER_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="USER_CREATE_DATE" Type="datetime" />
+    <Property Name="USER_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="USER_UPDATE_DATE" Type="datetime" />
+    <Property Name="USER_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_USER_ROLE">
+    <Key>
+      <PropertyRef Name="USERROLE_USER_LOGIN" />
+      <PropertyRef Name="USERROLE_ROLE_CODE" />
+    </Key>
+    <Property Name="USERROLE_USER_LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USERROLE_ROLE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="USERROLE_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="USERROLE_CREATE_DATE" Type="datetime" />
+    <Property Name="USERROLE_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="USERROLE_UPDATE_DATE" Type="datetime" />
+    <Property Name="USERROLE_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="M_WRITEOFF_SUBTYPE">
+    <Key>
+      <PropertyRef Name="SUBTYPE_CODE" />
+      <PropertyRef Name="SUBTYPE_GROUPE_CODE" />
+    </Key>
+    <Property Name="SUBTYPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="SUBTYPE_NAME_TH" Type="varchar" MaxLength="100" />
+    <Property Name="SUBTYPE_NAME_EN" Type="varchar" MaxLength="100" />
+    <Property Name="SUBTYPE_GROUPE_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="SUBTYPE_OS_FLAG" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_OS_MIN" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SUBTYPE_OS_MAX" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SUBTYPE_R3_FLAG" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_R3_DAY" Type="int" />
+    <Property Name="SUBTYPE_REPO_FLAG" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_REPO_STATUS" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_AUCTION_FLAG" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_OVD_FLAG" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_OVD_DAY" Type="int" />
+    <Property Name="SUBTYPE_REDCODE" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_BLACKCODE" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_WO_CAIMTAX" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_WO_CAIMTAX_STATUS" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_WO_COMP" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_WO_COMP_STATUS" Type="char" MaxLength="1" />
+    <Property Name="SUBTYPE_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="SUBTYPE_CREATE_DATE" Type="datetime" />
+    <Property Name="SUBTYPE_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="SUBTYPE_UPDATE_DATE" Type="datetime" />
+    <Property Name="SUBTYPE_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'NCLS_SIT.dbo.MG_BF' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MG_BF">
+          <Property Name="BF_DATE" Type="datetime" />
+          <Property Name="BF_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="BF_APPROVE_FLAG_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="BF_APPROVE_FLAG" Type="varchar" MaxLength="50" />
+          <Property Name="BF_APPROVE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="BF_APPROVE_DATE" Type="datetime" />
+          <Property Name="BFD_HID" Type="varchar" MaxLength="20" />
+          <Property Name="BFD_CONTRACT_NO" Type="varchar" MaxLength="20" />
+          <Property Name="BFD_CARD_NO" Type="varchar" MaxLength="20" />
+          <Property Name="BFD_FIRSTNAME" Type="varchar" MaxLength="255" />
+          <Property Name="BFD_LASTNAME" Type="varchar" MaxLength="255" />
+          <Property Name="BFD_COURTNAME" Type="varchar" MaxLength="255" />
+          <Property Name="BFD_REDCODE" Type="varchar" MaxLength="50" />
+          <Property Name="BFD_PLAINTIFF_NAME" Type="varchar" MaxLength="255" />
+          <Property Name="BFD_DEFENDANT_NAME" Type="varchar" MaxLength="255" />
+          <Property Name="BFD_RECEIVING_ORDER_DATE" Type="datetime" />
+          <Property Name="BFD_SUBMIT_DUE_DATE" Type="datetime" />
+          <Property Name="BFD_CANCEL_RECEIVING_ORDER_DATE" Type="datetime" />
+          <Property Name="BFD_COMPROMISE_BEFORE_DATE" Type="datetime" />
+          <Property Name="BFD_CANCEL_COMPROMISE_BAFORE_DATE" Type="datetime" />
+          <Property Name="BFD_ORDER_BANKRUPCTY_DATE" Type="datetime" />
+          <Property Name="BFD_COMPROMISE_AFTER_DATE" Type="datetime" />
+          <Property Name="BFD_CANCEL_COMPROMISE_AFTER_DATE" Type="datetime" />
+          <Property Name="BFD_SUBMIT_AFTER_DUE_DATE" Type="datetime" />
+          <Property Name="BFD_CANCEL_BANKRUPTCY_DATE" Type="datetime" />
+          <Property Name="BFD_DISCHANGED_BANKRUPTCY_DATE" Type="datetime" />
+          <Property Name="BFD_DISMISSAL_DATE" Type="datetime" />
+          <Property Name="BFD_DISPOSE_CASE_DATE" Type="datetime" />
+          <Property Name="BFD_FILING_DATE" Type="datetime" />
+          <Property Name="BFD_REMARK" Type="varchar" MaxLength="2000" />
+          <Property Name="BFD_CREATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="BFD_CREATE_DATE" Type="datetime" />
+          <Property Name="BFD_UPDATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="BFD_UPDATE_DATE" Type="datetime" />
+          <Property Name="BFD_STATUS" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.MG_JD_D' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MG_JD_D">
+    <Key>
+      <PropertyRef Name="JDD_ID" />
+    </Key>
+    <Property Name="JDD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JDD_CASE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_CASE" Type="varchar" MaxLength="100" />
+    <Property Name="JDD_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_HID" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_TRANS_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_AMOUNT" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JDD_PAYMENT_AMOUNT" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JDD_CREDITBUREAU_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_SUM_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_GENERATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_TYPE" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_START_DATE" Type="datetime" />
+    <Property Name="JDD_INTEREST_END_DATE" Type="datetime" />
+    <Property Name="JDD_INTEREST_END_DATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_MONTHS" Type="int" />
+    <Property Name="JDD_INTEREST_DAYS" Type="int" />
+    <Property Name="JDD_INTEREST_RATE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JDD_MONTHS_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_MONTHS" Type="int" />
+    <Property Name="JDD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JDD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDD_CREATE_DATE" Type="datetime" />
+    <Property Name="JDD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDD_UPDATE_DATE" Type="datetime" />
+    <Property Name="JDD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.MG_JD_H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MG_JD_H">
+    <Key>
+      <PropertyRef Name="JD_ID" />
+    </Key>
+    <Property Name="JD_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JD_CASE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JD_CASE" Type="varchar" MaxLength="500" />
+    <Property Name="JD_CONTRACT_NO" Type="varchar" MaxLength="500" />
+    <Property Name="JD_TYPE" Type="varchar" MaxLength="50" />
+    <Property Name="JD_JOB_ID" Type="varchar" MaxLength="20" />
+    <Property Name="JD_CONTRACT_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JD_CHEQUE_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JD_DEBTOR_STATUS_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="JD_DEBTOR_STATUS" Type="varchar" MaxLength="500" />
+    <Property Name="JD_JUDGMENT_DATE" Type="datetime" />
+    <Property Name="JD_COMPROMISE_DATE" Type="datetime" />
+    <Property Name="JD_FURTHER_COMMENT" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_TERM" Type="int" />
+    <Property Name="JD_TOTAL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JD_FIRST_DUE_DATE" Type="datetime" />
+    <Property Name="JD_PAY_DAY" Type="int" />
+    <Property Name="JD_APPROVE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JD_APPROVE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_APPROVE_DATE" Type="datetime" />
+    <Property Name="JD_APPROVE_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_CREATE_DATE" Type="datetime" />
+    <Property Name="JD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_UPDATE_DATE" Type="datetime" />
+    <Property Name="JD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.MG_JDC_D' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MG_JDC_D">
+    <Key>
+      <PropertyRef Name="JDD_ID" />
+    </Key>
+    <Property Name="JDD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JDD_CASE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_CASE" Type="varchar" MaxLength="100" />
+    <Property Name="JDD_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_HID" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_TRANS_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_AMOUNT" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JDD_PAYMENT_AMOUNT" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JDD_CREDITBUREAU_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_SUM_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_GENERATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_TYPE" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_START_DATE" Type="datetime" />
+    <Property Name="JDD_INTEREST_END_DATE" Type="datetime" />
+    <Property Name="JDD_INTEREST_END_DATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_MONTHS" Type="int" />
+    <Property Name="JDD_INTEREST_DAYS" Type="int" />
+    <Property Name="JDD_INTEREST_RATE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JDD_MONTHS_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_MONTHS" Type="int" />
+    <Property Name="JDD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JDD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDD_CREATE_DATE" Type="datetime" />
+    <Property Name="JDD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDD_UPDATE_DATE" Type="datetime" />
+    <Property Name="JDD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.MG_JDC_H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MG_JDC_H">
+    <Key>
+      <PropertyRef Name="JD_ID" />
+    </Key>
+    <Property Name="JD_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JD_CASE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JD_CASE" Type="varchar" MaxLength="500" />
+    <Property Name="JD_CONTRACT_NO" Type="varchar" MaxLength="500" />
+    <Property Name="JD_COMPROMIST_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="JD_TYPE" Type="varchar" MaxLength="50" />
+    <Property Name="JD_JOB_ID" Type="varchar" MaxLength="20" />
+    <Property Name="JD_CONTRACT_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JD_CHEQUE_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JD_DEBTOR_STATUS_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="JD_DEBTOR_STATUS" Type="varchar" MaxLength="500" />
+    <Property Name="JD_JUDGMENT_DATE" Type="datetime" />
+    <Property Name="JD_COMPROMISE_DATE" Type="datetime" />
+    <Property Name="JD_FURTHER_COMMENT" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_TERM" Type="int" />
+    <Property Name="JD_TOTAL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JD_FIRST_DUE_DATE" Type="datetime" />
+    <Property Name="JD_PAY_DAY" Type="int" />
+    <Property Name="JD_APPROVE_FLAG_CODE" Type="char" MaxLength="1" />
+    <Property Name="JD_APPROVE_FLAG" Type="varchar" MaxLength="50" />
+    <Property Name="JD_APPROVE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_APPROVE_DATE" Type="datetime" />
+    <Property Name="JD_APPROVE_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_CREATE_DATE" Type="datetime" />
+    <Property Name="JD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_UPDATE_DATE" Type="datetime" />
+    <Property Name="JD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'NCLS_SIT.dbo.MG_JDC_PM' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MG_JDC_PM">
+          <Property Name="JDP_HID" Type="varchar" MaxLength="20" />
+          <Property Name="JDP_CASE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JDP_CASE" Type="varchar" MaxLength="200" />
+          <Property Name="JDP_CONTRACT_NO" Type="varchar" MaxLength="20" />
+          <Property Name="JDP_TERM" Type="int" />
+          <Property Name="JDP_DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="JDP_DUEDATE" Type="datetime" />
+          <Property Name="JDP_INSTALLMENT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JDP_CREATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="JDP_CREATE_DATE" Type="datetime" />
+          <Property Name="JDP_UPDATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="JDP_UPDATE_DATE" Type="datetime" />
+          <Property Name="JDP_STATUS" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'NCLS_SIT.dbo.MG_LEGAL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MG_LEGAL">
+          <Property Name="JOB_ID" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CONTRACT_NO" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CASE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CASE" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_CASE_OTHER" Type="varchar" MaxLength="500" />
+          <Property Name="JOB_CASE_TYPE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_LEGAL_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_LEGAL_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_REPO_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_REPO_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_BASE_COUNT" Type="int" />
+          <Property Name="JOB_REALLOCATE_FLAG" Type="char" MaxLength="1" />
+          <Property Name="JOB_CUST_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CUST_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_CUST_TYPE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CUST_ADDRESS" Type="varchar" MaxLength="255" />
+          <Property Name="JOB_CARD_NO" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_ADMIN_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_OA_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_OA" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_DUE_DATE" Type="datetime" />
+          <Property Name="JOB_DUE_DAY" Type="int" />
+          <Property Name="JOB_INST_AMT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_INST_PAID" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_PAID_TERM" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_OS_AMT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_OVD_AMT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_OVD_DAY" Type="int" />
+          <Property Name="JOB_OVD_TERM" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_BRAND" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_MODEL" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_PLATE_NO" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_ASSET_DESC" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_EXPIRE_DATE" Type="datetime" />
+          <Property Name="JOB_DOC_FLAG" Type="char" MaxLength="1" />
+          <Property Name="JOB_ASSIGN_ADMIN_DATE" Type="datetime" />
+          <Property Name="JOB_ASSIGN_OA_DATE" Type="datetime" />
+          <Property Name="JOB_ASSIGN_REMARK" Type="varchar" MaxLength="500" />
+          <Property Name="JOB_FILING_DATE" Type="datetime" />
+          <Property Name="JOB_AML_ORDER_NO" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_AML_ORDER_DATE" Type="datetime" />
+          <Property Name="JOB_ANNOUNCE_DATE" Type="datetime" />
+          <Property Name="JOB_APPOINT_DATE" Type="datetime" />
+          <Property Name="JOB_LAST_DUE_DATE" Type="datetime" />
+          <Property Name="JOB_RECEIVE_ORDER_DATE" Type="datetime" />
+          <Property Name="JOB_REQUEST_DATE" Type="datetime" />
+          <Property Name="JOB_CAR_RECEIVE_PLACE" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_CAR_RECEIVE_DATE" Type="datetime" />
+          <Property Name="JOB_INSURER_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_ORDERED_REH" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_PLAINTIFF_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_REMARK" Type="varchar" MaxLength="500" />
+          <Property Name="JOB_REQUESTOR" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_COMPANY_PLAN" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_ASSURED_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_AMOUNT_CLAIMED" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_SHORT_FALL" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_TOTAL_LOSS_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_CONTRACT_LIST" Type="varchar" MaxLength="4000" />
+          <Property Name="JOB_CHEQUE_LIST" Type="varchar" MaxLength="4000" />
+          <Property Name="JOB_MAILING_DATE" Type="datetime" />
+          <Property Name="JOB_DEBTOR_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_DEBTOR_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_BLACK_CODE" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_RED_CODE" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_ATTORNEY_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_ATTORNEY_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_COURT" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_COURT_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_COURT_FEE" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_POLICE_STATION" Type="varchar" MaxLength="250" />
+          <Property Name="JOB_SUBMISSION_DATE" Type="datetime" />
+          <Property Name="JOB_SUBMISSION_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_CONTRACT_TERMINATED_DATE" Type="datetime" />
+          <Property Name="JOB_LACK_OF_BENEFIT" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_CHEQUE_NO" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_NOTIFY_CHEQUE_DATE" Type="datetime" />
+          <Property Name="JOB_PARTY_IN_LAW_SUIT" Type="varchar" MaxLength="250" />
+          <Property Name="JOB_APPOINTED_DATE" Type="datetime" />
+          <Property Name="JOB_ASSIGNED_DATE" Type="datetime" />
+          <Property Name="JOB_ATTORNEY_DATE" Type="datetime" />
+          <Property Name="JOB_NOTICE_DATE" Type="datetime" />
+          <Property Name="JOB_WITNESS_DATE" Type="datetime" />
+          <Property Name="JOB_WITNESS_TIME" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_LAWYER_FEE" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_SECOND_LAWYER_FEE" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="JOB_ENFORCEMENT_DATE" Type="datetime" />
+          <Property Name="JOB_BANKRUPTCY_DATE" Type="datetime" />
+          <Property Name="JOB_BANKRUPTCY_DISCHARGED_DATE" Type="datetime" />
+          <Property Name="JOB_POL_NO" Type="varchar" MaxLength="250" />
+          <Property Name="JOB_STOLEN_NO" Type="varchar" MaxLength="250" />
+          <Property Name="JOB_APPOINTMENT_CHECK_DATE" Type="datetime" />
+          <Property Name="JOB_OA_ENFORCEMENT_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_OA_ENFORCEMENT" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_SUBMIT_ENFORCEMENT_DATE" Type="datetime" />
+          <Property Name="JOB_OA_ASSET_SEARCH_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_OA_ASSET_SEARCH" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_SUBMIT_INVEST_DATE" Type="datetime" />
+          <Property Name="JOB_ENFORCEMENT_EFF_DATE" Type="datetime" />
+          <Property Name="JOB_CASH_RECEIVE_DATE" Type="datetime" />
+          <Property Name="JOB_SEIZE_DATE" Type="datetime" />
+          <Property Name="JOB_REPORT_DATE" Type="datetime" />
+          <Property Name="JOB_JUDGMENT_DATE" Type="datetime" />
+          <Property Name="JOB_WITHDRAW_DATE" Type="datetime" />
+          <Property Name="JOB_EXECUTION_DATE" Type="datetime" />
+          <Property Name="JOB_EXECUTION_END_DATE" Type="datetime" />
+          <Property Name="JOB_DETAILS" Type="varchar" MaxLength="4000" />
+          <Property Name="JOB_R3_ID" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_STEP_DATE" Type="datetime" />
+          <Property Name="JOB_CREATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_CREATE_DATE" Type="datetime" />
+          <Property Name="JOB_UPDATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_UPDATE_DATE" Type="datetime" />
+          <Property Name="JOB_STATUS" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.MG_LEGAL_DETAIL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MG_LEGAL_DETAIL">
+    <Key>
+      <PropertyRef Name="CHQ_JOB_ID" />
+      <PropertyRef Name="CHQ_CHEQUE_NO" />
+      <PropertyRef Name="CHQ_CONTRACT_NO" />
+    </Key>
+    <Property Name="CHQ_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CHQ_CHEQUE_NO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CHQ_CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CHQ_SR_NO" Type="int" />
+    <Property Name="CHQ_ACCOUNT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="CHQ_BANK_ID" Type="varchar" MaxLength="20" />
+    <Property Name="CHQ_BANK_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="CHQ_BRANCH_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="CHQ_BORROWER_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="CHQ_CHEQUE_CLEARING_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="CHQ_DEPOSIT_DATE" Type="datetime" />
+    <Property Name="CHQ_UPLOAD_DATE" Type="datetime" />
+    <Property Name="CHQ_DUE_DATE" Type="datetime" />
+    <Property Name="CHQ_EMI_AMOUNT" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'NCLS_SIT.dbo.MG_R3' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MG_R3">
+          <Property Name="R3_JOB_ID" Type="varchar" MaxLength="20" />
+          <Property Name="R3_CUST_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="R3_ADDR_ID" Type="varchar" MaxLength="20" />
+          <Property Name="R3_CONTRACT_NO" Type="varchar" MaxLength="20" />
+          <Property Name="R3_CUST_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="R3_CUST_BR_TYPE" Type="varchar" MaxLength="100" />
+          <Property Name="R3_CARD_NO" Type="varchar" MaxLength="20" />
+          <Property Name="R3_ADDR_FULL" Type="varchar" MaxLength="1000" />
+          <Property Name="R3_SEND_DATE" Type="datetime" />
+          <Property Name="R3_RECEVIE_DATE" Type="datetime" />
+          <Property Name="R3_REJECTED_DATE" Type="datetime" />
+          <Property Name="R3_ISSUE_DATE" Type="datetime" />
+          <Property Name="R3_CASE_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="R3_CASE_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="R3_EMS_TRACKING" Type="varchar" MaxLength="20" />
+          <Property Name="R3_EXPIRE_DATE" Type="datetime" />
+          <Property Name="R3_TARGET_DATE" Type="datetime" />
+          <Property Name="R3_REMARK" Type="varchar" MaxLength="1000" />
+          <Property Name="R3_BARCODE" Type="varchar" MaxLength="255" />
+          <Property Name="R3_CREATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="R3_CREATE_DATE" Type="datetime" />
+          <Property Name="R3_UPDATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="R3_UPDATE_DATE" Type="datetime" />
+          <Property Name="R3_STATUS" Type="char" MaxLength="1" />
+          <Property Name="R3_ADMIN_CODE" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'NCLS_SIT.dbo.MG_REPO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MG_REPO">
+          <Property Name="JOB_ID" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CONTRACT_NO" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CASE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_LEGAL_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_LEGAL_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_REPO_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_REPO_STATUS" Type="nvarchar" MaxLength="200" />
+          <Property Name="JOB_BASE_COUNT" Type="int" />
+          <Property Name="JOB_REALLOCATE_FLAG" Type="char" MaxLength="1" />
+          <Property Name="JOB_CUST_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CUST_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_CUST_TYPE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CARD_NO" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_ADMIN_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_OA_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_OA" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_DUE_DATE" Type="datetime" />
+          <Property Name="JOB_DUE_DAY" Type="int" />
+          <Property Name="JOB_INST_AMT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_BUCKET" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_INST_PAID" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_PAID_TERM" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="JOB_OS_AMT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_OVD_AMT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_OVD_DAY" Type="int" />
+          <Property Name="JOB_OVD_TERM" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="JOB_BRAND" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_MODEL" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_PLATE_NO" Type="varchar" MaxLength="100" />
+          <Property Name="JOB_ASSET_DESC" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_EXPIRE_DATE" Type="datetime" />
+          <Property Name="JOB_DOC_FLAG" Type="char" MaxLength="1" />
+          <Property Name="JOB_ASSIGN_ADMIN_DATE" Type="datetime" />
+          <Property Name="JOB_ASSIGN_OA_DATE" Type="datetime" />
+          <Property Name="JOB_ASSIGN_REMARK" Type="varchar" MaxLength="500" />
+          <Property Name="JOB_R3_SEND_DATE" Type="datetime" />
+          <Property Name="JOB_R3_RECEVIE_DATE" Type="datetime" />
+          <Property Name="JOB_OA_SUCCESS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_OA_SUCCESS" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_CAR_PARK_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_CAR_PARK" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_REPO_DATE" Type="datetime" />
+          <Property Name="JOB_TRANS_DATE" Type="datetime" />
+          <Property Name="JOB_MILEAGE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_REPO_TYPE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_REPO_TYPE" Type="varchar" MaxLength="200" />
+          <Property Name="JOB_CHARGE_DATE" Type="datetime" />
+          <Property Name="JOB_FEE_EXPENSE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_REPO_EXPENSE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_OTHER_EXPENSE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JOB_RECEIVE_REMARK" Type="varchar" MaxLength="500" />
+          <Property Name="JOB_NOTI_FLAG" Type="char" MaxLength="1" />
+          <Property Name="JOB_RPS_DATE" Type="datetime" />
+          <Property Name="JOB_PROVINCE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_R3_ID" Type="varchar" MaxLength="20" />
+          <Property Name="JOB_STEP_DATE" Type="datetime" />
+          <Property Name="JOB_CREATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_CREATE_DATE" Type="datetime" />
+          <Property Name="JOB_UPDATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="JOB_UPDATE_DATE" Type="datetime" />
+          <Property Name="JOB_STATUS" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'NCLS_SIT.dbo.MG_WO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MG_WO">
+          <Property Name="WRITEOFFD_HID" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFF_DATE" Type="datetime" />
+          <Property Name="WRITEOFF_TYPE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFF_TYPE" Type="varchar" MaxLength="500" />
+          <Property Name="WRITEOFF_SUBTYPE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFF_SUBTYPE" Type="varchar" MaxLength="500" />
+          <Property Name="WRITEOFF_APPROVE_FLAG_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="WRITEOFF_APPROVE_FLAG" Type="varchar" MaxLength="50" />
+          <Property Name="WRITEOFF_APPROVE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="WRITEOFF_APPROVE_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_CONTRACT_NO" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_OS" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="WRITEOFFD_R3_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_R3_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="WRITEOFFD_R3_DAY" Type="int" />
+          <Property Name="WRITEOFFD_REPO_FLAG" Type="char" MaxLength="1" />
+          <Property Name="WRITEOFFD_AUCTION_FLAG" Type="char" MaxLength="1" />
+          <Property Name="WRITEOFFD_OVD_DAY" Type="int" />
+          <Property Name="WRITEOFFD_REDCODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_BLACKCODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_CAIMTAX_STATUS" Type="char" MaxLength="1" />
+          <Property Name="WRITEOFFD_COMPANY_STATUS" Type="char" MaxLength="1" />
+          <Property Name="WRITEOFFD_REPO_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_REPO_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="WRITEOFFD_LEGAL_STATUS_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_LEGAL_STATUS" Type="varchar" MaxLength="200" />
+          <Property Name="WRITEOFFD_FILING_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_COURTCODE_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="WRITEOFFD_COURTCODE" Type="varchar" MaxLength="200" />
+          <Property Name="WRITEOFFD_SUBMIT_ENFORCEMENT_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_SUBMIT_INVEST_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_ENFORCEMENT_EFF_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_REPORT_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_JUDGMENT_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_EXECUTION_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_EXECUTION_END_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_REMARK" Type="varchar" MaxLength="2000" />
+          <Property Name="WRITEOFFD_JD_TOTAL" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="WRITEOFFD_CREATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="WRITEOFFD_CREATE_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_UPDATE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="WRITEOFFD_UPDATE_DATE" Type="datetime" />
+          <Property Name="WRITEOFFD_STATUS" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.S_CONTRACT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="S_CONTRACT">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="CONT_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="CONTRACT_STATUS" Type="varchar" MaxLength="500" />
+    <Property Name="CONTRACT_SUB_STATUS" Type="varchar" MaxLength="500" />
+    <Property Name="COLLECTION_STATUS" Type="varchar" MaxLength="500" />
+    <Property Name="CONTRACT_TYPE" Type="varchar" MaxLength="500" />
+    <Property Name="SUB_PRODUCT" Type="varchar" MaxLength="200" />
+    <Property Name="PAYMENT_TERM" Type="int" />
+    <Property Name="PAY_DAYS" Type="int" />
+    <Property Name="SERVICE_BRAND" Type="varchar" MaxLength="500" />
+    <Property Name="BRAND" Type="varchar" MaxLength="100" />
+    <Property Name="MODEL" Type="varchar" MaxLength="100" />
+    <Property Name="BODY" Type="varchar" MaxLength="100" />
+    <Property Name="PLATE_NO" Type="varchar" MaxLength="100" />
+    <Property Name="PLATE_PROVINCE" Type="varchar" MaxLength="100" />
+    <Property Name="CHASSIS" Type="varchar" MaxLength="100" />
+    <Property Name="COLOR_CD" Type="varchar" MaxLength="100" />
+    <Property Name="DL_GROUPNAME" Type="varchar" MaxLength="250" />
+    <Property Name="DL_NAME" Type="varchar" MaxLength="250" />
+    <Property Name="FI_NAME" Type="varchar" MaxLength="250" />
+    <Property Name="SALESMAN_NAME" Type="varchar" MaxLength="250" />
+    <Property Name="CUSTOMER_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="CUST_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="CUST_NAME_TH" Type="varchar" MaxLength="500" />
+    <Property Name="CUST_NAME_EN" Type="varchar" MaxLength="500" />
+    <Property Name="ID_NUMBER" Type="varchar" MaxLength="50" />
+    <Property Name="PROVINCE_ID" Type="varchar" MaxLength="50" />
+    <Property Name="FLEET_CUSTOMER_FLG" Type="varchar" MaxLength="10" />
+    <Property Name="ADDRESS_LINE1" Type="varchar" MaxLength="500" />
+    <Property Name="ADDRESS_LINE2" Type="varchar" MaxLength="500" />
+    <Property Name="ADDRESS_LINE3" Type="varchar" MaxLength="500" />
+    <Property Name="BOR_MOBILE_1" Type="varchar" MaxLength="500" />
+    <Property Name="BOR_MOBILE_2" Type="varchar" MaxLength="500" />
+    <Property Name="BOR_BUSINESS_PHONE" Type="varchar" MaxLength="500" />
+    <Property Name="BOR_TELEPHONE" Type="varchar" MaxLength="500" />
+    <Property Name="GUARANTOR_1" Type="varchar" MaxLength="50" />
+    <Property Name="GUARANTOR_NAME_1" Type="varchar" MaxLength="500" />
+    <Property Name="GUA1_MOBILE_1" Type="varchar" MaxLength="500" />
+    <Property Name="GUA1_MOBILE_2" Type="varchar" MaxLength="500" />
+    <Property Name="GUA1_BUSINESS_PHONE" Type="varchar" MaxLength="500" />
+    <Property Name="GUA1_TELEPHONE" Type="varchar" MaxLength="500" />
+    <Property Name="GUARANTOR_2" Type="varchar" MaxLength="50" />
+    <Property Name="GUARANTOR_NAME_2" Type="varchar" MaxLength="500" />
+    <Property Name="GUA2_MOBILE_1" Type="varchar" MaxLength="500" />
+    <Property Name="GUA2_MOBILE_2" Type="varchar" MaxLength="500" />
+    <Property Name="GUA2_BUSINESS_PHONE" Type="varchar" MaxLength="500" />
+    <Property Name="GUA2_TELEPHONE" Type="varchar" MaxLength="500" />
+    <Property Name="NEW_USED" Type="varchar" MaxLength="10" />
+    <Property Name="ASSET_PRICE" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="DOWN_PAYMENT_AMNT" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="ALL_INSURANCE_FINANCE" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="TOTAL_FINANCE" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="TOTAL_INTEREST_AMNT" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="CONTRACT_TERM" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="BALLOON_AMNT" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="ACTUAL_PAYMENT" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="LAST_PAYMENT_AMOUNT" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="PAID_AMT" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="PAID_TERM" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="OVERDUE_TERM" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="OVERDUE_DAY" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="OVERDUE_DATE" Type="datetime" />
+    <Property Name="BUCKET_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="ARREARS_AMOUNT" Type="numeric" Precision="20" Scale="2" />
+    <Property Name="OUTSTANDING_BALANCE" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="OUTSTANDING_TERM" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="CONTRACT_CREATION_DATE" Type="datetime" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+    <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="COMP_BRANCH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_CHEQUE">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="SR_NO" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="SR_NO" Type="int" Nullable="false" />
+    <Property Name="CHEQUE_SEQUENCE" Type="int" />
+    <Property Name="ACCOUNT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="BANK_ID" Type="varchar" MaxLength="100" />
+    <Property Name="BRANCH_ID" Type="varchar" MaxLength="100" />
+    <Property Name="CHEQUE_CLEARING_CD" Type="varchar" MaxLength="500" />
+    <Property Name="CHEQUE_DEPOSIT_DATE" Type="datetime" />
+    <Property Name="CHEQUE_NO" Type="varchar" MaxLength="20" />
+    <Property Name="CHEQUE_UPLOAD_DATE" Type="datetime" />
+    <Property Name="DUE_DATE" Type="datetime" />
+    <Property Name="EMI_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="RECORD_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="REJECTION_STATUS" Type="varchar" MaxLength="500" />
+    <Property Name="STATUS_DATE" Type="datetime" />
+    <Property Name="PDC_LETTER_GENERATED_FLG" Type="bit" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+    <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="COMP_BRANCH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_COST">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="COST_SEQ_NO" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="COST_SEQ_NO" Type="int" Nullable="false" />
+    <Property Name="COST_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="COST_CLASSIFICATION_CD" Type="varchar" MaxLength="50" />
+    <Property Name="COST_STATUS_CD" Type="varchar" MaxLength="50" />
+    <Property Name="COST_TYPE_CD" Type="varchar" MaxLength="50" />
+    <Property Name="COST_UPLOADED_DATE" Type="datetime" />
+    <Property Name="DATE_CHARGED" Type="datetime" />
+    <Property Name="DD_DATE" Type="datetime" />
+    <Property Name="DELETED_BY" Type="varchar" MaxLength="50" />
+    <Property Name="OUTSTANDING_COST_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="OUTSTANDING_VAT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="PAYMENT_ID" Type="int" />
+    <Property Name="RECOVERY_DATE" Type="datetime" />
+    <Property Name="REMARKS" Type="varchar" MaxLength="4000" />
+    <Property Name="RETURN_REMARKS" Type="varchar" MaxLength="4000" />
+    <Property Name="THIRD_PARTY_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="TRANSACTION_DATE" Type="datetime" />
+    <Property Name="VAT_PAID" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="RECORD_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_CUST">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="CUST_CODE" />
+      <PropertyRef Name="CUST_BR_TYPE" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CUST_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CUST_BR_TYPE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="GUARANTOR_SEQ" Type="int" />
+    <Property Name="SEND_SMS" Type="varchar" MaxLength="50" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_CUST_ADDRESS">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="CUST_CODE" />
+      <PropertyRef Name="NO_IN_CUST" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CUST_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NO_IN_CUST" Type="int" Nullable="false" />
+    <Property Name="ADDRESS_ID" Type="varchar" MaxLength="20" />
+    <Property Name="CUST_BR_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="ADDRESS_BUSINESS_ID" Type="varchar" MaxLength="20" />
+    <Property Name="MAILING_FLG" Type="bit" />
+    <Property Name="REG_ADDR_FLG" Type="bit" />
+    <Property Name="ADDRESS_LINE1" Type="varchar" MaxLength="255" />
+    <Property Name="ADDRESS_LINE2" Type="varchar" MaxLength="255" />
+    <Property Name="ADDRESS_LINE3" Type="varchar" MaxLength="255" />
+    <Property Name="ADDRESS_LINE4" Type="varchar" MaxLength="255" />
+    <Property Name="SUBURB" Type="varchar" MaxLength="255" />
+    <Property Name="DISTRICT" Type="varchar" MaxLength="255" />
+    <Property Name="CITY" Type="varchar" MaxLength="255" />
+    <Property Name="PROVINCE" Type="varchar" MaxLength="255" />
+    <Property Name="POSTAL" Type="varchar" MaxLength="255" />
+    <Property Name="PERIOD_STAYED_YRS" Type="int" />
+    <Property Name="PERIOD_STAYED_MNTS" Type="int" />
+    <Property Name="ADDR_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="OFFICE_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_DELINQUENCY">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DELINQUENCY_CYCLE_ID" Type="int" />
+    <Property Name="PAYMENT_ID" Type="int" />
+    <Property Name="DELINQUENCY_ON_HOLD_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="DELINQUENCY_STAGE_ID" Type="int" />
+    <Property Name="OVERDUE_SINCE" Type="datetime" />
+    <Property Name="OVERDUE_DAYS" Type="int" />
+    <Property Name="DELINQUENCY_DAYS" Type="int" />
+    <Property Name="DELINQUENT_SINCE" Type="datetime" />
+    <Property Name="DELINQUENCY_REASON_CD" Type="varchar" MaxLength="20" />
+    <Property Name="NO_OF_DELINQUENT_PAYMENTS" Type="int" />
+    <Property Name="TOTAL_DELINQUENT_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="PENALTY_INTEREST_WAIVER_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="DELINQUENCY_CLEARED_FG" Type="bit" />
+    <Property Name="USER_ALLOCATED" Type="varchar" MaxLength="1000" />
+    <Property Name="RECORD_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="CREATE_USER" Type="varchar" MaxLength="1000" />
+    <Property Name="CREATE_DATE" Type="datetime" />
+    <Property Name="UPDATE_USER" Type="varchar" MaxLength="1000" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+    <Property Name="TOTAL_OVERDUE_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="INTERACTION_ID" Type="int" />
+    <Property Name="DELINQUENCY_SEQUENCE_ID" Type="int" />
+    <Property Name="ARREAR_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="STAGE_OFFICER_CHANGED_CD" Type="varchar" MaxLength="20" />
+    <Property Name="TRANSMIT_ON_HOLD_CD" Type="varchar" MaxLength="20" />
+    <Property Name="REMINDER_LETTER1_GENERATED_FLG" Type="bit" />
+    <Property Name="REMINDER_LETTER2_GENERATED_FLG" Type="bit" />
+    <Property Name="REMINDER_LETTER3_GENERATED_FLG" Type="bit" />
+    <Property Name="REMINDER_LETTER4_GENERATED_FLG" Type="bit" />
+    <Property Name="REMINDER_LETTER5_GENERATED_FLG" Type="bit" />
+    <Property Name="OPRATOR_ASSGN_DATE" Type="datetime" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_INTERACTION">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="INTERACTION_ID" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="INTERACTION_ID" Type="int" Nullable="false" />
+    <Property Name="CREATE_DATE" Type="datetime" />
+    <Property Name="INTERACTION_NOTES" Type="varchar" MaxLength="4000" />
+    <Property Name="INTERACTION_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="INTERACTION_SUB_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="CREATE_USER" Type="varchar" MaxLength="100" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_OVERDUE">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="OVERDUE_SINCE" Type="datetime" />
+    <Property Name="DELINQUENT_SINCE" Type="datetime" />
+    <Property Name="OVERDUE_DAYS" Type="int" />
+    <Property Name="DELINQUENCY_DAYS" Type="int" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_PMT_RECEIPT">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="NO_IN_CONTRACT" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NO_IN_CONTRACT" Type="int" Nullable="false" />
+    <Property Name="INVOICE_RECEIPT_INT_ID" Type="int" Nullable="false" />
+    <Property Name="CASH_RECEIPT_ID" Type="int" />
+    <Property Name="AMOUNT_EXCL_VAT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="APPLICABLE_WHT_RATE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="CLASSIFICATION_CD" Type="varchar" MaxLength="100" />
+    <Property Name="INSTALLMENT_NO" Type="int" />
+    <Property Name="INVOICE_RECEIPT_DATE" Type="datetime" />
+    <Property Name="INVOICE_RECEIPT_NO" Type="varchar" MaxLength="100" />
+    <Property Name="PAIRED_INVOICE_NUMBER" Type="varchar" MaxLength="100" />
+    <Property Name="PAYMENT_CLASSIFICATION_CD" Type="varchar" MaxLength="100" />
+    <Property Name="PROCESSING_DATE" Type="datetime" />
+    <Property Name="STATUS_CD" Type="varchar" MaxLength="100" />
+    <Property Name="VAT_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="RECORD_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="PENALTY_CHARGE_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CONTRACT_PMT_SCHEDULE">
+    <Key>
+      <PropertyRef Name="CONTRACT_NO" />
+      <PropertyRef Name="PAYMENT_ID" />
+    </Key>
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PAYMENT_ID" Type="int" Nullable="false" />
+    <Property Name="PAYMENT_APPLICATION_STATUS" Type="varchar" MaxLength="50" />
+    <Property Name="DELINQUENCY_STATUS" Type="varchar" MaxLength="50" />
+    <Property Name="INTEREST_RATE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="CALCULATED_PAYMENT_DATE" Type="datetime" />
+    <Property Name="SCHEDULED_PAYMENT_DATE" Type="datetime" />
+    <Property Name="SCHEDULED_PRINCIPAL_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="SCHEDULED_INTEREST_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="SCHEDULED_SERVICES_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="SCHEDULED_TAX_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="SCHEDULED_FEE_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="UNPAID_PRINCIPAL_BALANCE_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="OUTSTANDING_PRINCIPAL_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="ACCRUED_OUTSTANDING_INTEREST_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="OUTSTANDING_SERVICES_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="OUTSTANDING_TAX_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="OUTSTANDING_FEE_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="ACTUAL_PAYMENT_DATE" Type="datetime" />
+    <Property Name="TOTAL_CUST_PAYMENT_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="RECORD_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="BONUS_AMNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="DATA_IMPORT_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="S_CUSTOMER_DETAIL">
+    <Key>
+      <PropertyRef Name="CUSTOMER_CODE" />
+    </Key>
+    <Property Name="CUSTOMER_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CUSTOMER_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="CUSTOMER_SUBTYPE_CD" Type="varchar" MaxLength="50" />
+    <Property Name="TAX_NUMBER" Type="varchar" MaxLength="100" />
+    <Property Name="ID_NUMBER" Type="varchar" MaxLength="50" />
+    <Property Name="COMMUNICATION_METHOD_CD" Type="varchar" MaxLength="50" />
+    <Property Name="C_TYPE_CD" Type="varchar" MaxLength="100" />
+    <Property Name="CUSTOMER_DEALER_FG" Type="bit" />
+    <Property Name="DATE_OF_BIRTH" Type="datetime" />
+    <Property Name="GENDER" Type="varchar" MaxLength="100" />
+    <Property Name="MARITAL_STATUS_CD" Type="varchar" MaxLength="100" />
+    <Property Name="FIRST_NAME" Type="varchar" MaxLength="500" />
+    <Property Name="LAST_NAME" Type="varchar" MaxLength="500" />
+    <Property Name="FIRST_NAME_LCL" Type="varchar" MaxLength="500" />
+    <Property Name="LAST_NAME_LCL" Type="varchar" MaxLength="500" />
+    <Property Name="ALIAS_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="ALIAS_NAME_LCL" Type="varchar" MaxLength="100" />
+    <Property Name="CONTACT_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="OCCUPATION" Type="varchar" MaxLength="100" />
+    <Property Name="BIRTHDAY_TYPE_CD" Type="varchar" MaxLength="100" />
+    <Property Name="ID_TYPE_CD" Type="varchar" MaxLength="100" />
+    <Property Name="EMPLOY_STATUS_CD" Type="varchar" MaxLength="100" />
+    <Property Name="EMPLOYER_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="BUSINESS_TYPE_CD" Type="varchar" MaxLength="100" />
+    <Property Name="BUSINESS_DETAIL" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_TITLE" Type="varchar" MaxLength="100" />
+    <Property Name="EMPLOYER_PHONE" Type="varchar" MaxLength="100" />
+    <Property Name="COMPANY_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="COMPANY_NAME_LCL" Type="varchar" MaxLength="200" />
+    <Property Name="COMPANY_TYPE_CD" Type="varchar" MaxLength="200" />
+    <Property Name="BUSINESS_CAT_CD" Type="varchar" MaxLength="200" />
+    <Property Name="ESTABLISHED_YEAR" Type="int" />
+    <Property Name="PRESIDENT_FULL_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="PASSPORT_ID" Type="varchar" MaxLength="50" />
+    <Property Name="VOTER_ID" Type="varchar" MaxLength="50" />
+    <Property Name="TITLE_TYPE_CD" Type="varchar" MaxLength="50" />
+    <Property Name="FIRST_NAME_SEARCH" Type="varchar" MaxLength="100" />
+    <Property Name="ID_NUMBER_SEARCH" Type="varchar" MaxLength="100" />
+    <Property Name="NATIONALITY" Type="varchar" MaxLength="100" />
+    <Property Name="INCORPORATION_DATE" Type="datetime" />
+    <Property Name="FLEET_CUSTOMER_FLG" Type="bit" />
+    <Property Name="NOTES" Type="varchar" MaxLength="200" />
+    <Property Name="STATUS_CD" Type="varchar" MaxLength="100" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+    <Property Name="TITLE_DESC" Type="varchar" MaxLength="100" />
+    <Property Name="TITLE_DESC_LCL" Type="varchar" MaxLength="100" />
+    <Property Name="TAX_ID" Type="varchar" MaxLength="100" />
+    <Property Name="CREATE_DATE" Type="datetime" />
+    <Property Name="PARTNER_ID" Type="int" />
+    <Property Name="DPP_FLG" Type="bit" />
+    <Property Name="COMMENTS" Type="varchar" MaxLength="1" />
+    <Property Name="METHOD_OF_COMMUNICATATION" Type="varchar" MaxLength="1" />
+    <Property Name="CUSTOMER_EMAIL" Type="varchar" MaxLength="1" />
+    <Property Name="SEND_SMS" Type="varchar" MaxLength="1" />
+    <Property Name="COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="BRANCH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="S_RPS">
+    <Key>
+      <PropertyRef Name="RPS_CONTRACT_NO" />
+    </Key>
+    <Property Name="RPS_CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="RPS_R3_DATE" Type="datetime" />
+    <Property Name="RPS_REMENPTION_DATE" Type="datetime" />
+    <Property Name="RPS_OA" Type="varchar" MaxLength="200" />
+    <Property Name="RPS_REMARKETING_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="RPS_AUCTION_DATE" Type="datetime" />
+    <Property Name="RPS_AUCTION_PRICE_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="RPS_AUCTION_PRICE_VAT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="RPS_AUCTION_HOUSE" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="T_ACT_LOG">
+    <Key>
+      <PropertyRef Name="AL_ID" />
+    </Key>
+    <Property Name="AL_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AL_USER_LOGIN" Type="varchar" MaxLength="20" />
+    <Property Name="AL_PROG_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="AL_DESC" Type="varchar" MaxLength="250" />
+    <Property Name="AC_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_BANKRUPTCY_FRAUD_D">
+    <Key>
+      <PropertyRef Name="BFD_ID" />
+    </Key>
+    <Property Name="BFD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BFD_HID" Type="varchar" MaxLength="20" />
+    <Property Name="BFD_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="BFD_CARD_NO" Type="varchar" MaxLength="20" />
+    <Property Name="BFD_FIRSTNAME" Type="varchar" MaxLength="255" />
+    <Property Name="BFD_LASTNAME" Type="varchar" MaxLength="255" />
+    <Property Name="BFD_COURTNAME" Type="varchar" MaxLength="255" />
+    <Property Name="BFD_REDCODE" Type="varchar" MaxLength="50" />
+    <Property Name="BFD_PLAINTIFF_NAME" Type="varchar" MaxLength="255" />
+    <Property Name="BFD_DEFENDANT_NAME" Type="varchar" MaxLength="255" />
+    <Property Name="BFD_RECEIVING_ORDER_DATE" Type="datetime" />
+    <Property Name="BFD_SUBMIT_DUE_DATE" Type="datetime" />
+    <Property Name="BFD_CANCEL_RECEIVING_ORDER_DATE" Type="datetime" />
+    <Property Name="BFD_COMPROMISE_BEFORE_DATE" Type="datetime" />
+    <Property Name="BFD_CANCEL_COMPROMISE_BAFORE_DATE" Type="datetime" />
+    <Property Name="BFD_ORDER_BANKRUPCTY_DATE" Type="datetime" />
+    <Property Name="BFD_COMPROMISE_AFTER_DATE" Type="datetime" />
+    <Property Name="BFD_CANCEL_COMPROMISE_AFTER_DATE" Type="datetime" />
+    <Property Name="BFD_SUBMIT_AFTER_DUE_DATE" Type="datetime" />
+    <Property Name="BFD_CANCEL_BANKRUPTCY_DATE" Type="datetime" />
+    <Property Name="BFD_DISCHANGED_BANKRUPTCY_DATE" Type="datetime" />
+    <Property Name="BFD_DISMISSAL_DATE" Type="datetime" />
+    <Property Name="BFD_DISPOSE_CASE_DATE" Type="datetime" />
+    <Property Name="BFD_FILING_DATE" Type="datetime" />
+    <Property Name="BFD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="BFD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BFD_CREATE_DATE" Type="datetime" />
+    <Property Name="BFD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BFD_UPDATE_DATE" Type="datetime" />
+    <Property Name="BFD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_BANKRUPTCY_FRAUD_H">
+    <Key>
+      <PropertyRef Name="BF_DOC_ID" />
+    </Key>
+    <Property Name="BF_DOC_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="BF_DATE" Type="datetime" />
+    <Property Name="BF_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="BF_APPROVE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="BF_APPROVE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BF_APPROVE_DATE" Type="datetime" />
+    <Property Name="BF_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BF_CREATE_DATE" Type="datetime" />
+    <Property Name="BF_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="BF_UPDATE_DATE" Type="datetime" />
+    <Property Name="BF_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_BATCH_LOG">
+    <Key>
+      <PropertyRef Name="BATCH_LOG_ID" />
+    </Key>
+    <Property Name="BATCH_LOG_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BATCH_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="BATCH_STEP" Type="varchar" MaxLength="20" />
+    <Property Name="BATCH_DESC" Type="varchar" MaxLength="5000" />
+    <Property Name="BATCH_RESULT_FLAG" Type="char" MaxLength="1" />
+    <Property Name="BATCH_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_CHEQUE_DETAIL">
+    <Key>
+      <PropertyRef Name="CHQ_JOB_ID" />
+      <PropertyRef Name="CHQ_CHEQUE_NO" />
+      <PropertyRef Name="CHQ_CONTRACT_NO" />
+    </Key>
+    <Property Name="CHQ_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CHQ_CHEQUE_NO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CHQ_CONTRACT_NO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CHQ_SR_NO" Type="int" />
+    <Property Name="CHQ_ACCOUNT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="CHQ_BANK_ID" Type="varchar" MaxLength="20" />
+    <Property Name="CHQ_BANK_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="CHQ_BRANCH_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="CHQ_BORROWER_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="CHQ_CHEQUE_CLEARING_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="CHQ_DEPOSIT_DATE" Type="datetime" />
+    <Property Name="CHQ_UPLOAD_DATE" Type="datetime" />
+    <Property Name="CHQ_DUE_DATE" Type="datetime" />
+    <Property Name="CHQ_EMI_AMOUNT" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CHQ_COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="CHQ_BRANCH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_CURRENT_LOGIN">
+    <Key>
+      <PropertyRef Name="CL_ID" />
+    </Key>
+    <Property Name="CL_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CL_USER_LOGIN" Type="varchar" MaxLength="50" />
+    <Property Name="CL_ROLE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="CL_IP_ADDRESS" Type="varchar" MaxLength="50" />
+    <Property Name="CL_LOGIN_DATE" Type="datetime" />
+    <Property Name="CL_LAST_ACT_DATE" Type="datetime" />
+    <Property Name="CL_STATUS" Type="char" MaxLength="1" />
+    <Property Name="CL_COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="CL_BRANCH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_DOCUMENT">
+    <Key>
+      <PropertyRef Name="TDOC_JOB_ID" />
+      <PropertyRef Name="TDOC_DOC_CODE" />
+    </Key>
+    <Property Name="TDOC_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TDOC_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="TDOC_DOC_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TDOC_SUCC_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TDOC_FAIL_FLAG" Type="char" MaxLength="1" />
+    <Property Name="TDOC_REASON_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="TDOC_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="TDOC_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="TDOC_CRREATE_DATE" Type="datetime" />
+    <Property Name="TDOC_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="TDOC_UPDATE_DATE" Type="datetime" />
+    <Property Name="TDOC_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_EXPENSE_D">
+    <Key>
+      <PropertyRef Name="EXPENSED_ID" />
+    </Key>
+    <Property Name="EXPENSED_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EXPENSED_HID" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_JOB_ID" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_COURT_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_TRANS_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="EXPENSED_AMOUNT_CLAIMED" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="EXPENSED_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="EXPENSED_VAT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="EXPENSED_TAX" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="EXPENSED_TOTAL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="EXPENSED_FILING_DATE" Type="datetime" />
+    <Property Name="EXPENSED_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="EXPENSED_CREATE_DATE" Type="datetime" />
+    <Property Name="EXPENSED_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="EXPENSED_UPDATE_DATE" Type="datetime" />
+    <Property Name="EXPENSED_STATUS" Type="char" MaxLength="1" />
+    <Property Name="EXPENSED_PAYMENT_REF" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_ID_REF" Type="int" />
+    <Property Name="EXPENSED_RECEIVE_TYPE" Type="varchar" MaxLength="1" />
+    <Property Name="EXPENSED_RECEIVE_BANK_CODE" Type="varchar" MaxLength="10" />
+    <Property Name="EXPENSED_RECEIVE_CHEQUE_NO" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSED_RECEIVE_CHEQUE_DATE" Type="datetime" />
+    <Property Name="EXPENSED_RECVIVE_FLAG" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_EXPENSE_H">
+    <Key>
+      <PropertyRef Name="EXPENSE_ID" />
+    </Key>
+    <Property Name="EXPENSE_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EXPENSE_DATE" Type="datetime" />
+    <Property Name="EXPENSE_INVOICE_NO" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSE_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="EXPENSE_BENEFICIARY_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="EXPENSE_BENEFICIARY" Type="varchar" MaxLength="50" />
+    <Property Name="EXPENSE_APPROVE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="EXPENSE_APPROVE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="EXPENSE_APPROVE_DATE" Type="datetime" />
+    <Property Name="EXPENSE_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="EXPENSE_CREATE_DATE" Type="datetime" />
+    <Property Name="EXPENSE_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="EXPENSE_UPDATE_DATE" Type="datetime" />
+    <Property Name="EXPENSE_STATUS" Type="char" MaxLength="1" />
+    <Property Name="EXPENSE_TYPE" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_JOB_LEGAL">
+    <Key>
+      <PropertyRef Name="JOB_ID" />
+    </Key>
+    <Property Name="JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JOB_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CASE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CASE_OTHER" Type="varchar" MaxLength="500" />
+    <Property Name="JOB_CASE_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_LEGAL_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_REPO_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_BASE_COUNT" Type="int" />
+    <Property Name="JOB_REALLOCATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_CUST_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CUST_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_CUST_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CUST_ADDRESS" Type="varchar" MaxLength="255" />
+    <Property Name="JOB_CARD_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_ADMIN_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_OA_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_DUE_DATE" Type="datetime" />
+    <Property Name="JOB_DUE_DAY" Type="int" />
+    <Property Name="JOB_INST_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_INST_PAID" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_PAID_TERM" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_OS_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_OVD_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_OVD_DAY" Type="int" />
+    <Property Name="JOB_OVD_TERM" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_BRAND" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_MODEL" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_PLATE_NO" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_ASSET_DESC" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_EXPIRE_DATE" Type="datetime" />
+    <Property Name="JOB_DOC_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_ASSIGN_ADMIN_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_OA_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="JOB_FILING_DATE" Type="datetime" />
+    <Property Name="JOB_AML_ORDER_NO" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_AML_ORDER_DATE" Type="datetime" />
+    <Property Name="JOB_ANNOUNCE_DATE" Type="datetime" />
+    <Property Name="JOB_APPOINT_DATE" Type="datetime" />
+    <Property Name="JOB_LAST_DUE_DATE" Type="datetime" />
+    <Property Name="JOB_RECEIVE_ORDER_DATE" Type="datetime" />
+    <Property Name="JOB_REQUEST_DATE" Type="datetime" />
+    <Property Name="JOB_CAR_RECEIVE_PLACE" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_CAR_RECEIVE_DATE" Type="datetime" />
+    <Property Name="JOB_INSURER_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_ORDERED_REH" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_PLAINTIFF_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="JOB_REQUESTOR" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_COMPANY_PLAN" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_ASSURED_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_AMOUNT_CLAIMED" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_SHORT_FALL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_TOTAL_LOSS_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_CONTRACT_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JOB_CHEQUE_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JOB_MAILING_DATE" Type="datetime" />
+    <Property Name="JOB_DEBTOR_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_BLACK_CODE" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_RED_CODE" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_ATTORNEY_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_COURT_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_COURT_FEE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_POLICE_STATION" Type="varchar" MaxLength="250" />
+    <Property Name="JOB_SUBMISSION_DATE" Type="datetime" />
+    <Property Name="JOB_SUBMISSION_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_CONTRACT_TERMINATED_DATE" Type="datetime" />
+    <Property Name="JOB_LACK_OF_BENEFIT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_CHEQUE_NO" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_NOTIFY_CHEQUE_DATE" Type="datetime" />
+    <Property Name="JOB_PARTY_IN_LAW_SUIT" Type="varchar" MaxLength="250" />
+    <Property Name="JOB_APPOINTED_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGNED_DATE" Type="datetime" />
+    <Property Name="JOB_ATTORNEY_DATE" Type="datetime" />
+    <Property Name="JOB_NOTICE_DATE" Type="datetime" />
+    <Property Name="JOB_WITNESS_DATE" Type="datetime" />
+    <Property Name="JOB_WITNESS_TIME" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_LAWYER_FEE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_SECOND_LAWYER_FEE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_ENFORCEMENT_DATE" Type="datetime" />
+    <Property Name="JOB_BANKRUPTCY_DATE" Type="datetime" />
+    <Property Name="JOB_BANKRUPTCY_DISCHARGED_DATE" Type="datetime" />
+    <Property Name="JOB_POL_NO" Type="varchar" MaxLength="250" />
+    <Property Name="JOB_STOLEN_NO" Type="varchar" MaxLength="250" />
+    <Property Name="JOB_APPOINTMENT_CHECK_DATE" Type="datetime" />
+    <Property Name="JOB_OA_ENFORCEMENT" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_SUBMIT_ENFORCEMENT_DATE" Type="datetime" />
+    <Property Name="JOB_OA_ASSET_SEARCH" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_SUBMIT_INVEST_DATE" Type="datetime" />
+    <Property Name="JOB_ENFORCEMENT_EFF_DATE" Type="datetime" />
+    <Property Name="JOB_CASH_RECEIVE_DATE" Type="datetime" />
+    <Property Name="JOB_SEIZE_DATE" Type="datetime" />
+    <Property Name="JOB_REPORT_DATE" Type="datetime" />
+    <Property Name="JOB_JUDGMENT_DATE" Type="datetime" />
+    <Property Name="JOB_WITHDRAW_DATE" Type="datetime" />
+    <Property Name="JOB_EXECUTION_DATE" Type="datetime" />
+    <Property Name="JOB_EXECUTION_END_DATE" Type="datetime" />
+    <Property Name="JOB_DETAILS" Type="varchar" MaxLength="4000" />
+    <Property Name="JOB_R3_ID" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_STEP_DATE" Type="datetime" />
+    <Property Name="JOB_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_CREATE_DATE" Type="datetime" />
+    <Property Name="JOB_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_UPDATE_DATE" Type="datetime" />
+    <Property Name="JOB_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_JOB_R3">
+    <Key>
+      <PropertyRef Name="JOB_ID" />
+    </Key>
+    <Property Name="JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JOB_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_R3_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_BASE_COUNT" Type="int" />
+    <Property Name="JOB_CUST_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CUST_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_CUST_BR_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CUST_CR_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CARD_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_ADMIN_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_OA_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_BUCKET" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_OS_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_OVD_AMT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_OVD_DAY" Type="int" />
+    <Property Name="JOB_OVD_TERM" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_BRAND" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_MODEL" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_PLATE_NO" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_ASSET_DESC" Type="varchar" MaxLength="255" />
+    <Property Name="JOB_EXPIRE_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_ASSIGN_ADMIN_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_OA_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="JOB_STEP_DATE" Type="datetime" />
+    <Property Name="JOB_R3_SEND_DATE" Type="datetime" />
+    <Property Name="JOB_R3_RECEVIE_DATE" Type="datetime" />
+    <Property Name="JOB_GEN_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_CREATE_DATE" Type="datetime" />
+    <Property Name="JOB_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_UPDATE_DATE" Type="datetime" />
+    <Property Name="JOB_STATUS" Type="char" MaxLength="1" />
+    <Property Name="JOB_COMP_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_BRACH_CODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_JOB_REPO">
+    <Key>
+      <PropertyRef Name="JOB_ID" />
+    </Key>
+    <Property Name="JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JOB_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CASE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_LEGAL_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_REPO_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_BASE_COUNT" Type="int" />
+    <Property Name="JOB_REALLOCATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_CUST_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CUST_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_CUST_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CARD_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_ADMIN_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_OA_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_DUE_DATE" Type="datetime" />
+    <Property Name="JOB_DUE_DAY" Type="int" />
+    <Property Name="JOB_INST_AMT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_BUCKET" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_INST_PAID" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_PAID_TERM" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JOB_OS_AMT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_OVD_AMT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_OVD_DAY" Type="int" />
+    <Property Name="JOB_OVD_TERM" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JOB_BRAND" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_MODEL" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_PLATE_NO" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_ASSET_DESC" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_EXPIRE_DATE" Type="datetime" />
+    <Property Name="JOB_DOC_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_ASSIGN_ADMIN_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_OA_DATE" Type="datetime" />
+    <Property Name="JOB_ASSIGN_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="JOB_R3_SEND_DATE" Type="datetime" />
+    <Property Name="JOB_R3_RECEVIE_DATE" Type="datetime" />
+    <Property Name="JOB_OA_SUCCESS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CAR_PARK" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_REPO_DATE" Type="datetime" />
+    <Property Name="JOB_TRANS_DATE" Type="datetime" />
+    <Property Name="JOB_MILEAGE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_REPO_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CHARGE_DATE" Type="datetime" />
+    <Property Name="JOB_FEE_EXPENSE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_REPO_EXPENSE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_OTHER_EXPENSE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JOB_RECEIVE_REMARK" Type="varchar" MaxLength="500" />
+    <Property Name="JOB_NOTI_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_RPS_DATE" Type="datetime" />
+    <Property Name="JOB_PROVINCE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_PROVINCE_REPO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_GEN_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_R3_ID" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_STEP_DATE" Type="datetime" />
+    <Property Name="JOB_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_CREATE_DATE" Type="datetime" />
+    <Property Name="JOB_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_UPDATE_DATE" Type="datetime" />
+    <Property Name="JOB_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_JUDGMENTDEBTOR_ATTACHMENT">
+    <Key>
+      <PropertyRef Name="JDA_HID" />
+      <PropertyRef Name="JDA_JOB_ID" />
+      <PropertyRef Name="JDA_SEQUENCE" />
+    </Key>
+    <Property Name="JDA_HID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JDA_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JDA_SEQUENCE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JDA_FILE_NAME" Type="varchar" MaxLength="500" />
+    <Property Name="JDA_FILE_PATH" Type="varchar" MaxLength="2500" />
+    <Property Name="JDA_DESCRIPTION" Type="varchar" MaxLength="500" />
+    <Property Name="JDA_CREATE_BY" Type="varchar" MaxLength="20" />
+    <Property Name="JDA_CREATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_JUDGMENTDEBTOR_D">
+    <Key>
+      <PropertyRef Name="JDD_ID" />
+    </Key>
+    <Property Name="JDD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JDD_HID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JDD_SEQ" Type="int" Nullable="false" />
+    <Property Name="JDD_TRANS_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JDD_AMOUNT" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JDD_PAYMENT_AMOUNT" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="JDD_CREDITBUREAU_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_SUM_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_GENERATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_TYPE" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_START_DATE" Type="datetime" />
+    <Property Name="JDD_INTEREST_END_DATE" Type="datetime" />
+    <Property Name="JDD_INTEREST_END_DATE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_INTEREST_MONTHS" Type="int" />
+    <Property Name="JDD_INTEREST_DAYS" Type="int" />
+    <Property Name="JDD_INTEREST_RATE" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JDD_MONTHS_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JDD_MONTHS" Type="int" />
+    <Property Name="JDD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JDD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDD_CREATE_DATE" Type="datetime" />
+    <Property Name="JDD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDD_UPDATE_DATE" Type="datetime" />
+    <Property Name="JDD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_JUDGMENTDEBTOR_H">
+    <Key>
+      <PropertyRef Name="JD_ID" />
+    </Key>
+    <Property Name="JD_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JD_TYPE" Type="varchar" MaxLength="50" />
+    <Property Name="JD_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JD_CONTRACT_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JD_CHEQUE_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JD_DEBTOR_STATUS" Type="varchar" MaxLength="50" />
+    <Property Name="JD_JUDGMENT_DATE" Type="datetime" />
+    <Property Name="JD_COMPROMISE_DATE" Type="datetime" />
+    <Property Name="JD_FURTHER_COMMENT" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_TERM" Type="int" />
+    <Property Name="JD_TOTAL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JD_FIRST_DUE_DATE" Type="datetime" />
+    <Property Name="JD_PAY_DAY" Type="int" />
+    <Property Name="JD_APPROVE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JD_APPROVE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_APPROVE_DATE" Type="datetime" />
+    <Property Name="JD_APPROVE_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="JD_STATUS" Type="char" MaxLength="1" />
+    <Property Name="JD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_CREATE_DATE" Type="datetime" />
+    <Property Name="JD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JD_UPDATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_JUDGMENTDEBTOR_PAYMENT">
+    <Key>
+      <PropertyRef Name="JDP_HID" />
+      <PropertyRef Name="JDP_TERM" />
+    </Key>
+    <Property Name="JDP_HID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JDP_TERM" Type="int" Nullable="false" />
+    <Property Name="JDP_DESCRIPTION" Type="varchar" MaxLength="250" />
+    <Property Name="JDP_DUEDATE" Type="datetime" />
+    <Property Name="JDP_INSTALLMENT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JDP_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDP_CREATE_DATE" Type="datetime" />
+    <Property Name="JDP_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="JDP_UPDATE_DATE" Type="datetime" />
+    <Property Name="JDP_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_LEGAL_ATTACHMENT">
+    <Key>
+      <PropertyRef Name="ATTACH_JOB_ID" />
+      <PropertyRef Name="ATTACH_SEQUENCE" />
+    </Key>
+    <Property Name="ATTACH_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ATTACH_SEQUENCE" Type="int" Nullable="false" />
+    <Property Name="ATTACH_FILE_NAME" Type="varchar" MaxLength="500" />
+    <Property Name="ATTACH_DESCRIPTION" Type="varchar" MaxLength="500" />
+    <Property Name="ATTACH_DATE" Type="datetime" />
+    <Property Name="ATTACH_BY" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="T_LEGAL_TRACKING">
+    <Key>
+      <PropertyRef Name="LEGAL_JOB_ID" />
+      <PropertyRef Name="LEGAL_SEQ_NO" />
+    </Key>
+    <Property Name="LEGAL_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LEGAL_SEQ_NO" Type="int" Nullable="false" />
+    <Property Name="LEGAL_CASE" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_TRACKING_DATE" Type="datetime" />
+    <Property Name="LEGAL_TRACKING_BY" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_MAILING_DATE" Type="datetime" />
+    <Property Name="LEGAL_FILING_DATE" Type="datetime" />
+    <Property Name="LEGAL_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_DEBTOR_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_BLACK_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_RED_CODE" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_ATTORNEY_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_COURT_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_COURT_FEE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="LEGAL_AMOUNT_CLAIMED" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="LEGAL_POLICE_STATION" Type="varchar" MaxLength="100" />
+    <Property Name="LEGAL_CAR_RECEIVED_PLACE" Type="varchar" MaxLength="100" />
+    <Property Name="LEGAL_SUBMISSION_DATE" Type="datetime" />
+    <Property Name="LEGAL_SUBMISSION_AMOUNT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="LEGAL_CONTRACT_TERMINATED_DATE" Type="datetime" />
+    <Property Name="LEGAL_LACK_OF_BENEFIT" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="LEGAL_CHEQUE_NO" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_NOTIFY_CHEQUE_DATE" Type="datetime" />
+    <Property Name="LEGAL_PARTY_IN_LAW_SUIT" Type="varchar" MaxLength="100" />
+    <Property Name="LEGAL_APPOINTED_DATE" Type="datetime" />
+    <Property Name="LEGAL_ASSIGNED_DATE" Type="datetime" />
+    <Property Name="LEGAL_ATTORNEY_DATE" Type="datetime" />
+    <Property Name="LEGAL_NOTICE_DATE" Type="datetime" />
+    <Property Name="LEGAL_WITNESS_DATE" Type="datetime" />
+    <Property Name="LEGAL_WITNESS_TIME" Type="varchar" MaxLength="20" />
+    <Property Name="LEGAL_LAWYER_FEE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="LEGAL_SECOND_LAWYER_FEE" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="LEGAL_ENFORCEMENT_DATE" Type="datetime" />
+    <Property Name="LEGAL_BANKRUPTCY_DATE" Type="datetime" />
+    <Property Name="LEGAL_BANKRUPTCY_DISCHARGED_DATE" Type="datetime" />
+    <Property Name="LEGAL_POL_NO" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_STOLEN_NO" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_APPOINTMENT_CHECK_DATE" Type="datetime" />
+    <Property Name="LEGAL_OA_ENFORCEMENT" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_SUBMIT_ENFORCEMENT_DATE" Type="datetime" />
+    <Property Name="LEGAL_OA_ASSET_SEARCH" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_SUBMIT_INVEST_DATE" Type="datetime" />
+    <Property Name="LEGAL_ENFORCEMENT_EFF_DATE" Type="datetime" />
+    <Property Name="LEGAL_CASH_RECEIVE_DATE" Type="datetime" />
+    <Property Name="LEGAL_SEIZE_DATE" Type="datetime" />
+    <Property Name="LEGAL_REPORT_DATE" Type="datetime" />
+    <Property Name="LEGAL_JUDGMENT_DATE" Type="datetime" />
+    <Property Name="LEGAL_WITHDRAW_DATE" Type="datetime" />
+    <Property Name="LEGAL_EXECUTION_DATE" Type="datetime" />
+    <Property Name="LEGAL_EXECUTION_END_DATE" Type="datetime" />
+    <Property Name="LEGAL_DETAILS" Type="varchar" MaxLength="8000" />
+    <Property Name="LEGAL_CREATE_DATE" Type="datetime" />
+    <Property Name="LEGAL_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="LEGAL_UPDATE_DATE" Type="datetime" />
+    <Property Name="LEGAL_UPDATE_BY" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_LOGIN_HISTORY">
+    <Key>
+      <PropertyRef Name="CL_ID" />
+    </Key>
+    <Property Name="CL_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CL_USER_LOGIN" Type="varchar" MaxLength="50" />
+    <Property Name="CL_ROLE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="CL_IP_ADDRESS" Type="varchar" MaxLength="50" />
+    <Property Name="CL_LOGIN_DATE" Type="datetime" />
+    <Property Name="CL_LAST_ACT_DATE" Type="datetime" />
+    <Property Name="CL_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_R3_DETAIL">
+    <Key>
+      <PropertyRef Name="R3_JOB_ID" />
+      <PropertyRef Name="R3_CUST_CODE" />
+      <PropertyRef Name="R3_ADDR_ID" />
+    </Key>
+    <Property Name="R3_JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="R3_CUST_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="R3_ADDR_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="R3_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="R3_CUST_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="R3_CUST_BR_TYPE" Type="varchar" MaxLength="100" />
+    <Property Name="R3_CARD_NO" Type="varchar" MaxLength="20" />
+    <Property Name="R3_ADDR_FULL" Type="varchar" MaxLength="1000" />
+    <Property Name="R3_SEND_DATE" Type="datetime" />
+    <Property Name="R3_RECEVIE_DATE" Type="datetime" />
+    <Property Name="R3_REJECTED_DATE" Type="datetime" />
+    <Property Name="R3_ISSUE_DATE" Type="datetime" />
+    <Property Name="R3_CASE_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="R3_EMS_TRACKING" Type="varchar" MaxLength="20" />
+    <Property Name="R3_EXPIRE_DATE" Type="datetime" />
+    <Property Name="R3_TARGET_DATE" Type="datetime" />
+    <Property Name="R3_REMARK" Type="varchar" MaxLength="1000" />
+    <Property Name="R3_BARCODE" Type="varchar" MaxLength="255" />
+    <Property Name="R3_FLAG" Type="varchar" MaxLength="100" />
+    <Property Name="R3_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="R3_CREATE_DATE" Type="datetime" />
+    <Property Name="R3_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="R3_UPDATE_DATE" Type="datetime" />
+    <Property Name="R3_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_REPO_NOTE">
+    <Key>
+      <PropertyRef Name="NOTE_ID" />
+    </Key>
+    <Property Name="NOTE_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOTE_JOB_ID" Type="varchar" MaxLength="50" />
+    <Property Name="NOTE_CONTRACT_NO" Type="varchar" MaxLength="50" />
+    <Property Name="NOTE_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="NOTE_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="NOTE_CREATE_DATE" Type="datetime" />
+    <Property Name="NOTE_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="NOTE_UPDATE_DATE" Type="datetime" />
+    <Property Name="NOTE_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_WRITEOFF_D">
+    <Key>
+      <PropertyRef Name="WRITEOFFD_ID" />
+    </Key>
+    <Property Name="WRITEOFFD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WRITEOFFD_HID" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_OS" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="WRITEOFFD_R3_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_R3_DAY" Type="int" />
+    <Property Name="WRITEOFFD_REPO_FLAG" Type="char" MaxLength="1" />
+    <Property Name="WRITEOFFD_AUCTION_FLAG" Type="char" MaxLength="1" />
+    <Property Name="WRITEOFFD_OVD_DAY" Type="int" />
+    <Property Name="WRITEOFFD_REDCODE" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_BLACKCODE" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_CAIMTAX_STATUS" Type="char" MaxLength="1" />
+    <Property Name="WRITEOFFD_COMPANY_STATUS" Type="char" MaxLength="1" />
+    <Property Name="WRITEOFFD_REPO_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_LEGAL_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_FILING_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_COURTCODE" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFFD_SUBMIT_ENFORCEMENT_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_SUBMIT_INVEST_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_ENFORCEMENT_EFF_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_REPORT_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_JUDGMENT_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_EXECUTION_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_EXECUTION_END_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_REMARK" Type="varchar" MaxLength="2000" />
+    <Property Name="WRITEOFFD_JD_TOTAL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="WRITEOFFD_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="WRITEOFFD_CREATE_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="WRITEOFFD_UPDATE_DATE" Type="datetime" />
+    <Property Name="WRITEOFFD_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_WRITEOFF_H">
+    <Key>
+      <PropertyRef Name="WRITEOFF_DOC_ID" />
+    </Key>
+    <Property Name="WRITEOFF_DOC_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="WRITEOFF_DATE" Type="datetime" />
+    <Property Name="WRITEOFF_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFF_SUBTYPE" Type="varchar" MaxLength="20" />
+    <Property Name="WRITEOFF_APPROVE_FLAG" Type="char" MaxLength="1" />
+    <Property Name="WRITEOFF_APPROVE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="WRITEOFF_APPROVE_DATE" Type="datetime" />
+    <Property Name="WRITEOFF_CREATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="WRITEOFF_CREATE_DATE" Type="datetime" />
+    <Property Name="WRITEOFF_UPDATE_BY" Type="varchar" MaxLength="50" />
+    <Property Name="WRITEOFF_UPDATE_DATE" Type="datetime" />
+    <Property Name="WRITEOFF_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NCLS_SIT.dbo.T_JOB_ALL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="T_JOB_ALL">
+    <Key>
+      <PropertyRef Name="JOB_CASE_COLOR" />
+      <PropertyRef Name="JOB_ID" />
+    </Key>
+    <Property Name="JOB_CASE_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CASE_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_CASE_COLOR" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="JOB_LEGAL_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_LEGAL_STATUS_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_REPO_STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_REPO_STATUS_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_CASE_STATUS_COLOR" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="JOB_CONTRACT_NO" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CHEQUE_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JOB_CONTRACT_LIST" Type="varchar" MaxLength="4000" />
+    <Property Name="JOB_CUST_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_CUST_NAME" Type="varchar" MaxLength="200" />
+    <Property Name="JOB_BRAND" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_MODEL" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_PLATE_NO" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_OS_AMT_COL" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="JOB_OVD_DAY_COL" Type="numeric" Precision="18" Scale="8" />
+    <Property Name="JOB_ADMIN_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_ADMIN_NAME" Type="varchar" MaxLength="201" />
+    <Property Name="JOB_ASSIGN_ADMIN_DATE" Type="datetime" />
+    <Property Name="JOB_OA_CODE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_OA_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="JOB_ASSIGN_OA_DATE" Type="datetime" />
+    <Property Name="JOB_STEP_DATE" Type="datetime" />
+    <Property Name="JOB_HANDLE_DAY" Type="int" />
+    <Property Name="JOB_DOC_FLAG" Type="char" MaxLength="1" />
+    <Property Name="JOB_SHORT_FALL" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_AMOUNT_CLAIMED" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="JOB_TYPE" Type="varchar" MaxLength="50" />
+    <Property Name="JOB_FILING_DATE" Type="datetime" />
+    <Property Name="JOB_CONTRACT_TYPE" Type="varchar" MaxLength="20" />
+    <Property Name="JOB_STATUS" Type="char" MaxLength="1" />
+  </EntityType>
+  <Function Name="f_split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="param" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="delimiter" Type="char" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="val" Type="nvarchar(max)" />
+          <Property Name="seq" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="FN_GEN_BANKRUPTCY_FRAUD_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GEN_EXPENSE_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+    <Parameter Name="OA_Code" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GEN_JOB_LEGAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="LEGAL_CASE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GEN_JOB_R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GEN_JUDGMENT_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GEN_REPO_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GEN_SUGGEST_WRITEOFF_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_BLACK_CODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_COURT_NAME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="COURT_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_JOB_CASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="JOB_CASE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_MASTER_NAME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="MASTER_TYPE" Type="varchar" Mode="In" />
+    <Parameter Name="MASTER_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_OA_NAME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_RED_CODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_STATUS_NAME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="STATUS_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FN_GET_USER_NAME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="USER_LOGIN" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_IN_HOUSE_GET_LEGAL_LC015" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_IN_HOUSE_GET_LEGAL_LC016" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_IN_HOUSE_GET_REPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_IN_HOUSE_UPDATE_R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_OA_GET_CONFIG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_OA_GET_JOB_NO_OWNER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_ASSIGN_OA_UPDATE_EXP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_CONTRACT_DETAIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_R3_GET_DETAIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_R3_GET_HEADER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_UPDATE_STATUS_EXP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_UPDATE_STATUS_R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_BATCH_UPDATE_STATUS_REPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_CHECK_HOLIDAY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowCount" Type="int" Mode="InOut" />
+    <Parameter Name="ErrorCode" Type="int" Mode="InOut" />
+    <Parameter Name="ExecTime" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_DASHBOARD_DOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_DASHBOARD_LEGAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_DASHBOARD_LEGALCASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_DASHBOARD_LEGALSTATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_DASHBOARD_R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_DASHBOARD_REPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_EXPENSE_RECEIVE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SEARCH" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GEN_BANKRUPTCY_FRAUD__ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GEN_EXPENSE_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+    <Parameter Name="OA_Code" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GEN_JUDGMENT_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GEN_REPO_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GEN_SUGGEEST_WRITE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Key" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GET_CONTRACT_NO_BY_JD_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JD_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GET_MENU_BY_ROLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserRole" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GET_MENU_DEFAULT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_MAPPING_OA_AREA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="BUCKET_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_ASSIGN_REPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="OS_START" Type="decimal" Mode="In" />
+    <Parameter Name="OS_END" Type="decimal" Mode="In" />
+    <Parameter Name="DOC_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="ASSIGN_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="ASSIGN_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="PROVINCE_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="OA" Type="varchar" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_ASSIGN_REPO_GEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="OS_START" Type="decimal" Mode="In" />
+    <Parameter Name="OS_END" Type="decimal" Mode="In" />
+    <Parameter Name="DOC_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="ASSIGN_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="ASSIGN_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="PROVINCE_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_BANKRUPTCY_BY_DOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DOC_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_BANKRUPTCY_FRAUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DOC_NO" Type="varchar" Mode="In" />
+    <Parameter Name="APPROVAL_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="CREATE_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="CREATE_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="TYPE" Type="varchar" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_CANCEL_JOB_LEGAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_CANCEL_JOB_REPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_CHEQUE_CONTRACT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_COURTFEES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="REF_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTNOFROM" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTNOTO" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTDATEFROM" Type="date" Mode="In" />
+    <Parameter Name="PAYMENTDATETO" Type="date" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="LEGALCASE" Type="varchar" Mode="In" />
+    <Parameter Name="EXPENSE_APPROVE_FLAG" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_CUSTOMER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SEARCH" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_DOCUMENT_BY_CASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SEARCH" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_DOCUMENT_BY_REF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+    <Parameter Name="CASE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_EXPENSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="REF_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTNOFROM" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTNOTO" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTDATEFROM" Type="date" Mode="In" />
+    <Parameter Name="PAYMENTDATETO" Type="date" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="LEGALCASE" Type="varchar" Mode="In" />
+    <Parameter Name="EXPENSE_APPROVE_FLAG" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_EXPENSE_CONFIG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SEARCH" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_EXPENSE_DETAIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EXPEN_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_FRAUD_BY_DOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DOC_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SEARCH" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_JUDGMENTDEBTOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+    <Parameter Name="ContractNo" Type="varchar" Mode="In" />
+    <Parameter Name="CustName" Type="varchar" Mode="In" />
+    <Parameter Name="JudgmentDateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="JudgmentDateTo" Type="datetime" Mode="In" />
+    <Parameter Name="CompromiseDateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="CompromiseDateTo" Type="datetime" Mode="In" />
+    <Parameter Name="RedCode" Type="varchar" Mode="In" />
+    <Parameter Name="Admin" Type="varchar" Mode="In" />
+    <Parameter Name="LegalCase" Type="varchar" Mode="In" />
+    <Parameter Name="LegalOA" Type="varchar" Mode="In" />
+    <Parameter Name="DebtorStatus" Type="varchar" Mode="In" />
+    <Parameter Name="ApproveStatus" Type="varchar" Mode="In" />
+    <Parameter Name="ActiveStatus" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_JUDGMENTDEBTOR_CHEQUE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+    <Parameter Name="Cheque" Type="varchar" Mode="In" />
+    <Parameter Name="CustName" Type="varchar" Mode="In" />
+    <Parameter Name="JudgmentDateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="JudgmentDateTo" Type="datetime" Mode="In" />
+    <Parameter Name="CompromiseDateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="CompromiseDateTo" Type="datetime" Mode="In" />
+    <Parameter Name="RedCode" Type="varchar" Mode="In" />
+    <Parameter Name="Admin" Type="varchar" Mode="In" />
+    <Parameter Name="LegalCase" Type="varchar" Mode="In" />
+    <Parameter Name="LegalOA" Type="varchar" Mode="In" />
+    <Parameter Name="DebtorStatus" Type="varchar" Mode="In" />
+    <Parameter Name="ApproveStatus" Type="varchar" Mode="In" />
+    <Parameter Name="ActiveStatus" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_MAPPING_OA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OACode" Type="varchar" Mode="In" />
+    <Parameter Name="BucketCode" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_PERMISSION_BY_ROLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="STATUSDATA" Type="varchar" Mode="In" />
+    <Parameter Name="CUST_NAME" Type="varchar" Mode="In" />
+    <Parameter Name="ISSUE_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="ISSUE_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="SEND_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="SEND_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="RECEIVE_YELLOW_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="RECEIVE_YELLOW_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_RC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="REF_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CUST_NAME" Type="varchar" Mode="In" />
+    <Parameter Name="STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="ADMIN" Type="varchar" Mode="In" />
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ASSIGN_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="ASSIGN_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="DATASTATUS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_SPECIAL_CASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CHEQUE_NO" Type="varchar" Mode="In" />
+    <Parameter Name="ADMIN" Type="varchar" Mode="In" />
+    <Parameter Name="LEGAL_OA" Type="varchar" Mode="In" />
+    <Parameter Name="REF_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CASE_TYPE" Type="varchar" Mode="In" />
+    <Parameter Name="LEGAL_CASE" Type="varchar" Mode="In" />
+    <Parameter Name="STATUS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_SPECIAL_CASE_CHEQUE_LIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_STATUS_BY_CASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SEARCH" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_SUGGEST_WRITEOFF_BY_DOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DOC_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_TODOLIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="REF_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="CUST_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="CASE_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="CASE_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="TRAFFIC_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ADMIN_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="OA_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="ASSIGN_ADMIN_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="ASSIGN_ADMIN_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="ASSIGN_OA_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="ASSIGN_OA_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="SUCC_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="ROLE_CODE" Type="varchar" Mode="In" />
+    <Parameter Name="MODE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_WRITE_OFF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CONTRACT_NO" Type="varchar" Mode="In" />
+    <Parameter Name="OS_START" Type="decimal" Mode="In" />
+    <Parameter Name="OS_END" Type="decimal" Mode="In" />
+    <Parameter Name="R3_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="REPO_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="AUCTION_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="LEGAL_CASE" Type="varchar" Mode="In" />
+    <Parameter Name="LEGAL_STATUS" Type="varchar" Mode="In" />
+    <Parameter Name="DUE_STATRT" Type="decimal" Mode="In" />
+    <Parameter Name="DUE_END" Type="decimal" Mode="In" />
+    <Parameter Name="FILING_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="FILING_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="JUDGMENT_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="JUDGMENT_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="EN_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="EN_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="SUBMIT_INVERT_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="SUBMIT_INVERT_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="REPORT_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="REPORT_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="EXECUTION_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="EXECUTION_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="EXECUTION_END_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="EXECUTION_END_DATE_END" Type="date" Mode="In" />
+    <Parameter Name="SUBMIT_EN_DATE_START" Type="date" Mode="In" />
+    <Parameter Name="SUBMIT_EN_DATE_END" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_WRITE_OFF_ALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="WF_STATUS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SEARCH_WRITE_OFF_VIEW_DOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="APPROVE_DATE_FROM" Type="date" Mode="In" />
+    <Parameter Name="APPROVE_DATE_TO" Type="date" Mode="In" />
+    <Parameter Name="APPROVE_STATUS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_JUDGMENT_DEBTOR_BY_JD_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JD_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_JUDGMENT_DEBTOR_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_JUDGMENT_DEBTOR_BY_JOB_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_JUDGMENT_DEBTOR_DETAIL_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_ATTACH_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_CAR_RECEIVE_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_CASE_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+    <Parameter Name="JOB_CONTRACT_NO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_COURT_FEE_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_DEBTOR_EXPENSE_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_EXPENSE_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_REPO_BY_JOB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SELECT_LEGAL_TRACKING_BY_CASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOB_ID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_UPDATE_R3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JOBID" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="NCLS_SITModelStoreContainer">
+    <EntitySet Name="COL_USER" EntityType="Self.COL_USER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="COL_USER_CONTRACT" EntityType="Self.COL_USER_CONTRACT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_ACTION" EntityType="Self.M_ACTION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_BUCKET" EntityType="Self.M_BUCKET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_COURT" EntityType="Self.M_COURT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_DOCUMENT" EntityType="Self.M_DOCUMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_FUNCTION" EntityType="Self.M_FUNCTION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_LEGAL_CASE" EntityType="Self.M_LEGAL_CASE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_LEGAL_STATUS" EntityType="Self.M_LEGAL_STATUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_MASTER" EntityType="Self.M_MASTER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_OA" EntityType="Self.M_OA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_OA_CONFIG_AREA" EntityType="Self.M_OA_CONFIG_AREA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_OA_CONFIG_BUCKET" EntityType="Self.M_OA_CONFIG_BUCKET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_OA_GROUP" EntityType="Self.M_OA_GROUP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_PARAMETER" EntityType="Self.M_PARAMETER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_PERMISSION" EntityType="Self.M_PERMISSION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_PROGRAM" EntityType="Self.M_PROGRAM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_PROVINCE" EntityType="Self.M_PROVINCE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_REPO_FEE" EntityType="Self.M_REPO_FEE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_ROLE" EntityType="Self.M_ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_SIGNATURE" EntityType="Self.M_SIGNATURE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_STATUS" EntityType="Self.M_STATUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_TAX_CONFIG" EntityType="Self.M_TAX_CONFIG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_TRANS_DETAIL" EntityType="Self.M_TRANS_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_TRANSACTION" EntityType="Self.M_TRANSACTION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_USER" EntityType="Self.M_USER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_USER_ROLE" EntityType="Self.M_USER_ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_WRITEOFF_SUBTYPE" EntityType="Self.M_WRITEOFF_SUBTYPE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_CHEQUE" EntityType="Self.S_CONTRACT_CHEQUE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_COST" EntityType="Self.S_CONTRACT_COST" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_CUST" EntityType="Self.S_CONTRACT_CUST" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_CUST_ADDRESS" EntityType="Self.S_CONTRACT_CUST_ADDRESS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_DELINQUENCY" EntityType="Self.S_CONTRACT_DELINQUENCY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_INTERACTION" EntityType="Self.S_CONTRACT_INTERACTION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_OVERDUE" EntityType="Self.S_CONTRACT_OVERDUE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_PMT_RECEIPT" EntityType="Self.S_CONTRACT_PMT_RECEIPT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CONTRACT_PMT_SCHEDULE" EntityType="Self.S_CONTRACT_PMT_SCHEDULE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_CUSTOMER_DETAIL" EntityType="Self.S_CUSTOMER_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="S_RPS" EntityType="Self.S_RPS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_ACT_LOG" EntityType="Self.T_ACT_LOG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_BANKRUPTCY_FRAUD_D" EntityType="Self.T_BANKRUPTCY_FRAUD_D" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_BANKRUPTCY_FRAUD_H" EntityType="Self.T_BANKRUPTCY_FRAUD_H" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_BATCH_LOG" EntityType="Self.T_BATCH_LOG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_CHEQUE_DETAIL" EntityType="Self.T_CHEQUE_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_CURRENT_LOGIN" EntityType="Self.T_CURRENT_LOGIN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_DOCUMENT" EntityType="Self.T_DOCUMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_EXPENSE_D" EntityType="Self.T_EXPENSE_D" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_EXPENSE_H" EntityType="Self.T_EXPENSE_H" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JOB_LEGAL" EntityType="Self.T_JOB_LEGAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JOB_R3" EntityType="Self.T_JOB_R3" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JOB_REPO" EntityType="Self.T_JOB_REPO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JUDGMENTDEBTOR_ATTACHMENT" EntityType="Self.T_JUDGMENTDEBTOR_ATTACHMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JUDGMENTDEBTOR_D" EntityType="Self.T_JUDGMENTDEBTOR_D" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JUDGMENTDEBTOR_H" EntityType="Self.T_JUDGMENTDEBTOR_H" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_JUDGMENTDEBTOR_PAYMENT" EntityType="Self.T_JUDGMENTDEBTOR_PAYMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_LEGAL_ATTACHMENT" EntityType="Self.T_LEGAL_ATTACHMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_LEGAL_TRACKING" EntityType="Self.T_LEGAL_TRACKING" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_LOGIN_HISTORY" EntityType="Self.T_LOGIN_HISTORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_R3_DETAIL" EntityType="Self.T_R3_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_REPO_NOTE" EntityType="Self.T_REPO_NOTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_WRITEOFF_D" EntityType="Self.T_WRITEOFF_D" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_WRITEOFF_H" EntityType="Self.T_WRITEOFF_H" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MG_JD_D" EntityType="Self.MG_JD_D" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MG_JD_D].[JDD_ID] AS [JDD_ID], 
+    [MG_JD_D].[JDD_CASE_CODE] AS [JDD_CASE_CODE], 
+    [MG_JD_D].[JDD_CASE] AS [JDD_CASE], 
+    [MG_JD_D].[JDD_CONTRACT_NO] AS [JDD_CONTRACT_NO], 
+    [MG_JD_D].[JDD_HID] AS [JDD_HID], 
+    [MG_JD_D].[JDD_TRANS_CODE] AS [JDD_TRANS_CODE], 
+    [MG_JD_D].[JDD_AMOUNT] AS [JDD_AMOUNT], 
+    [MG_JD_D].[JDD_PAYMENT_AMOUNT] AS [JDD_PAYMENT_AMOUNT], 
+    [MG_JD_D].[JDD_CREDITBUREAU_FLAG] AS [JDD_CREDITBUREAU_FLAG], 
+    [MG_JD_D].[JDD_SUM_FLAG] AS [JDD_SUM_FLAG], 
+    [MG_JD_D].[JDD_GENERATE_FLAG] AS [JDD_GENERATE_FLAG], 
+    [MG_JD_D].[JDD_INTEREST_FLAG] AS [JDD_INTEREST_FLAG], 
+    [MG_JD_D].[JDD_INTEREST_TYPE] AS [JDD_INTEREST_TYPE], 
+    [MG_JD_D].[JDD_INTEREST_START_DATE] AS [JDD_INTEREST_START_DATE], 
+    [MG_JD_D].[JDD_INTEREST_END_DATE] AS [JDD_INTEREST_END_DATE], 
+    [MG_JD_D].[JDD_INTEREST_END_DATE_FLAG] AS [JDD_INTEREST_END_DATE_FLAG], 
+    [MG_JD_D].[JDD_INTEREST_MONTHS] AS [JDD_INTEREST_MONTHS], 
+    [MG_JD_D].[JDD_INTEREST_DAYS] AS [JDD_INTEREST_DAYS], 
+    [MG_JD_D].[JDD_INTEREST_RATE] AS [JDD_INTEREST_RATE], 
+    [MG_JD_D].[JDD_MONTHS_FLAG] AS [JDD_MONTHS_FLAG], 
+    [MG_JD_D].[JDD_MONTHS] AS [JDD_MONTHS], 
+    [MG_JD_D].[JDD_REMARK] AS [JDD_REMARK], 
+    [MG_JD_D].[JDD_CREATE_BY] AS [JDD_CREATE_BY], 
+    [MG_JD_D].[JDD_CREATE_DATE] AS [JDD_CREATE_DATE], 
+    [MG_JD_D].[JDD_UPDATE_BY] AS [JDD_UPDATE_BY], 
+    [MG_JD_D].[JDD_UPDATE_DATE] AS [JDD_UPDATE_DATE], 
+    [MG_JD_D].[JDD_STATUS] AS [JDD_STATUS]
+    FROM [dbo].[MG_JD_D] AS [MG_JD_D]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MG_JD_H" EntityType="Self.MG_JD_H" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MG_JD_H].[JD_ID] AS [JD_ID], 
+    [MG_JD_H].[JD_CASE_CODE] AS [JD_CASE_CODE], 
+    [MG_JD_H].[JD_CASE] AS [JD_CASE], 
+    [MG_JD_H].[JD_CONTRACT_NO] AS [JD_CONTRACT_NO], 
+    [MG_JD_H].[JD_TYPE] AS [JD_TYPE], 
+    [MG_JD_H].[JD_JOB_ID] AS [JD_JOB_ID], 
+    [MG_JD_H].[JD_CONTRACT_LIST] AS [JD_CONTRACT_LIST], 
+    [MG_JD_H].[JD_CHEQUE_LIST] AS [JD_CHEQUE_LIST], 
+    [MG_JD_H].[JD_DEBTOR_STATUS_CODE] AS [JD_DEBTOR_STATUS_CODE], 
+    [MG_JD_H].[JD_DEBTOR_STATUS] AS [JD_DEBTOR_STATUS], 
+    [MG_JD_H].[JD_JUDGMENT_DATE] AS [JD_JUDGMENT_DATE], 
+    [MG_JD_H].[JD_COMPROMISE_DATE] AS [JD_COMPROMISE_DATE], 
+    [MG_JD_H].[JD_FURTHER_COMMENT] AS [JD_FURTHER_COMMENT], 
+    [MG_JD_H].[JD_TERM] AS [JD_TERM], 
+    [MG_JD_H].[JD_TOTAL] AS [JD_TOTAL], 
+    [MG_JD_H].[JD_FIRST_DUE_DATE] AS [JD_FIRST_DUE_DATE], 
+    [MG_JD_H].[JD_PAY_DAY] AS [JD_PAY_DAY], 
+    [MG_JD_H].[JD_APPROVE_FLAG] AS [JD_APPROVE_FLAG], 
+    [MG_JD_H].[JD_APPROVE_BY] AS [JD_APPROVE_BY], 
+    [MG_JD_H].[JD_APPROVE_DATE] AS [JD_APPROVE_DATE], 
+    [MG_JD_H].[JD_APPROVE_REMARK] AS [JD_APPROVE_REMARK], 
+    [MG_JD_H].[JD_REMARK] AS [JD_REMARK], 
+    [MG_JD_H].[JD_CREATE_BY] AS [JD_CREATE_BY], 
+    [MG_JD_H].[JD_CREATE_DATE] AS [JD_CREATE_DATE], 
+    [MG_JD_H].[JD_UPDATE_BY] AS [JD_UPDATE_BY], 
+    [MG_JD_H].[JD_UPDATE_DATE] AS [JD_UPDATE_DATE], 
+    [MG_JD_H].[JD_STATUS] AS [JD_STATUS]
+    FROM [dbo].[MG_JD_H] AS [MG_JD_H]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MG_JDC_D" EntityType="Self.MG_JDC_D" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MG_JDC_D].[JDD_ID] AS [JDD_ID], 
+    [MG_JDC_D].[JDD_CASE_CODE] AS [JDD_CASE_CODE], 
+    [MG_JDC_D].[JDD_CASE] AS [JDD_CASE], 
+    [MG_JDC_D].[JDD_CONTRACT_NO] AS [JDD_CONTRACT_NO], 
+    [MG_JDC_D].[JDD_HID] AS [JDD_HID], 
+    [MG_JDC_D].[JDD_TRANS_CODE] AS [JDD_TRANS_CODE], 
+    [MG_JDC_D].[JDD_AMOUNT] AS [JDD_AMOUNT], 
+    [MG_JDC_D].[JDD_PAYMENT_AMOUNT] AS [JDD_PAYMENT_AMOUNT], 
+    [MG_JDC_D].[JDD_CREDITBUREAU_FLAG] AS [JDD_CREDITBUREAU_FLAG], 
+    [MG_JDC_D].[JDD_SUM_FLAG] AS [JDD_SUM_FLAG], 
+    [MG_JDC_D].[JDD_GENERATE_FLAG] AS [JDD_GENERATE_FLAG], 
+    [MG_JDC_D].[JDD_INTEREST_FLAG] AS [JDD_INTEREST_FLAG], 
+    [MG_JDC_D].[JDD_INTEREST_TYPE] AS [JDD_INTEREST_TYPE], 
+    [MG_JDC_D].[JDD_INTEREST_START_DATE] AS [JDD_INTEREST_START_DATE], 
+    [MG_JDC_D].[JDD_INTEREST_END_DATE] AS [JDD_INTEREST_END_DATE], 
+    [MG_JDC_D].[JDD_INTEREST_END_DATE_FLAG] AS [JDD_INTEREST_END_DATE_FLAG], 
+    [MG_JDC_D].[JDD_INTEREST_MONTHS] AS [JDD_INTEREST_MONTHS], 
+    [MG_JDC_D].[JDD_INTEREST_DAYS] AS [JDD_INTEREST_DAYS], 
+    [MG_JDC_D].[JDD_INTEREST_RATE] AS [JDD_INTEREST_RATE], 
+    [MG_JDC_D].[JDD_MONTHS_FLAG] AS [JDD_MONTHS_FLAG], 
+    [MG_JDC_D].[JDD_MONTHS] AS [JDD_MONTHS], 
+    [MG_JDC_D].[JDD_REMARK] AS [JDD_REMARK], 
+    [MG_JDC_D].[JDD_CREATE_BY] AS [JDD_CREATE_BY], 
+    [MG_JDC_D].[JDD_CREATE_DATE] AS [JDD_CREATE_DATE], 
+    [MG_JDC_D].[JDD_UPDATE_BY] AS [JDD_UPDATE_BY], 
+    [MG_JDC_D].[JDD_UPDATE_DATE] AS [JDD_UPDATE_DATE], 
+    [MG_JDC_D].[JDD_STATUS] AS [JDD_STATUS]
+    FROM [dbo].[MG_JDC_D] AS [MG_JDC_D]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MG_JDC_H" EntityType="Self.MG_JDC_H" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MG_JDC_H].[JD_ID] AS [JD_ID], 
+    [MG_JDC_H].[JD_CASE_CODE] AS [JD_CASE_CODE], 
+    [MG_JDC_H].[JD_CASE] AS [JD_CASE], 
+    [MG_JDC_H].[JD_CONTRACT_NO] AS [JD_CONTRACT_NO], 
+    [MG_JDC_H].[JD_COMPROMIST_TYPE] AS [JD_COMPROMIST_TYPE], 
+    [MG_JDC_H].[JD_TYPE] AS [JD_TYPE], 
+    [MG_JDC_H].[JD_JOB_ID] AS [JD_JOB_ID], 
+    [MG_JDC_H].[JD_CONTRACT_LIST] AS [JD_CONTRACT_LIST], 
+    [MG_JDC_H].[JD_CHEQUE_LIST] AS [JD_CHEQUE_LIST], 
+    [MG_JDC_H].[JD_DEBTOR_STATUS_CODE] AS [JD_DEBTOR_STATUS_CODE], 
+    [MG_JDC_H].[JD_DEBTOR_STATUS] AS [JD_DEBTOR_STATUS], 
+    [MG_JDC_H].[JD_JUDGMENT_DATE] AS [JD_JUDGMENT_DATE], 
+    [MG_JDC_H].[JD_COMPROMISE_DATE] AS [JD_COMPROMISE_DATE], 
+    [MG_JDC_H].[JD_FURTHER_COMMENT] AS [JD_FURTHER_COMMENT], 
+    [MG_JDC_H].[JD_TERM] AS [JD_TERM], 
+    [MG_JDC_H].[JD_TOTAL] AS [JD_TOTAL], 
+    [MG_JDC_H].[JD_FIRST_DUE_DATE] AS [JD_FIRST_DUE_DATE], 
+    [MG_JDC_H].[JD_PAY_DAY] AS [JD_PAY_DAY], 
+    [MG_JDC_H].[JD_APPROVE_FLAG_CODE] AS [JD_APPROVE_FLAG_CODE], 
+    [MG_JDC_H].[JD_APPROVE_FLAG] AS [JD_APPROVE_FLAG], 
+    [MG_JDC_H].[JD_APPROVE_BY] AS [JD_APPROVE_BY], 
+    [MG_JDC_H].[JD_APPROVE_DATE] AS [JD_APPROVE_DATE], 
+    [MG_JDC_H].[JD_APPROVE_REMARK] AS [JD_APPROVE_REMARK], 
+    [MG_JDC_H].[JD_REMARK] AS [JD_REMARK], 
+    [MG_JDC_H].[JD_CREATE_BY] AS [JD_CREATE_BY], 
+    [MG_JDC_H].[JD_CREATE_DATE] AS [JD_CREATE_DATE], 
+    [MG_JDC_H].[JD_UPDATE_BY] AS [JD_UPDATE_BY], 
+    [MG_JDC_H].[JD_UPDATE_DATE] AS [JD_UPDATE_DATE], 
+    [MG_JDC_H].[JD_STATUS] AS [JD_STATUS]
+    FROM [dbo].[MG_JDC_H] AS [MG_JDC_H]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MG_LEGAL_DETAIL" EntityType="Self.MG_LEGAL_DETAIL" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MG_LEGAL_DETAIL].[CHQ_JOB_ID] AS [CHQ_JOB_ID], 
+    [MG_LEGAL_DETAIL].[CHQ_CHEQUE_NO] AS [CHQ_CHEQUE_NO], 
+    [MG_LEGAL_DETAIL].[CHQ_CONTRACT_NO] AS [CHQ_CONTRACT_NO], 
+    [MG_LEGAL_DETAIL].[CHQ_SR_NO] AS [CHQ_SR_NO], 
+    [MG_LEGAL_DETAIL].[CHQ_ACCOUNT_NO] AS [CHQ_ACCOUNT_NO], 
+    [MG_LEGAL_DETAIL].[CHQ_BANK_ID] AS [CHQ_BANK_ID], 
+    [MG_LEGAL_DETAIL].[CHQ_BANK_NAME] AS [CHQ_BANK_NAME], 
+    [MG_LEGAL_DETAIL].[CHQ_BRANCH_NAME] AS [CHQ_BRANCH_NAME], 
+    [MG_LEGAL_DETAIL].[CHQ_BORROWER_NAME] AS [CHQ_BORROWER_NAME], 
+    [MG_LEGAL_DETAIL].[CHQ_CHEQUE_CLEARING_CODE] AS [CHQ_CHEQUE_CLEARING_CODE], 
+    [MG_LEGAL_DETAIL].[CHQ_DEPOSIT_DATE] AS [CHQ_DEPOSIT_DATE], 
+    [MG_LEGAL_DETAIL].[CHQ_UPLOAD_DATE] AS [CHQ_UPLOAD_DATE], 
+    [MG_LEGAL_DETAIL].[CHQ_DUE_DATE] AS [CHQ_DUE_DATE], 
+    [MG_LEGAL_DETAIL].[CHQ_EMI_AMOUNT] AS [CHQ_EMI_AMOUNT]
+    FROM [dbo].[MG_LEGAL_DETAIL] AS [MG_LEGAL_DETAIL]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="S_CONTRACT" EntityType="Self.S_CONTRACT" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [S_CONTRACT].[CONTRACT_NO] AS [CONTRACT_NO], 
+    [S_CONTRACT].[CONT_CODE] AS [CONT_CODE], 
+    [S_CONTRACT].[CONTRACT_STATUS] AS [CONTRACT_STATUS], 
+    [S_CONTRACT].[CONTRACT_SUB_STATUS] AS [CONTRACT_SUB_STATUS], 
+    [S_CONTRACT].[COLLECTION_STATUS] AS [COLLECTION_STATUS], 
+    [S_CONTRACT].[CONTRACT_TYPE] AS [CONTRACT_TYPE], 
+    [S_CONTRACT].[SUB_PRODUCT] AS [SUB_PRODUCT], 
+    [S_CONTRACT].[PAYMENT_TERM] AS [PAYMENT_TERM], 
+    [S_CONTRACT].[PAY_DAYS] AS [PAY_DAYS], 
+    [S_CONTRACT].[SERVICE_BRAND] AS [SERVICE_BRAND], 
+    [S_CONTRACT].[BRAND] AS [BRAND], 
+    [S_CONTRACT].[MODEL] AS [MODEL], 
+    [S_CONTRACT].[BODY] AS [BODY], 
+    [S_CONTRACT].[PLATE_NO] AS [PLATE_NO], 
+    [S_CONTRACT].[PLATE_PROVINCE] AS [PLATE_PROVINCE], 
+    [S_CONTRACT].[CHASSIS] AS [CHASSIS], 
+    [S_CONTRACT].[COLOR_CD] AS [COLOR_CD], 
+    [S_CONTRACT].[DL_GROUPNAME] AS [DL_GROUPNAME], 
+    [S_CONTRACT].[DL_NAME] AS [DL_NAME], 
+    [S_CONTRACT].[FI_NAME] AS [FI_NAME], 
+    [S_CONTRACT].[SALESMAN_NAME] AS [SALESMAN_NAME], 
+    [S_CONTRACT].[CUSTOMER_TYPE] AS [CUSTOMER_TYPE], 
+    [S_CONTRACT].[CUST_CODE] AS [CUST_CODE], 
+    [S_CONTRACT].[CUST_NAME_TH] AS [CUST_NAME_TH], 
+    [S_CONTRACT].[CUST_NAME_EN] AS [CUST_NAME_EN], 
+    [S_CONTRACT].[ID_NUMBER] AS [ID_NUMBER], 
+    [S_CONTRACT].[PROVINCE_ID] AS [PROVINCE_ID], 
+    [S_CONTRACT].[FLEET_CUSTOMER_FLG] AS [FLEET_CUSTOMER_FLG], 
+    [S_CONTRACT].[ADDRESS_LINE1] AS [ADDRESS_LINE1], 
+    [S_CONTRACT].[ADDRESS_LINE2] AS [ADDRESS_LINE2], 
+    [S_CONTRACT].[ADDRESS_LINE3] AS [ADDRESS_LINE3], 
+    [S_CONTRACT].[BOR_MOBILE_1] AS [BOR_MOBILE_1], 
+    [S_CONTRACT].[BOR_MOBILE_2] AS [BOR_MOBILE_2], 
+    [S_CONTRACT].[BOR_BUSINESS_PHONE] AS [BOR_BUSINESS_PHONE], 
+    [S_CONTRACT].[BOR_TELEPHONE] AS [BOR_TELEPHONE], 
+    [S_CONTRACT].[GUARANTOR_1] AS [GUARANTOR_1], 
+    [S_CONTRACT].[GUARANTOR_NAME_1] AS [GUARANTOR_NAME_1], 
+    [S_CONTRACT].[GUA1_MOBILE_1] AS [GUA1_MOBILE_1], 
+    [S_CONTRACT].[GUA1_MOBILE_2] AS [GUA1_MOBILE_2], 
+    [S_CONTRACT].[GUA1_BUSINESS_PHONE] AS [GUA1_BUSINESS_PHONE], 
+    [S_CONTRACT].[GUA1_TELEPHONE] AS [GUA1_TELEPHONE], 
+    [S_CONTRACT].[GUARANTOR_2] AS [GUARANTOR_2], 
+    [S_CONTRACT].[GUARANTOR_NAME_2] AS [GUARANTOR_NAME_2], 
+    [S_CONTRACT].[GUA2_MOBILE_1] AS [GUA2_MOBILE_1], 
+    [S_CONTRACT].[GUA2_MOBILE_2] AS [GUA2_MOBILE_2], 
+    [S_CONTRACT].[GUA2_BUSINESS_PHONE] AS [GUA2_BUSINESS_PHONE], 
+    [S_CONTRACT].[GUA2_TELEPHONE] AS [GUA2_TELEPHONE], 
+    [S_CONTRACT].[NEW_USED] AS [NEW_USED], 
+    [S_CONTRACT].[ASSET_PRICE] AS [ASSET_PRICE], 
+    [S_CONTRACT].[DOWN_PAYMENT_AMNT] AS [DOWN_PAYMENT_AMNT], 
+    [S_CONTRACT].[ALL_INSURANCE_FINANCE] AS [ALL_INSURANCE_FINANCE], 
+    [S_CONTRACT].[TOTAL_FINANCE] AS [TOTAL_FINANCE], 
+    [S_CONTRACT].[TOTAL_INTEREST_AMNT] AS [TOTAL_INTEREST_AMNT], 
+    [S_CONTRACT].[CONTRACT_TERM] AS [CONTRACT_TERM], 
+    [S_CONTRACT].[BALLOON_AMNT] AS [BALLOON_AMNT], 
+    [S_CONTRACT].[ACTUAL_PAYMENT] AS [ACTUAL_PAYMENT], 
+    [S_CONTRACT].[LAST_PAYMENT_AMOUNT] AS [LAST_PAYMENT_AMOUNT], 
+    [S_CONTRACT].[PAID_AMT] AS [PAID_AMT], 
+    [S_CONTRACT].[PAID_TERM] AS [PAID_TERM], 
+    [S_CONTRACT].[OVERDUE_TERM] AS [OVERDUE_TERM], 
+    [S_CONTRACT].[OVERDUE_DAY] AS [OVERDUE_DAY], 
+    [S_CONTRACT].[OVERDUE_DATE] AS [OVERDUE_DATE], 
+    [S_CONTRACT].[BUCKET_CODE] AS [BUCKET_CODE], 
+    [S_CONTRACT].[ARREARS_AMOUNT] AS [ARREARS_AMOUNT], 
+    [S_CONTRACT].[OUTSTANDING_BALANCE] AS [OUTSTANDING_BALANCE], 
+    [S_CONTRACT].[OUTSTANDING_TERM] AS [OUTSTANDING_TERM], 
+    [S_CONTRACT].[CONTRACT_CREATION_DATE] AS [CONTRACT_CREATION_DATE], 
+    [S_CONTRACT].[DATA_IMPORT_DATE] AS [DATA_IMPORT_DATE], 
+    [S_CONTRACT].[COMP_CODE] AS [COMP_CODE], 
+    [S_CONTRACT].[COMP_BRANCH_CODE] AS [COMP_BRANCH_CODE]
+    FROM [dbo].[S_CONTRACT] AS [S_CONTRACT]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="T_JOB_ALL" EntityType="Self.T_JOB_ALL" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [T_JOB_ALL].[JOB_CASE_CODE] AS [JOB_CASE_CODE], 
+    [T_JOB_ALL].[JOB_CASE_NAME] AS [JOB_CASE_NAME], 
+    [T_JOB_ALL].[JOB_CASE_COLOR] AS [JOB_CASE_COLOR], 
+    [T_JOB_ALL].[JOB_LEGAL_STATUS] AS [JOB_LEGAL_STATUS], 
+    [T_JOB_ALL].[JOB_LEGAL_STATUS_NAME] AS [JOB_LEGAL_STATUS_NAME], 
+    [T_JOB_ALL].[JOB_REPO_STATUS] AS [JOB_REPO_STATUS], 
+    [T_JOB_ALL].[JOB_REPO_STATUS_NAME] AS [JOB_REPO_STATUS_NAME], 
+    [T_JOB_ALL].[JOB_CASE_STATUS_COLOR] AS [JOB_CASE_STATUS_COLOR], 
+    [T_JOB_ALL].[JOB_ID] AS [JOB_ID], 
+    [T_JOB_ALL].[JOB_CONTRACT_NO] AS [JOB_CONTRACT_NO], 
+    [T_JOB_ALL].[JOB_CHEQUE_LIST] AS [JOB_CHEQUE_LIST], 
+    [T_JOB_ALL].[JOB_CONTRACT_LIST] AS [JOB_CONTRACT_LIST], 
+    [T_JOB_ALL].[JOB_CUST_CODE] AS [JOB_CUST_CODE], 
+    [T_JOB_ALL].[JOB_CUST_NAME] AS [JOB_CUST_NAME], 
+    [T_JOB_ALL].[JOB_BRAND] AS [JOB_BRAND], 
+    [T_JOB_ALL].[JOB_MODEL] AS [JOB_MODEL], 
+    [T_JOB_ALL].[JOB_PLATE_NO] AS [JOB_PLATE_NO], 
+    [T_JOB_ALL].[JOB_OS_AMT_COL] AS [JOB_OS_AMT_COL], 
+    [T_JOB_ALL].[JOB_OVD_DAY_COL] AS [JOB_OVD_DAY_COL], 
+    [T_JOB_ALL].[JOB_ADMIN_CODE] AS [JOB_ADMIN_CODE], 
+    [T_JOB_ALL].[JOB_ADMIN_NAME] AS [JOB_ADMIN_NAME], 
+    [T_JOB_ALL].[JOB_ASSIGN_ADMIN_DATE] AS [JOB_ASSIGN_ADMIN_DATE], 
+    [T_JOB_ALL].[JOB_OA_CODE] AS [JOB_OA_CODE], 
+    [T_JOB_ALL].[JOB_OA_NAME] AS [JOB_OA_NAME], 
+    [T_JOB_ALL].[JOB_ASSIGN_OA_DATE] AS [JOB_ASSIGN_OA_DATE], 
+    [T_JOB_ALL].[JOB_STEP_DATE] AS [JOB_STEP_DATE], 
+    [T_JOB_ALL].[JOB_HANDLE_DAY] AS [JOB_HANDLE_DAY], 
+    [T_JOB_ALL].[JOB_DOC_FLAG] AS [JOB_DOC_FLAG], 
+    [T_JOB_ALL].[JOB_SHORT_FALL] AS [JOB_SHORT_FALL], 
+    [T_JOB_ALL].[JOB_AMOUNT_CLAIMED] AS [JOB_AMOUNT_CLAIMED], 
+    [T_JOB_ALL].[JOB_TYPE] AS [JOB_TYPE], 
+    [T_JOB_ALL].[JOB_FILING_DATE] AS [JOB_FILING_DATE], 
+    [T_JOB_ALL].[JOB_CONTRACT_TYPE] AS [JOB_CONTRACT_TYPE], 
+    [T_JOB_ALL].[JOB_STATUS] AS [JOB_STATUS]
+    FROM [dbo].[T_JOB_ALL] AS [T_JOB_ALL]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
