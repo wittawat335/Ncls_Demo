@@ -1,0 +1,57 @@
+﻿@using NCLS.DOMAIN.Entities
+@model List<NCLS.DOMAIN.Entities.SP_GET_MENU_BY_ROLE_Result>
+@{
+    var menuLv1 = ((List<SP_GET_MENU_BY_ROLE_Result>)Model).Where(x => x.PROG_LEVEL == 1);
+    var menuLv2 = ((List<SP_GET_MENU_BY_ROLE_Result>)Model).Where(x => x.PROG_LEVEL == 2);
+    var menuLv3 = ((List<SP_GET_MENU_BY_ROLE_Result>)Model).Where(x => x.PROG_LEVEL == 3);
+}
+
+<div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu  page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 60px">
+        <li class="sidebar-toggler-wrapper hide">
+            <div class="sidebar-toggler"></div>
+        </li>
+        @foreach (var lv1 in menuLv1.OrderBy(x => x.PROG_ORDER))
+        {
+            <li class="nav-item">
+                <a href="@Url.Content("~/" + lv1.PROG_TARGET_URL ?? "#")" class="nav-link nav-toggle">
+                    <i class='@lv1.PROG_ICON'></i>
+                    <span class="title">@(lv1.PROG_NAME ?? "")</span>
+                    <span class="selected"></span>
+                    @if (menuLv2.Where(x => x.PROG_PARENT_CODE == lv1.PROG_CODE).Count() > 0)
+                    {<span class="arrow"></span>}
+                </a>
+                @if (menuLv2.Where(x => x.PROG_PARENT_CODE == lv1.PROG_CODE).Count() > 0)
+                {
+                    <ul class="sub-menu">
+                        @foreach (var lv2 in menuLv2.Where(x => x.PROG_PARENT_CODE == lv1.PROG_CODE).OrderBy(x => x.PROG_ORDER))
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Content("~/" + lv2.PROG_TARGET_URL ?? "#")" class="nav-link nav-toggle">
+                                    <span class="title">@(lv2.PROG_NAME ?? "")</span>
+                                    @if (menuLv3.Where(x => x.PROG_PARENT_CODE == lv2.PROG_CODE).Count() > 0)
+                                    {<span class="arrow"></span>}
+                                </a>
+                                @if (menuLv3.Where(x => x.PROG_PARENT_CODE == lv2.PROG_CODE).Count() > 0)
+                                {
+                                    <ul class="sub-menu">
+                                        @foreach (var lv3 in menuLv3.Where(x => x.PROG_PARENT_CODE == lv2.PROG_CODE).OrderBy(x => x.PROG_ORDER))
+                                        {
+                                            <li class="nav-item">
+                                                <a href="@Url.Content("~/" + lv3.PROG_TARGET_URL ?? "#")" class="nav-link nav-toggle">
+                                                    <span class="title">@(lv3.PROG_NAME ?? "")</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+

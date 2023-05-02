@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using NCLS.WEB.Utility
+@{
+    var common = new Common();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +32,7 @@
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 
+                            <span class="username username-hide-on-mobile"><i class="icon-user"></i>&nbsp;@common.UserName</span>
                             <i class="fa fa-angle-down"></i>&nbsp;
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
@@ -67,6 +72,7 @@
     </div>
     <div class="page-footer">
         <div class="page-footer-inner">
+            2016 © ITOS Consulting Co., Ltd. <b>&nbsp;&nbsp;Version - @common.Version </b>
         </div>
         <div class="scroll-to-top" style="display: none;">
             <i class="icon-arrow-up"></i>
@@ -75,6 +81,135 @@
 
     @Html.Action("_Modal", "Common")
     @Html.Action("_Loading", "Common")
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
+        //});
+
+        var root = '@Url.Content("~")';
+        var dataNotFound = '@Constants.Msg.DataNotFound';
+        var resultTrue = '@Constants.Result.True';
+        var urlSelectRole = '@Constants.UrlAction.HomeSelectRole';
+        var urlLogin = '@Constants.UrlAction.HomeLogin';
+        var urlLogout = '@Constants.UrlAction.HomeLogout';
+        //LogOut
+        function logout() {
+            bootbox.confirm('Do you want to logout?',
+                function (result) {
+                    if (result)
+                    {
+                        document.execCommand("ClearAuthenticationCache");
+                        window.location.href = urlLogout;
+                    }
+                });
+        }
+
+        function SelectRole() {
+            var url = urlSelectRole;
+            var data = { "role": $('#ddlRole').val() };
+            $.post(url, data, function (result) {
+                if (result.Result == resultTrue) {
+                    alertMessage(result.Message);
+                    clearModal();
+                    window.location.href = result.url;
+                }
+                else {
+                    alertMessage(result.Message);
+                }
+            });
+        }
+
+        function SwapRole() {
+            modalPOST("Swap Role", "Home", "_SwitchRole", null, false);
+        }
+
+        function ClearValueByDiv(div) {
+            try {
+                $('#' + div + ' input').val("");
+                $('#' + div + ' select').val("");
+                $('#' + div + ' textarea').val(" ");
+                $('#ddlStatus').val('A');
+              //  $('#' + div + ' select').select2("val", "");
+            } catch (e) {
+
+            }
+
+
+        }
+
+        function SetReadOnlyByDiv(div, x) {
+
+
+
+            if (!x) {
+                $('#' + div).find('input[name],select[name],textarea[name]').not('input[type=hidden]').removeAttr('disabled').removeAttr('readonly')
+                    .attr('disabled', 'disabled').attr('readonly', 'readonly');
+            }
+            else {
+                $('#' + div).find('input[name],select[name],textarea[name]').not('input[type=hidden]').removeAttr('disabled').removeAttr('readonly');
+            }
+        }
+        function SetReadOnly(div, x) {
+            if (!x) {
+                $('#' + div).removeAttr('disabled').removeAttr('readonly')
+                    .attr('disabled', 'disabled').attr('readonly', 'readonly');
+            }
+            else {
+                $('#' + div).removeAttr('disabled').removeAttr('readonly');
+            }
+        }
+        function SetReqByDiv(div, x) {
+            if (x) {
+                $('#' + div + ' input,select').removeAttr('required').attr('required', 'required');
+            }
+            else {
+                $('#' + div + ' input,select').removeAttr('required');
+            }
+        }
+        function SetReq(div, x) {
+            if (x) {
+                $('#' + div).removeAttr('required').attr('required', 'required');
+            }
+            else {
+
+                $('#' + div).removeAttr('required');
+                $('#' + div).closest('div.form-group').removeClass('has-error has-danger');
+            }
+        }
+
+
+
+        function setRole(roleCode) {
+            var url = urlSelectRole;
+            var data = { "role": roleCode };
+            $.post(url, data, function (result) {
+
+                window.location.href = result.url;
+
+            });
+        }
+
+        function setPageBar(progCode) {
+            //    $('#barController').html(controller);
+            //    $('#barView').html(view);
+            //    $('#headTitle').html(view);
+            }
+
+        //function setPageBar(controller, view) {
+        //    $('#barController').html(controller);
+        //    $('#barView').html(view);
+        //    $('#headTitle').html(view);
+        //}
+    </script>
+
+    <style type="text/css">
+        .label-red {
+            color: red;
+        }
+    </style>
 
     @RenderSection("Scripts", false)
 

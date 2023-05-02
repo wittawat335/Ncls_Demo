@@ -1,0 +1,147 @@
+﻿@using NCLS.WEB.Utility
+@{
+    var common = new Common();
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>BMW Financial Services</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="~/Assets/img/logo-bmw-200.png" />
+    @Styles.Render("~/Contents/common", "~/Contents/datepicker", "~/Contents/select2")
+    @Scripts.Render("~/Scripts/jquery", "~/Scripts/common", "~/Scripts/datepicker", "~/Scripts/select2")
+    <style>
+        .page-content {
+            margin-left: 0px !important;
+        }
+    </style>
+</head>
+<body class="page-container-bg-solid">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div id="divlogin" class="page-content">
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-user"></i>
+                                    <span class="caption-subject bold uppercase">Login</span>
+                                    <span class="caption-helper">&nbsp; Login to NCLS version - @common.Version</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <form action="#" class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label">User Login</label>
+                                            <div class="col-xs-6">
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-user"></i>
+                                                    <input type="text" id="UserLogin" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label">Password</label>
+                                            <div class="col-xs-6">
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-key"></i>
+                                                    <input type="password" id="Password" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-6 col-md-6">
+                                                <a class="btn green" id="btnLogin">
+                                                    <i class="fa fa-mail-forward"></i>&nbsp;Login
+                                                </a>
+                                                <a class="btn default" id="btnCancel">
+                                                    <i class="fa fa-close"></i>&nbsp;Cancel
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("_Modal", "Common")
+    @Html.Action("_Loading", "Common")
+
+    <script>
+        var urlCheckLogin = '@Constants.UrlAction.HomeCheckLogin';
+        var resultTrue = '@Constants.Result.True';
+        var msgSuccess = '@Constants.Msg.LoginSucc';
+
+
+        if ('@common.UnStringNull(ViewBag.msg)' !='') {
+            alertMessage('@ViewBag.msg');
+        }
+
+        function processLogin() {
+            var url = urlCheckLogin;
+            var data = { "UserLogin": $('#UserLogin').val(), "Password": $('#Password').val() };
+            //var data = null
+            $.post(url, data, function (result) {
+                if (result.Result == resultTrue) {
+                    //alertMessage(result.Message);
+                    window.location.href = result.url;
+                }
+                else {
+                    alertMessage(result.Message);
+                }
+            });
+        }
+        $('#btnCancel').click(function () {
+            $('#UserLogin').val('');
+            $('#Password').val('');
+        });
+
+
+
+        $('#btnLogin').click(function () {
+            var url = '@Constants.UrlAction.HomeCheckLoginADandDb';
+            var data = { "UserLogin": $('#UserLogin').val(), "Password": $('#Password').val() };
+           // var data = null;
+            $.post(url, data, function (result) {
+                if (result.Result == resultTrue) {
+                   // processLogin();
+                    if (result.Message == '@Constants.Msg.LoginDuplicate') {
+                        bootbox.confirm(result.Message, function (result) {
+                            if (result) {
+                                processLogin();
+                            }
+                        });
+                    }
+                    else {
+                        processLogin();
+                    }
+                }
+                else {
+                    alertMessage(result.Message);
+                }
+            });
+        });
+      //  $('#btnLogin').click();
+    </script>
+</body>
+</html>

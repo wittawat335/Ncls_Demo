@@ -1,0 +1,32 @@
+﻿@using System.Web.Mvc
+@using NCLS.WEB.Models.ViewModels.User
+@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Models.ViewModels.User.Role>
+@{
+    var common = new Common();
+}
+<li class="dropdown dropdown-user">
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <span class="username username-hide-on-mobile" onclick=""><i class="icon-users"></i>&nbsp;@common.UserRoleName</span>
+        @if (((List<Role>)Model).Count > 1)
+        {
+            <i class="fa fa-angle-down"></i>
+        }
+    </a>
+    @if (((List<Role>)Model).Count > 1)
+    {
+        <ul class="dropdown-menu dropdown-menu-default">
+            @foreach (var item in Model)
+            {
+                if (item.RoleCode != common.UserRole)
+                {
+                    <li onclick="setRole('@item.RoleCode')">
+                        <a>@item.RoleName</a>
+                    </li>
+                }
+            }
+        </ul>
+    }
+</li>
+
+

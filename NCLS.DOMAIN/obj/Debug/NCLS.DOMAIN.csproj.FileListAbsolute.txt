@@ -5,6 +5,5 @@ F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\bin\Debug\EntityFramework.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\bin\Debug\EntityFramework.SqlServer.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\bin\Debug\EntityFramework.xml
 F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\bin\Debug\EntityFramework.SqlServer.xml
-F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\obj\Debug\NCLS.DOMAIN.csprojResolveAssemblyReference.cache
 F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\obj\Debug\NCLS.DOMAIN.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.DOMAIN\obj\Debug\NCLS.DOMAIN.pdb
