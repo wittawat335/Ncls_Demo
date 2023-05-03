@@ -23,12 +23,10 @@ namespace NCLS.WEB.Controllers
             this._service = new BucketService();
         }
 
-        // GET: Bucket
         public ActionResult Index()
         {
             return View();
         }
-
 
         [HttpPost]
         public ActionResult _Search(string Code, string BucketName, decimal? OvdStart, decimal? OvdEnd, string Status)

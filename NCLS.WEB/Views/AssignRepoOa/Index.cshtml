@@ -1,0 +1,498 @@
+﻿@using NCLS.WEB.Utility
+
+@{
+    var cm = new Common();
+}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+
+        <li>
+            <i class="fa fa-check-square-o"></i>
+            <span>Assign Repo OA</span>
+        </li>
+    </ul>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-search "></i>
+                    <span class="caption-subject  bold ">Search</span>
+                    <span class="caption-helper">enter search criteria...</span>
+                </div>
+                <div class="tools">
+                    <a class="collapse" data-original-title="" title=""></a>
+                </div>
+
+            </div>
+            <div class="portlet-body form">
+
+                <form action="#" class="form-horizontal">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tabs1" data-toggle="tab">Assign Repo OA </a>
+                            </li>
+                            <li>
+                                <a href="#tabs2" data-toggle="tab">Generate Document </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs1">
+                                <div class="pull-right">
+                                    <a class="btn btn blue" onclick="popupSendToOA()"><i class="fa fa-share-square-o fa-lg"></i>&nbsp;Send To OA</a>
+
+
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <form action="#" id="frmSearch" class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label">Contract No</label>
+                                                    <div class="col-xs-5 col0">
+                                                        <select class="form-control select2" id="ddlContract" name="ddlContract"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label">OA</label>
+                                                    <div class="col-xs-5 col0">
+                                                        @Html.DropDownList("ddlOA1", new SelectList(cm.GetListOA(), "OA_CODE", "OA_NAME_TH"), @Constants.SelectOption.SelectOne, new { @class = "form-control select2" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label">Area</label>
+                                                    <div class="col-xs-5 col0">
+                                                        @Html.DropDownList("ddlArea", new SelectList(cm.GetListProvinces(), "PROVINCE_CODE", "PROVINCE_NAME"), @Constants.SelectOption.SelectOne, new { @class = "form-control select2" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label">Outstanding Balance</label>
+                                                    <div class="col-xs-6 col0">
+                                                        <div class="input-group input-daterange">
+                                                            <input type="text" class="form-control" onkeypress="return NumKey(event,this,'integer',0);" name="from" id="txtOsStart">
+                                                            <span class="input-group-addon">to </span>
+                                                            <input type="text" class="form-control" onkeypress="return NumKey(event,this,'integer',0);" name="to" id="txtOsEnd">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label">Assign Date</label>
+                                                    <div class="col-xs-6 col0">
+                                                        <div class="input-group date-picker input-daterange" data-date-format="dd/mm/yyyy">
+                                                            <input type="text" class="form-control" name="fromGe" id="txtAssignStart">
+                                                            <span class="input-group-addon">to </span>
+                                                            <input type="text" class="form-control" name="toGe" id="txtAssignEnd">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-5 col-md-7">
+                                                <a class="btn green" id="btnSearch">
+                                                    <i class="fa fa-search"></i>
+                                                    Search
+                                                </a>
+                                                <a class="btn default" id="btnClear" onclick="">
+                                                    <i class="fa fa-close"></i>
+                                                    Cancel
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="portlet light bordered">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-th"></i>
+                                                    <span class="caption-subject bold">List</span>
+                                                    <span class="caption-helper">search result...</span>
+                                                </div>
+                                                <div class="">
+                                                    <a href="@Constants.UrlAction.ExportExcelAssignRepoOA" class="btn btn blue" id="btnExcel">
+
+                                                        Excel
+                                                    </a>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="portlet-body">
+                                                <table id="tbList" class="table table-hover table-striped">
+                                                    <thead style="text-align: center">
+                                                        <tr>
+                                                            <td>
+                                                                <input type="checkbox" id="selectAll" class="form-control" />
+                                                            </td>
+
+
+                                                            <td><b>Contract No</b></td>
+
+                                                            <td><b>Citizen ID</b></td>
+                                                            <td><b>Borrower Name</b></td>
+                                                            <td><b>Previous Repo OA</b></td>
+                                                            <td><b>Outstanding Balance</b></td>
+                                                            <td><b>Assign Date</b></td>
+                                                            <td><b>Area</b></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="text-align: center" id="tbListResult"></tbody>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tabs2">
+                                <div class="pull-right">
+                                    <a class="btn sbold btn-outline blue"><i class="fa fa-print fa-lg"></i>&nbsp;Generate Document</a>
+                                </div>
+                                <br />
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label">Repo OA</label>
+                                                <div class="col-xs-5 col0">
+                                                    @Html.DropDownList("ddlOA2", new SelectList(cm.GetListOA(), "OA_CODE", "OA_NAME_TH"), @Constants.SelectOption.SelectOne, new { @class = "form-control select2" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label">Assign Date from </label>
+                                                <div class="col-xs-5 col0">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        <input type="text" class="form-control" id="txtAssignFrom">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+
+                                                <label class="col-xs-4 control-label">Document Status</label>
+                                                <div class="col-xs-5 col0">
+                                                    <select class="form-control" id="ddlDocStatus">
+                                                        <option value="">Please Select</option>
+                                                        <option value="1">Generated</option>
+                                                        <option value="0">Not generated</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label class="col-xs-4 control-label">Assign Date to </label>
+                                                <div class="col-xs-5 col0">
+                                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                                        <input type="text" class="form-control" id="txtAssignTo">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-5 col-md-7">
+                                            <a class="btn green" id="btnSearchGen">
+                                                <i class="fa fa-search"></i>
+                                                Search
+                                            </a>
+                                            <a class="btn default" id="btnClearGen" onclick="">
+                                                <i class="fa fa-close"></i>
+                                                Cancel
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="portlet light bordered">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-th"></i>
+                                                    <span class="caption-subject bold">List</span>
+                                                    <span class="caption-helper">search result...</span>
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                            <div class="portlet-body">
+                                                <table id="tbViewDoc" class="datatable table table-hover table-striped">
+                                                    <thead style="text-align: center">
+                                                        <tr>
+                                                            <td>
+                                                                <input type="checkbox" id="checkBoxView" />
+                                                            </td>
+                                                            <td><b>Contract No.</b></td>
+                                                            <td><b>Citizen ID</b></td>
+                                                            <td><b>Borrower Name</b></td>
+                                                            @*         <td><b>Previous Repo OA</b></td>*@
+                                                            <td><b>Repo OA</b></td>
+                                                            <td><b>Outstanding Balance</b></td>
+                                                            <td><b>Assign Date</b></td>
+                                                            <td><b>Area</b></td>
+                                                            <td><b>Document Status</b></td>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="text-align: center" id="tbViewDocResult"></tbody>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        //DestroySession();
+        $('#btnExcel').hide();
+        $(window).bind('beforeunload',function(){
+            DestroySession();
+        });
+
+        $("#ddlContract").select2({
+            placeholder: "@Constants.SelectOption.SelectOne",
+                 minimumInputLength: 3,
+                 dropdownAutoWidth: 'true',
+                 delay: 250,
+                 cache: true,
+                 quietMillis: 3000,
+                 allowClear: true,
+                 width: '100%',
+                 ajax: {
+                     url: '@Constants.UrlAction.ContractNoAssignSearch',
+                dataType: 'json',
+                quietMillis: 100,
+                data: function(params) {
+                    return { term: params.term };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data
+                    };
+                }
+            }
+             });
+
+
+        $("#selectAll").click(function () {
+            $('#tbList tbody tr  input:checkbox').not(this).prop('checked', this.checked);
+        });
+        $("#checkBoxView").click(function () {
+            $('#tbViewDoc tbody tr  input:checkbox').not(this).prop('checked', this.checked);
+        });
+
+        $("#ddlArea").select2({
+            width: '100%',
+            placeholder: '@Constants.SelectOption.SelectOne',
+            allowClear: true
+         });
+        $("#ddlArea").on("select2:unselect", function (e) {
+            $("#ddlArea").select2({
+                width: '100%',
+                placeholder: '@Constants.SelectOption.SelectOne',
+                allowClear: true
+            }).select2('val', $('.select2 option:eq(1)').val());
+        });
+
+        $("#ddlOA1").select2({
+            width: '100%',
+            placeholder: '@Constants.SelectOption.SelectOne',
+            allowClear: true
+        });
+        $("#ddlOA1").on("select2:unselect", function (e) {
+            $("#ddlOA1").select2({
+                width: '100%',
+                placeholder: '@Constants.SelectOption.SelectOne',
+                allowClear: true
+            }).select2('val', $('.select2 option:eq(1)').val());
+        });
+
+         $("#ddlOA2").select2({
+            width: '100%',
+            placeholder: '@Constants.SelectOption.SelectOne',
+            allowClear: true
+        });
+        $("#ddlOA2").on("select2:unselect", function (e) {
+            $("#ddlOA2").select2({
+                width: '100%',
+                placeholder: '@Constants.SelectOption.SelectOne',
+                allowClear: true
+            }).select2('val', $('.select2 option:eq(1)').val());
+        });
+
+    });
+    $('#tbList').DataTable({
+        "bSort": false
+    });
+    $('#btnSearch').click(function() {
+        var url = '@Constants.UrlAction.AssSignRepoSearch';
+        var data = {
+            "oaCode": $('#ddlOA1').val(),
+            "assignDateForm": $('#txtAssignStart').val(),
+            "assignDateTo": $('#txtAssignEnd').val(),
+            "docStatus": $('#ddlDocStatus').val(),
+            "contractNo": $('#ddlContract').val(),
+            "osStart": $('#txtOsStart').val(),
+            "osEnd": $('#txtOsEnd').val(),
+            "area": $('#ddlArea').val(),
+            "mode": "Serach"
+        };
+        $.post(url, data, function(response) {
+            $('#tbList').DataTable().destroy();
+            $('#tbList tbody').empty();
+            $('#tbListResult').html(response);
+            $('#tbList').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+                "sSearch": "Search"
+            }});
+            ShowDataTable();
+        });
+    });
+    $('#btnClear').click(function () {
+        bootbox.confirm('Do you want to clear data?', function (confirm) {
+            if (confirm) {
+                var table = $('#tbList').DataTable();
+                table.clear().draw();
+
+                $("#txtOsStart").val('');
+                $("#txtOsEnd").val('');
+                $("#txtAssignStart").val('');
+                $("#txtAssignEnd").val('');
+                $("#ddlOA1").select2('val', '');
+                $("#ddlContract").select2('val', '');
+                $("#ddlArea").select2('val', '');
+                $('#btnExcel').hide(500);
+            }
+        });
+    });
+
+    function ShowDataTable()
+    {
+        var table = $('#tbList').DataTable();
+        if (table.rows().any())
+        {
+            $('#btnExcel').show(500);
+
+        }
+        else{
+
+            $('#btnExcel').hide();
+        }
+    }
+
+    function checked() {
+        var numChck = 0;
+        $('#tbList tbody tr  input:checkbox').each( function() {
+            if (this.checked) {
+                numChck++;
+            }
+        });
+
+        if (numChck > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    function popupSendToOA() {
+        if (checked()) {
+            var table = $('#tbList').DataTable();
+            var data = table.$('input, select').serialize();
+            modalPOST('Assign Repo OA', 'AssignRepoOa', '_AssignRepo', data, 80);
+        } else {
+            alertMessage("Please Select Contract");
+        }
+
+    }
+
+    $('#btnSearchGen').click(function() {
+        var url = '@Constants.UrlAction.AssSignRepoSearchGen';
+        var data = {
+            "oaCode" : $('#ddlOA2').val(),
+            "assignDateForm" : $('#txtAssignFrom').val(),
+            "assignDateTo" : $('#txtAssignTo').val(),
+            "docStatus" : $('#ddlDocStatus').val()
+
+        };
+        $.post(url, data, function(response) {
+            $('#tbViewDoc').DataTable().destroy();
+            $('#tbViewDoc tbody').empty();
+            $('#tbViewDocResult').html(response);
+            $('#tbViewDoc').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+                 "sSearch": "Search"
+             }});
+         });
+    });
+
+    $('#btnClearGen').click(function () {
+        bootbox.confirm('Do you want to clear data?', "No", "Yes", function (confirm) {
+            if (confirm) {
+                var table = $('#tbViewDoc').DataTable();
+                table.clear().draw();
+
+                $("#ddlOA2").select2("val", '');
+                $("#txtAssignFrom").val('');
+                $("#txtAssignTo").val('');
+                $("#ddlDocStatus").val('');
+
+            }
+        });
+    });
+
+</script>
