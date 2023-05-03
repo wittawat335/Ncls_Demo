@@ -728,6 +728,8 @@
     <Content Include="Views\Dashboard\_ChartsLegalCase.cshtml" />
     <Content Include="Views\Dashboard\_ChartsLegal.cshtml" />
     <Content Include="Views\Dashboard\_ChartsDoc.cshtml" />
+    <Content Include="Views\Common\_Notification.cshtml" />
+    <Content Include="Views\Common\_TopBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,75 @@
+﻿@using NCLS.WEB.Models
+@using NCLS.WEB.Utility
+@model NCLS.WEB.Models.Notification
+@{
+    var common = new Common();
+}
+
+@if (Model.CountItem > 0)
+{
+
+
+    <li class="dropdown dropdown-extended dropdown-inbox" id="notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+            <i class="icon-bell"></i>
+            <span class="badge badge-default">@Model.CountItem</span>
+        </a>
+        <ul class="dropdown-menu">
+            @*     <li class="external">
+                    <h3>You have<span class="bold"> @Model.CountItem pending</span> notifications</h3>
+                </li>*@
+            <li>
+                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto;">
+                    <ul class="dropdown-menu-list scroller" style="overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+
+                        @foreach (ItemNotification notic in Model.NotificationList)
+                        {
+                            if (!notic.Count.Equals(0))
+                            {
+
+                                <li>
+
+                                    @if (notic.typeModalPupup == true)
+                                    {
+                                        <a href="#" onclick="@notic.Url">
+                                            <span class="photo">
+                                                <span class="badge badge-success from">@notic.Count</span>
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from">@notic.Header </span>
+                                                <span class="time">@notic.NoticeDate</span>
+                                            </span>
+                                            <span class="message">@notic.Detail </span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@notic.Url">
+                                            <span class="photo">
+                                                <span class="badge badge-success from">@notic.Count</span>
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from">@notic.Header </span>
+                                                <span class="time">@notic.NoticeDate</span>
+                                            </span>
+                                            <span class="message">@notic.Detail </span>
+                                        </a>
+                                    }
+
+
+
+                                </li>
+
+                            }
+                        }
+
+                    </ul>
+                    <div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; background: rgb(99, 114, 131);"></div>
+                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(234, 234, 234);"></div>
+                </div>
+            </li>
+        </ul>
+    </li>
+}
+
+
