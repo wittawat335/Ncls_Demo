@@ -1,0 +1,51 @@
+﻿@using NCLS.WEB.Utility
+@{
+    var cm = new Common();
+    bool permEdit = cm.IsPermission(Constants.ProgramCode.User, Constants.ActCode.UserEdit);
+    bool permView = cm.IsPermission(Constants.ProgramCode.User, Constants.ActCode.UserView);
+    bool permAdd = cm.IsPermission(Constants.ProgramCode.User, Constants.ActCode.UserAdd);
+}
+
+<!-- Page Bar -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-pie-chart"></i>
+            <span>Dashboard</span>
+        </li>
+    </ul>
+</div>
+<br />
+
+
+<div class="row">
+    <div id="Chart1">
+        @Html.Action("_ChartsR3", "Dashboard")
+    </div>
+
+    <div id="Chart2">
+        @Html.Action("_ChartsRepo", "Dashboard")
+    </div>
+</div>
+
+
+<div class="row">
+    <div id="Chart3">
+        @Html.Action("_ChartsDoc", "Dashboard")
+    </div>
+
+    <div id="Chart4">
+        @Html.Action("_ChartsLegal", "Dashboard")
+    </div>
+</div>
+
+<div class="row">
+    <div id="Chart5">
+        @Html.Action("_ChartsLegalStatus", "Dashboard")
+    </div>
+
+    <div id="Chart6">
+        @Html.Action("_ChartsLegalCase", "Dashboard")
+    </div>
+</div>
+

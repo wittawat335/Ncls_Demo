@@ -82,6 +82,6 @@ F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.OAuth.xml
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.Google.xml
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.Twitter.xml
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\obj\Debug\NCLS.WEB.csprojResolveAssemblyReference.cache
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\obj\Debug\NCLS.WEB.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\obj\Debug\NCLS.WEB.pdb
+F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\obj\Debug\NCLS.WEB.csprojResolveAssemblyReference.cache

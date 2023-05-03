@@ -1,5 +1,6 @@
-﻿@using NCLS.DOMAIN.Entities
-@model List<NCLS.DOMAIN.Entities.SP_GET_MENU_BY_ROLE_Result>
+﻿@using NCLS.WEB.Entities
+
+@model List<SP_GET_MENU_BY_ROLE_Result>
 @{
     var menuLv1 = ((List<SP_GET_MENU_BY_ROLE_Result>)Model).Where(x => x.PROG_LEVEL == 1);
     var menuLv2 = ((List<SP_GET_MENU_BY_ROLE_Result>)Model).Where(x => x.PROG_LEVEL == 2);
@@ -53,5 +54,3 @@
         }
     </ul>
 </div>
-
-

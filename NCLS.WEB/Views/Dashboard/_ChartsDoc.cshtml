@@ -1,0 +1,99 @@
+﻿@using NCLS.WEB.Utility
+
+@{
+    var cm = new Common();
+}
+
+
+<div class="col-md-6">
+    <div id="Chart3" class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bar-chart font-green-haze"></i>
+                <span class="caption-subject bold uppercase font-green-haze">งานเตรียมเอกสาร</span>
+            </div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse"></a>
+                <a href="javascript:;" class="fullscreen"></a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div id="chart_doc" class="chart" style="height: 500px;"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+
+    var ChartDoc = AmCharts.makeChart("chart_doc", {
+        "type": "pie",
+        "startDuration": 0,
+        "theme": "light",
+        "addClassNames": true,
+        "legend": {
+            "position": "top",
+            "marginRight": 100,
+            "autoMargins": true
+        },
+        "innerRadius": "30%",
+        "defs": {
+            "filter": [
+                {
+                    "id": "shadow",
+                    "width": "200%",
+                    "height": "200%",
+                    "feOffset": {
+                        "result": "offOut",
+                        "in": "SourceAlpha",
+                        "dx": 0,
+                        "dy": 0
+                    },
+                    "feGaussianBlur": {
+                        "result": "blurOut",
+                        "in": "offOut",
+                        "stdDeviation": 5
+                    },
+                    "feBlend": {
+                        "in": "SourceGraphic",
+                        "in2": "blurOut",
+                        "mode": "normal"
+                    }
+                }
+            ]
+        },
+
+        "valueField": "value",
+        "titleField": "text",
+        "id": "id",
+        "export": {
+            "enabled": true
+        },
+        "dataLoader": {
+            "url": '@Constants.UrlAction.DashboardDoc',
+            "format": "json"
+
+        },
+        "listeners": [{
+            "event": "clickSlice",
+            "method": function (e) {
+                var dp = e.dataItem.dataContext;
+                alert(dp[ChartDoc.id]);
+                e.ChartDoc.validateData();
+
+            }
+        }]
+    });
+
+
+    $('#Chart3').closest('.portlet').find('.fullscreen').click(function () {
+        ChartDoc.invalidateSize();
+    });
+
+
+
+
+</script>

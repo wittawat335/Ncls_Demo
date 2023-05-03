@@ -213,13 +213,11 @@
     <Compile Include="App_Start\CustomConfig.cs" />
     <Compile Include="App_Start\CustomModelBindersConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BucketController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\COL_USER.cs">
@@ -624,21 +622,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LDAPManager.cs" />
     <Compile Include="Models\LoginInfo.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\ViewModels\Bucket\BucketMaintenance.cs" />
+    <Compile Include="Models\ViewModels\Dashboard\DashboardMaintenance.cs" />
     <Compile Include="Models\ViewModels\Error\ErrorMaintenance.cs" />
     <Compile Include="Models\ViewModels\User\UserMaintenance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BucketRepository.cs" />
     <Compile Include="Repositories\Contract\IBucketRepository.cs" />
+    <Compile Include="Repositories\Contract\IGenericRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Services\BucketService.cs" />
     <Compile Include="Services\Contract\IBucketService.cs" />
-    <Compile Include="Startup.cs" />
     <Compile Include="Utility\Common.cs" />
     <Compile Include="Utility\Constants.cs" />
   </ItemGroup>
@@ -722,6 +720,14 @@
     <Content Include="Views\Bucket\Index.cshtml" />
     <Content Include="Views\Bucket\_Search.cshtml" />
     <Content Include="Views\Bucket\_Details.cshtml" />
+    <Content Include="Views\Home\_SwitchRole.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\_ChartsR3.cshtml" />
+    <Content Include="Views\Dashboard\_ChartsRepo.cshtml" />
+    <Content Include="Views\Dashboard\_ChartsLegalStatus.cshtml" />
+    <Content Include="Views\Dashboard\_ChartsLegalCase.cshtml" />
+    <Content Include="Views\Dashboard\_ChartsLegal.cshtml" />
+    <Content Include="Views\Dashboard\_ChartsDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

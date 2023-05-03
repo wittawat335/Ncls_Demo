@@ -1,0 +1,28 @@
+﻿@using System.Web.Mvc
+@using NCLS.WEB.Utility
+@{
+    var cm = new Common();
+
+}
+<form id="frmDetails" data-toggle="validator">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.DropDownList("ddlRole", new SelectList(ViewBag.Role, "RoleCode", "RoleName"), @Constants.SelectOption.SelectOne, new { @class = "form-control", @required = "required" })
+            </div>
+
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit" onclick="SelectRole()" class="btn blue-dark"><i class="fa fa-floppy-o" />&nbsp;&nbsp;Ok</button>
+                <a class="btn blue-dark" onclick="clearModal()"><i class="fa fa-close" />&nbsp;&nbsp;Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+
+
+
+</script>
