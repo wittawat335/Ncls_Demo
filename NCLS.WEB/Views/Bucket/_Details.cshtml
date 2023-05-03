@@ -1,0 +1,105 @@
+﻿@using NCLS.WEB.Utility
+@model NCLS.WEB.Models.ViewModels.Bucket.BucketMaintenance
+@{
+    var cm = new Common();
+    bool permEdit = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketEdit);
+    bool permView = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketView);
+    bool permAdd = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketAdd);
+}
+<form id="frmDetails" role="form" data-toggle="validator">
+    <div class="form-body">
+        <div class="form-group">
+            <label>Bucket Code</label>
+            @Html.TextBoxFor(m => m.Bucket.BUCKET_CODE, "", new { @class = "form-control", @required = "required", @MaxLength = "20", @onkeypress = "return EngNumber();", @onpaste = "return false;" })
+        </div>
+        <div class="form-group">
+            <label>Bucket Name</label>
+            @Html.TextBoxFor(m => m.Bucket.BUCKET_NAME, "", new { @class = "form-control", @required = "required", @MaxLength = "100" })
+        </div>
+        <div class="form-group">
+            <label>OverDueDay Start</label>
+            @Html.TextBoxFor(m => m.Bucket.BUCKET_OVDDAYS_START, "", new { @class = "form-control", @required = "required", @onkeypress = "return NumKey(event,this,'integer',0);", @MaxLength = "100" })
+        </div>
+        <div class="form-group">
+            <label>OverDueDay End</label>
+            @Html.TextBoxFor(m => m.Bucket.BUCKET_OVDDAYS_END, "", new { @class = "form-control", @required = "required", @onkeypress = "return NumKey(event,this,'integer',0);", @MaxLength = "100" })
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            @Html.TextAreaFor(m => m.Bucket.BUCKET_DESC, new { @class = "form-control", @MaxLength = "100", @rows = "5" })
+        </div>
+        <div class="form-group">
+            <label>Status</label>
+            @Html.DropDownListFor(m => m.Bucket.BUCKET_STATUS, new SelectList(cm.GetListStatus(), "CODE", "TEXT"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+        <div class="col-md-12">
+            <div class="pull-right">
+                @if (permEdit || permAdd)
+                {
+                    if (Model.mode == Constants.Mode.New || Model.mode == Constants.Mode.Edit)
+                    {
+                        <button type="submit" id="btnSave" class="btn green"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+                    }
+                }
+                <a class="btn btn-outline dark" onclick=" clearModal() "><i class="fa fa-close"></i>&nbsp;Close</a>
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        <input type="text" name="Bucket.BUCKET_CREATE_BY" value='@cm.UserLogin' />
+        <input type="datetime" name="Bucket.BUCKET_CREATE_DATE" value='@cm.SystemDate' />
+        <input type="text" name="Bucket.BUCKET_UPDATE_BY" value='@cm.UserLogin' />
+        <input type="datetime" name="Bucket.BUCKET_UPDATE_DATE" value='@cm.SystemDate' />
+        <input type="text" name="mode" value='@Model.mode' />
+    </div>
+</form>
+<script>
+    $(function () {
+
+        if ('@Constants.Mode.New' == '@Model.mode') {
+
+            SetReadOnlyByDiv('frmDetails', true);
+        }
+        else if ('@Constants.Mode.Edit' == '@Model.mode') {
+            SetReadOnlyByDiv('frmDetails', true);
+
+            SetReadOnly('Bucket_BUCKET_CODE', false);
+        }
+        else {
+            SetReadOnlyByDiv('frmDetails', false);
+        }
+
+        $('#frmDetails').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                Save();
+            }
+        });
+    });
+    function Save() {
+        bootbox.confirm('@Constants.Msg.ConfirmSave', function (confirm) {
+            if (confirm) {
+                $('#Bucket_BUCKET_OVDDAYS_START').val(parseFloat($('#Bucket_BUCKET_OVDDAYS_START').val().replace(/,/g, '')));
+                $('#Bucket_BUCKET_OVDDAYS_END').val(parseFloat($('#Bucket_BUCKET_OVDDAYS_END').val().replace(/,/g, '')));
+
+                var url = '@Constants.UrlAction.BucketSave';
+                var data = $('#frmDetails').serializeObject();
+
+                $.post(url, data, function (result) {
+                    bootbox.alert(result.message, function () {
+                        if (result.result == '@Constants.Result.True') {
+                            clearModal();
+                            document.getElementById('btnSearch').click();
+                        }
+                    });
+                });
+            }
+        });
+    };
+</script>
+

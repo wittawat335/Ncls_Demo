@@ -11,7 +11,7 @@ using System.Web;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ITOS.Utility.TripleDES;
-using NCLS.DOMAIN.Entities;
+using NCLS.WEB.Entities;
 using NCLS.WEB.Models;
 using NCLS.WEB.Models.ViewModels.User;
 using Newtonsoft.Json;

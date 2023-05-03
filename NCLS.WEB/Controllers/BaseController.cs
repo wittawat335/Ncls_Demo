@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using NCLS.DOMAIN.Entities;
+using NCLS.WEB.Entities;
 using NCLS.WEB.Utility;
 
 namespace NCLS.WEB.Controllers

@@ -1,0 +1,42 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.M_BUCKET>
+@{
+    Common cm = new Common();
+    bool permEdit = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketEdit);
+    bool permView = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketView);
+    bool permAdd = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketAdd);
+}
+@if (Model.Count > 0)
+{
+    foreach (var result in Model)
+    {
+        <tr id='@("tr_search_" + result.BUCKET_CODE)' style="cursor:pointer;">
+            <td>@result.BUCKET_CODE</td>
+            <td>@result.BUCKET_NAME</td>
+            <td>@result.BUCKET_DESC</td>
+            <td>@result.BUCKET_OVDDAYS_START</td>
+            <td>@result.BUCKET_OVDDAYS_END</td>
+            <td>@result.BUCKET_CREATE_BY</td>
+            <td nowrap="nowrap">@result.BUCKET_CREATE_DATE</td>
+            <td>@result.BUCKET_UPDATE_BY</td>
+            <td nowrap="nowrap">@result.BUCKET_UPDATE_DATE</td>
+            <td>@cm.GetNameStatus(result.BUCKET_STATUS)</td>
+
+            @if (permEdit)
+            {
+                <td onclick=" PopupDetail('@result.BUCKET_CODE', '@Constants.Mode.Edit' ) " style="cursor: pointer;">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </td>
+            }
+            @if (permView)
+            {
+                <td onclick="PopupDetail('@result.BUCKET_CODE','@Constants.Mode.View')" style="cursor:pointer;">
+                    <span class="glyphicon glyphicon-search"></span>
+                </td>
+            }
+        </tr>
+    }
+}
+<script>
+
+</script>

@@ -1,0 +1,80 @@
+﻿@model NCLS.WEB.Models.ViewModels.Error.ErrorMaintenance
+@using NCLS.WEB.Utility
+@{
+    Layout = "";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Error</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="~/Assets/img/logo-bmw-200.png" />
+    @Styles.Render("~/Contents/common", "~/Contents/datepicker", "~/Contents/select2")
+    @Scripts.Render("~/Scripts/jquery", "~/Scripts/common", "~/Scripts/datepicker", "~/Scripts/select2")
+    <style>
+        .page-content {
+            margin-left: 0px !important;
+        }
+    </style>
+
+</head>
+<body class="page-container-bg-solid">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div id="divlogin" class="page-content">
+
+                <h2>
+                    Sorry, an error occurred while processing your request.      <a onclick="logout()">
+                        <i class="icon-logout"></i>&nbsp;&nbsp;Go to login page . .
+                    </a>
+                </h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <span class="caption-helper">Error Detail...</span>
+                                </div>
+                                <div class="tools">
+                                    <a class="expand" data-original-title="" title=""></a>
+                                </div>
+                            </div>
+                            <div class="portlet-body form" style="display: none">
+                                <form action="#" id="frmSearch" class="form-horizontal">
+                                    <div class="row">
+                                        Error Page :  @Model.ErrorPage
+                                    </div>
+                                    <div class="row" hidden="hidden">
+                                        Error Code :   @Model.ErrorCode
+                                    </div>
+                                    <div class="row">
+                                        Error Msg :    @Model.ErrorMsg
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+<script>
+
+
+        function logout() {
+            window.location.href = '@Constants.UrlAction.HomeLogin';
+        }
+
+</script>

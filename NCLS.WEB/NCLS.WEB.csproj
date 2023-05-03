@@ -97,6 +97,8 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -208,15 +210,417 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CustomConfig.cs" />
+    <Compile Include="App_Start\CustomModelBindersConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BucketController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Entities\COL_USER.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\COL_USER_CONTRACT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\f_split_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\MG_JDC_D.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\MG_JDC_H.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\MG_JD_D.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\MG_JD_H.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\MG_LEGAL_DETAIL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_ACTION.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_BUCKET.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_COURT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_DOCUMENT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_FUNCTION.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_LEGAL_CASE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_LEGAL_STATUS.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_MASTER.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_OA.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_OA_CONFIG_AREA.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_OA_CONFIG_BUCKET.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_OA_GROUP.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_PARAMETER.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_PERMISSION.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_PROGRAM.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_PROVINCE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_REPO_FEE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_ROLE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_SIGNATURE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_STATUS.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_TAX_CONFIG.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_TRANSACTION.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_TRANS_DETAIL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_USER.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_USER_ROLE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\M_WRITEOFF_SUBTYPE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\NCLSEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NCLSEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\NCLSEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\NCLSEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NCLSEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_ASSIGN_IN_HOUSE_GET_LEGAL_LC015_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_ASSIGN_IN_HOUSE_GET_LEGAL_LC016_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_ASSIGN_IN_HOUSE_GET_REPO_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_ASSIGN_OA_GET_CONFIG_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_ASSIGN_OA_GET_JOB_NO_OWNER_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_R3_GET_DETAIL_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_BATCH_R3_GET_HEADER_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_DASHBOARD_DOC_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_DASHBOARD_LEGALCASE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_DASHBOARD_LEGALSTATUS_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_DASHBOARD_LEGAL_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_DASHBOARD_R3_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_DASHBOARD_REPO_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_EXPENSE_RECEIVE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_GET_MENU_BY_ROLE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_MAPPING_OA_AREA_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_ASSIGN_REPO_GEN_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_ASSIGN_REPO_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_BANKRUPTCY_BY_DOC_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_BANKRUPTCY_FRAUD_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_CANCEL_JOB_LEGAL_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_CANCEL_JOB_REPO_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_CHEQUE_CONTRACT_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_COURTFEES_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_CUSTOMER_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_DOCUMENT_BY_CASE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_DOCUMENT_BY_REF_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_EXPENSE_CONFIG_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_EXPENSE_DETAIL_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_EXPENSE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_FRAUD_BY_DOC_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_JUDGMENTDEBTOR_CHEQUE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_JUDGMENTDEBTOR_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_MAPPING_OA_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_PERMISSION_BY_ROLE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_R3_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_RC_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_SPECIAL_CASE_CHEQUE_LIST_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_SPECIAL_CASE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_STATUS_BY_CASE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_SUGGEST_WRITEOFF_BY_DOC_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_TODOLIST_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_WRITE_OFF_ALL_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_WRITE_OFF_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SEARCH_WRITE_OFF_VIEW_DOC_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_JUDGMENT_DEBTOR_BY_JD_ID_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_JUDGMENT_DEBTOR_BY_JOB_ID_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_JUDGMENT_DEBTOR_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_JUDGMENT_DEBTOR_DETAIL_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_ATTACH_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_CAR_RECEIVE_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_CASE_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_COURT_FEE_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_DEBTOR_EXPENSE_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_EXPENSE_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_REPO_BY_JOB_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SP_SELECT_LEGAL_TRACKING_BY_CASE_Result.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_CHEQUE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_COST.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_CUST.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_CUST_ADDRESS.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_DELINQUENCY.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_INTERACTION.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_OVERDUE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_PMT_RECEIPT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CONTRACT_PMT_SCHEDULE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_CUSTOMER_DETAIL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\S_RPS.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_ACT_LOG.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_BANKRUPTCY_FRAUD_D.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_BANKRUPTCY_FRAUD_H.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_BATCH_LOG.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_CHEQUE_DETAIL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_CURRENT_LOGIN.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_DOCUMENT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_EXPENSE_D.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_EXPENSE_H.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JOB_ALL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JOB_LEGAL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JOB_R3.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JOB_REPO.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JUDGMENTDEBTOR_ATTACHMENT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JUDGMENTDEBTOR_D.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JUDGMENTDEBTOR_H.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_JUDGMENTDEBTOR_PAYMENT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_LEGAL_ATTACHMENT.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_LEGAL_TRACKING.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_LOGIN_HISTORY.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_R3_DETAIL.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_REPO_NOTE.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_WRITEOFF_D.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\T_WRITEOFF_H.cs">
+      <DependentUpon>NCLSEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,8 +630,14 @@
     <Compile Include="Models\LoginInfo.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\ViewModels\Bucket\BucketMaintenance.cs" />
+    <Compile Include="Models\ViewModels\Error\ErrorMaintenance.cs" />
     <Compile Include="Models\ViewModels\User\UserMaintenance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BucketRepository.cs" />
+    <Compile Include="Repositories\Contract\IBucketRepository.cs" />
+    <Compile Include="Services\BucketService.cs" />
+    <Compile Include="Services\Contract\IBucketService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\Common.cs" />
     <Compile Include="Utility\Constants.cs" />
@@ -237,6 +647,16 @@
     <Content Include="Assets\_custom.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Entities\NCLSEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NCLSEntities.edmx</DependentUpon>
+      <LastGenOutput>NCLSEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\NCLSEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NCLSEntities.edmx</DependentUpon>
+      <LastGenOutput>NCLSEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -268,12 +688,6 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
@@ -291,22 +705,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <EntityDeploy Include="Entities\NCLSEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NCLSEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\NCLSEntities.edmx.diagram">
+      <DependentUpon>NCLSEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Common\_RoleList.cshtml" />
     <Content Include="Views\Common\_NavMenu.cshtml" />
     <Content Include="Views\Common\_Modal.cshtml" />
     <Content Include="Views\Common\_Loading.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Bucket\Index.cshtml" />
+    <Content Include="Views\Bucket\_Search.cshtml" />
+    <Content Include="Views\Bucket\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NCLS.APPLICATION\NCLS.APPLICATION.csproj">
-      <Project>{6e2b474f-ccd6-40c8-b992-e33ffbbcc7fe}</Project>
-      <Name>NCLS.APPLICATION</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NCLS.DOMAIN\NCLS.DOMAIN.csproj">
-      <Project>{bf220f2b-1d93-4b2a-b8e9-c9bd2fa6f729}</Project>
-      <Name>NCLS.DOMAIN</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

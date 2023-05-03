@@ -43,8 +43,6 @@ F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.MicrosoftAcco
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.OAuth.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Owin.Security.Twitter.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.Web.Infrastructure.dll
-F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\NCLS.APPLICATION.dll
-F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\NCLS.DOMAIN.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Newtonsoft.Json.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Owin.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\System.Web.Helpers.dll
@@ -55,8 +53,6 @@ F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\System.Web.WebPages.Deployment.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\System.Web.WebPages.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\System.Web.WebPages.Razor.dll
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\WebGrease.dll
-F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\NCLS.APPLICATION.pdb
-F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\NCLS.DOMAIN.pdb
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.AI.DependencyCollector.xml
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.AI.ServerTelemetryChannel.xml
 F:\Project 2023\.Net MVC\NCLS\NCLS.WEB\bin\Microsoft.AI.Web.xml

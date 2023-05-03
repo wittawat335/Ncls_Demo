@@ -1,0 +1,166 @@
+﻿@using NCLS.WEB.Utility
+
+
+@{
+    var cm = new Common();
+    bool permEdit = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketEdit);
+    bool permView = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketView);
+    bool permAdd = cm.IsPermission(Constants.ProgramCode.Bucket, Constants.ActCode.BucketAdd);
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-search "></i>
+                    <span class="caption-subject  bold">Search</span>
+                    <span class="caption-helper">&nbsp;Enter search criteria...</span>
+                </div>
+                <div class="tools">
+                    <a id="aSearchToggle" class="collapse" data-original-title="" title=""></a>
+                </div>
+            </div>
+            <div id="dvSearchPanel" class="portlet-body form">
+                <form action="#" class="form-horizontal">
+                    <div class="row">
+                        <div class="form-group">
+
+                            <label class="col-xs-2 control-label">Code</label>
+                            <div class="col-xs-3 col0">
+                                <input type="text" class="form-control" id="txtCode">
+                            </div>
+
+
+                            <label class="col-xs-2 control-label">Name</label>
+                            <div class="col-xs-3 col0">
+                                <input type="text" class="form-control" id="txtBucketName">
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+
+                            <label class="col-xs-2 control-label">OverDueDay</label>
+                            <div class="col-xs-3 col0">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" onkeypress="return NumKey(event,this,'integer',0);" name="from" id="txtOvdStart">
+                                    <span class="input-group-addon">to </span>
+                                    <input type="text" class="form-control" onkeypress="return NumKey(event,this,'integer',0);" name="to" id="txtOvdEnd">
+                                </div>
+                            </div>
+
+
+                            <label class="col-xs-2 control-label">Status</label>
+                            <div class="col-xs-3 col0">
+                                @Html.DropDownList("ddlStatus", new SelectList(cm.GetListStatus(), "CODE", "TEXT"), @Constants.SelectOption.SelectAll, new { @class = "form-control" })
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-3">
+                                <a class="btn btn green" id="btnSearch">
+                                    <i class="fa fa-search"></i>&nbsp;Search
+                                </a>
+                                <a class="btn default" id="btnClear">
+                                    <i class="fa fa-close"></i>&nbsp;Clear
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th "></i>
+                    <span class="caption-subject bold ">Search Result</span>
+                    <span class="caption-helper">&nbsp;Click row to display information...</span>
+                </div>
+                <div class="pull-right">
+                    @if (permAdd)
+                    {
+                        <a class="btn btn green" id="btnNew" onclick=" PopupDetail('', '@Constants.Mode.New' ) ">
+                            <i class="fa fa-plus"></i>&nbsp;New
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table id="tbSearh" class="table table-hover table-striped datatable">
+                    <thead style="text-align: center">
+                        <tr>
+                            <td><b>Code</b></td>
+                            <td><b>Name</b></td>
+                            <td><b>Desciption</b></td>
+                            <td><b>OverDueDayStart</b></td>
+                            <td><b>OverDueDayEnd</b></td>
+                            <td><b>Create By</b></td>
+                            <td><b>Create Date</b></td>
+                            <td><b>Update By</b></td>
+                            <td><b>Update Date</b></td>
+                            <td><b>Status</b></td>
+                            @if (permEdit)
+                            {
+                                <td><b>Edit</b></td>
+                            }
+                            @if (permView)
+                            {
+                                <td><b>View</b></td>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody style="text-align: center" id="tbdSearchResult">
+                        <!--Search Result-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--tab-->
+
+
+<script>
+
+    $('#btnClear').click(function () {
+        bootbox.confirm('Do you want to clear data?', function (confirm) {
+            if (confirm) {
+                ClearValueByDiv('dvSearchPanel');
+                var table = $('#tbSearh').DataTable();
+                table.clear().draw();
+            }
+        });
+    });
+
+    $('#btnSearch').click(function() {
+        var url = '@Constants.UrlAction.BucketSerach';
+        var data = {
+            "Code": $('#txtCode').val(),
+            "BucketName": $('#txtBucketName').val(),
+            "OvdStart" :  $('#txtOvdStart').val(),
+            "OvdEnd" :  $('#txtOvdEnd').val(),
+            "Status" :  $('#ddlStatus').val()
+        }
+        $.post(url, data, function(response) {
+            $('#tbSearh').DataTable().destroy();
+            $('#tbSearh tbody').empty();
+            $('#tbdSearchResult').html(response);
+            $('#tbSearh').DataTable({ "bSort": true, "iDisplayLength": @cm.PageSize });
+        });
+    });
+
+    function PopupDetail(code, mode) {
+        var data = { "code": code, "mode": mode };
+        modalPOST("Bucket", "Bucket", "_Details", data, false);
+    }
+</script>

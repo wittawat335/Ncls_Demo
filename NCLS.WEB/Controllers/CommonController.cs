@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NCLS.DOMAIN.Entities;
+using NCLS.WEB.Entities;
 using NCLS.WEB.Models;
 using NCLS.WEB.Models.ViewModels.User;
 using NCLS.WEB.Utility;
