@@ -1,0 +1,35 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Models.ViewModels.AssignRepoOA.AssignRepoOAViewModel>
+
+@{
+    Common cm = new Common();
+    int i = 0;
+}
+
+@foreach (var m in Model)
+{
+    <tr>
+        <td>
+            @m.ContractNo
+        <div hidden="hidden">
+            @Html.TextBox("model[" + @i + "].JobId", m.JobId)
+            @Html.TextBox("model[" + @i + "].ContractNo", m.ContractNo)
+            @Html.TextBox("model[" + @i + "].OS", m.OutstandingBalance)
+            @Html.TextBox("model[" + @i + "].CitizenId", m.CitizenId)
+            @Html.TextBox("model[" + @i + "].BorrowerName", m.BorrowerName)
+            @Html.TextBox("model[" + @i + "].PreviousRepoOa", m.PreviousRepoOa)
+            @Html.TextBox("model[" + @i + "].AssignDate", m.AssignDate)
+            @Html.TextBox("model[" + @i + "].AreaCode", m.AreaCode)
+            <input type="text" name="oaCode" id="writeStatus" />
+            <input type="text" name="assignDate" id="subType" />
+            @(++i)
+        </div>
+    </td>
+    <td>@m.CitizenId</td>
+    <td style="text-align: left">@m.BorrowerName</td>
+    <td style="text-align: left">@m.PreviousRepoOa</td>
+    <td style="text-align: right">@String.Format("{0:#,##0.00}", m.OutstandingBalance)</td>
+    <td style="text-align: left">@cm.DateDisplay(m.AssignDate)</td>
+    <td style="text-align: left">@cm.GetProvinceNameByCode(m.AreaCode)</td>
+</tr>
+}

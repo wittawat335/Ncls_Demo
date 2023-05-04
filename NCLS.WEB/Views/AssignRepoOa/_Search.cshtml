@@ -1,0 +1,39 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.SP_SEARCH_ASSIGN_REPO_Result>
+
+@{
+    Common cm = new Common();
+    int i = 0;
+}
+
+@foreach (var m in Model)
+{
+    <tr>
+        @if (ViewBag.mode == Constants.Result.True)
+        {
+            <td style="text-align: center">
+                @Html.CheckBox("model[" + @i + "].Flag", false, new { @style = "cursor:pointer" })
+                <div hidden="hidden">
+                    @Html.TextBox("model[" + @i + "].JobId", m.JOB_ID)
+                    @Html.TextBox("model[" + @i + "].ContractNo", m.JOB_CONTRACT_NO)
+                    @Html.TextBox("model[" + @i + "].OutstandingBalance", m.TOTAL_OS_BALANCE)
+                    @Html.TextBox("model[" + @i + "].CitizenId", m.JOB_CARD_NO)
+                    @Html.TextBox("model[" + @i + "].BorrowerName", m.JOB_CUST_NAME)
+                    @Html.TextBox("model[" + @i + "].PreviousRepoOa", m.NAME_OA_CODE)
+                    @Html.TextBox("model[" + @i + "].AssignDate", m.JOB_ASSIGN_OA_DATE)
+                    @Html.TextBox("model[" + @i + "].AreaCode", m.JOB_PROVINCE_CODE)
+
+                    @(++i)
+                </div>
+            </td>
+        }
+
+        <td>@m.JOB_CONTRACT_NO</td>
+        <td>@m.JOB_CARD_NO</td>
+        <td style="text-align: left">@m.JOB_CUST_NAME</td>
+        <td style="text-align: left">@m.NAME_OA_CODE</td>
+        <td style="text-align: right">@String.Format("{0:#,##0.00}", m.TOTAL_OS_BALANCE)</td>
+        <td style="text-align: left">@cm.DateDisplay(m.JOB_ASSIGN_OA_DATE)</td>
+        <td style="text-align: left">@m.PROVINCE_NAME</td>
+    </tr>
+}

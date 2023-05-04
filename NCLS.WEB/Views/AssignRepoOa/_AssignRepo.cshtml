@@ -1,0 +1,176 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Models.ViewModels.AssignRepoOA.AssignRepoOAViewModel>
+@{
+    Common cm = new Common();
+    int i = 0;
+}
+<form id="dvRepoOAUpdate" class="form-horizontal">
+    <div class="row" id="">
+        <div class="col-md-12">
+            <div class="col-md-5 col-md-offset-1">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Repo OA<label class="label-red">*</label></label>
+                    <div class="col-xs-4 col0">
+                        @Html.DropDownList("ddlOA3", new SelectList(cm.GetListOA(), "OA_CODE", "OA_NAME_TH"), @Constants.SelectOption.SelectOne, new { @class = "form-control", @required = true })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+
+                <div class="form-group">
+                    <label class="col-xs-4 control-label">Assign Date<label class="label-red">*</label></label>
+                    <div class="col-xs-4 col0">
+                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                            <input type="text" class="form-control" id="txtAssignDateUpdate" required="required">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />   <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-th"></i>
+                        <span class="caption-subject bold">List</span>
+                        <span class="caption-helper">search result...</span>
+                    </div>
+
+
+
+                </div>
+                <div class="portlet-body">
+                    <table id="tbList2" class="table table-hover table-striped">
+                        <thead style="text-align: center">
+                            <tr>
+                                <td><b>Contract No</b></td>
+                                <td><b>Citizen ID</b></td>
+                                <td><b>Borrower Name</b></td>
+                                <td><b>Previous Repo OA</b></td>
+                                <td><b>Outstanding Balance</b></td>
+                                <td><b>Assign Date</b></td>
+                                <td><b>Area</b></td>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center" id="tbListResult2"></tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+        <div class="col-md-12">
+            <div class="pull-right">
+
+                <button type="submit" id="btnSave" class="btn green"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+
+                <a class="btn btn-outline dark" id="btnClose"><i class="fa fa-close"></i>&nbsp;Close</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<script>
+    $(function() {
+        $.fn.modal.Constructor.prototype.enforceFocus = (function() {
+
+
+            $('#ddlOA3').select2();
+        });
+        var datePayment = '@ViewBag.AssignDate';
+        $('#txtAssignDateUpdate').datepicker({
+            startDate: '-' + datePayment + 'd',
+            rtl: App.isRTL(),
+            orientation: "right",
+            autoclose: true
+        });
+
+
+
+        bindSendToOA();
+        $('#dvRepoOAUpdate').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                Save();
+            }
+        });
+        $('#txtAssignDateUpdate').datepicker();
+    });
+
+    $(".close, #btnClose").click(function() {
+        DestroySession();
+        $('input:checkbox').removeAttr('checked');
+    });
+
+    function DestroySession() {
+        var url = '@Constants.UrlAction.ClearSessionOA';
+        $.post(url, function(result) {
+            if (result.result == '@Constants.Result.True') {
+                clearModal();
+
+            }else {
+                alertMessage(result.message);
+            }
+        });
+    }
+
+
+    function Save() {
+        bootbox.confirm('@Constants.Msg.ConfirmSave', function (confirm) {
+            if (confirm) {
+                $('#writeStatus').val($('#ddlOA3').val());
+                $('#subType').val($('#txtAssignDateUpdate').val());
+               var table = $('#tbList2').DataTable();
+               var data = table.$('input, select').serialize();
+               var url = '@Constants.UrlAction.SaveOA';
+
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                        DestroySession();
+                        clearModal();
+                        $('input:checkbox').removeAttr('checked');
+                        $('#btnSearch').click();
+                    }else {
+                        DestroySession();
+                        $('input:checkbox').removeAttr('checked');
+                        alertMessage(result.message);
+                    }
+
+                });
+                }
+        });
+        }
+
+
+    function bindSendToOA() {
+        var url = '@Constants.UrlAction.SendToOA';
+        var data = {};
+        $.post(url, data, function(response) {
+            $('#tbList2').DataTable().destroy();
+            $('#tbList2 tbody').empty();
+            $('#tbListResult2').html(response);
+            $('#tbList2').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+            "sSearch": "Search"
+        }});
+    });
+    }
+
+</script>

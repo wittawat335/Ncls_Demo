@@ -733,6 +733,10 @@
     <Content Include="Views\Common\_Notification.cshtml" />
     <Content Include="Views\Common\_TopBar.cshtml" />
     <Content Include="Views\AssignRepoOa\Index.cshtml" />
+    <Content Include="Views\AssignRepoOa\_SendToOA.cshtml" />
+    <Content Include="Views\AssignRepoOa\_SearchGen.cshtml" />
+    <Content Include="Views\AssignRepoOa\_Search.cshtml" />
+    <Content Include="Views\AssignRepoOa\_AssignRepo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
