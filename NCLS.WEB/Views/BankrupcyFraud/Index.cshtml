@@ -1,0 +1,249 @@
+﻿@using NCLS.WEB.Utility
+
+@{
+    var cm = new Common();
+}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+
+        <li>
+            <i class="fa fa-bank"></i>
+            <span>Bankrupcy / Fraud</span>
+        </li>
+    </ul>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-search "></i>
+                    <span class="caption-subject  bold ">Search</span>
+                    <span class="caption-helper">enter search criteria...</span>
+                </div>
+                <div class="tools">
+                    <a class="collapse" data-original-title="" title=""></a>
+                </div>
+                <div class="pull-right">
+                    <a onclick=" modalPOST('Upload Excel', 'BankrupcyFraud' , '_Upload' , '' , 99) " class="btn btn blue">
+                        <i class="fa fa-upload"></i>&nbsp;&nbsp;
+                        Upload
+                    </a>
+                    <a href="@Constants.UrlAction.DownloadTremplateFraud" class="btn blue"><i class="fa fa-download"></i>&nbsp;&nbsp;Download Template Fraud</a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal" id="dvSearchPanel">
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Doc No </label>
+                                <div class="col-xs-5 col0">
+                                    <select class="form-control" id="txtDoc"></select>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Create Date From </label>
+                                <div class="col-xs-5 col0">
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                        <input type="text" id="txtCreateDateFrom" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Approval Status</label>
+                                <div class="col-xs-5 col0">
+                                    @Html.DropDownList("ddlApprovalStatus", new SelectList(ViewBag.ddlApprovalStatus, "CODE", "TEXT"), @Constants.SelectOption.SelectOne, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Type</label>
+                                <div class="col-xs-5 col0">
+                                    <select class="form-control" id="ddlType">
+                                        <option value="">Please Select</option>
+                                        <option value="Bankruptcy">Bankruptcy</option>
+                                        <option value="Fraud">Fraud</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Create Date To </label>
+                                <div class="col-xs-5 col0">
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                        <input type="text" id="txtCreateDateTo" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-7">
+                                <a class="btn green" id="btnSearch">
+                                    <i class="fa fa-search"></i>
+                                    Search
+                                </a>
+                                <a class="btn default" id="btnClear" onclick="">
+                                    <i class="fa fa-close"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th "></i>
+                    <span class="caption-subject bold  ">List</span>
+                    <span class="caption-helper">search result...</span>
+                </div>
+
+
+
+            </div>
+            <div class="portlet-body">
+                <table id="tbSearh" class="datatable table table-hover table-striped">
+                    <thead style="text-align: center">
+                        <tr>
+
+                            <td><b>No</b></td>
+                            <td><b>Doc No</b></td>
+                            <td><b>Create Date</b></td>
+                            <td><b>Type</b></td>
+
+                            <td><b>Approve Status</b></td>
+                            <td><b>Approve/Reject</b></td>
+                            <td><b>View</b></td>
+
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody style="text-align: center" id="tbdSearchResult"></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        if('@ViewBag.Noti' == '1') {
+            $('#ddlApprovalStatus').val('@Constants.ApproveStatus.Pending');
+            BindViewNoti();
+        }
+        $("#txtDoc").select2({
+            placeholder: "@Constants.SelectOption.SelectOne",
+            minimumInputLength: 3,
+            dropdownAutoWidth: 'true',
+            width: '100%',
+            ajax: {
+                url: '@Constants.UrlAction.DocNoSearch',
+                dataType: 'json',
+                quietMillis: 100,
+                data: function (params) {
+                    return { q: params.term };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (obj) {
+                            return { id: obj.BF_DOC_ID, text: obj.BF_DOC_ID };
+                        })
+                    };
+                }
+            }
+        });
+        $('#txtCreateDateFrom').change(function () {
+            if ($('#txtCreateDateTo').val() == '') {
+                $('#txtCreateDateTo').val($('#txtCreateDateFrom').val());
+            } else {
+                $('#txtCreateDateTo').val($('#txtCreateDateTo').val());
+            }
+
+        });
+
+
+    });
+    $('#btnSearch').click(function() {
+        var url = '@Constants.UrlAction.BankFraudSearch';
+        var data = {
+            "docNo" : $('#txtDoc').val(),
+            "createDateFrom" : $('#txtCreateDateFrom').val(),
+            "createDateTo" : $('#txtCreateDateTo').val(),
+            "approveStatus" : $('#ddlApprovalStatus').val(),
+            "type" : $('#ddlType').val(),
+
+        };
+        $.post(url, data, function(response) {
+            $('#tbSearh').DataTable().destroy();
+            $('#tbSearh tbody').empty();
+            $('#tbdSearchResult').html(response);
+            $('#tbSearh').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+                "sSearch": "Search", "aLengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
+            }});
+        });
+    });
+    $('#btnClear').click(function () {
+        bootbox.confirm('Do you want to clear data?', function (confirm) {
+            if (confirm) {
+                var table = $('#tbSearh').DataTable();
+                table.clear().draw();
+
+                ClearValueByDiv('dvSearchPanel');
+                $('#txtDoc').select2("val", "");
+                $("#ddlApprovalStatus").val('');
+                $("#ddlType").val('');
+            }
+        });
+    });
+
+    function BindViewNoti() {
+        var url = '@Constants.UrlAction.BankFraudSearch';
+        var data = {
+            "approveStatus" : $('#ddlApprovalStatus').val()
+        };
+        $.post(url, data, function(response) {
+            $('#tbSearh').DataTable().destroy();
+            $('#tbSearh tbody').empty();
+            $('#tbdSearchResult').html(response);
+            $('#tbSearh').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+                "sSearch": "Search", "aLengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
+            }});
+        });
+     }
+
+     function popupBankrupcy(code, mode) {
+         var data = { "code" : code, "mode" : mode };
+         modalPOST('Bankrupcy', 'BankrupcyFraud', '_Bankrupcy', data, 99);
+     }
+     function popupFraud(code, mode) {
+         var data = { "code" : code, "mode" : mode };
+         modalPOST('Fraud', 'BankrupcyFraud', '_Fraud', data, 90);
+     }
+</script>
+

@@ -1,0 +1,274 @@
+﻿@*****************************
+    ** LC015 Recall ฟ้องเรียกทรัพย์
+    ** LC016 Loss ฟ้องขาดทุน
+    ** LC010 AMLO คดี ปปง
+    ** LC009 ONCB คดี ปปส
+    ** LC003 Embezzle ยักยอกทรัพย์
+    ** LC008 Exhibit ร้องคืนของกลาง
+    ** LC006 Bankruptcy ล้มละลาย
+    ** LC014 Claim เคลมประกัน
+    ** LC002 OCPB สคบ
+    ** LC001 Other คดีอื่นๆ
+    ** LC012 Cheque เช็ค
+    ** LC007 Rehabilitation ฟื้นฟูกิจการ
+    ********************************@
+@using NCLS.WEB.Models.ViewModels.LegalCase
+@using NCLS.WEB.Utility
+@model NCLS.WEB.Models.ViewModels.LegalCase.Other
+
+@{
+    var vm = (Other)Model;
+    var cm = new Common();
+    int i = 1;
+}
+
+<div class="tab-pane @vm.CssActive" id="tab_LC001">
+    <div class="tabbable-custom tabbable-tabdrop">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_LC001_1" data-toggle="tab">Tracking </a>
+            </li>
+            <li>
+                <a href="#tab_LC001_3" data-toggle="tab">Court Fees </a>
+            </li>
+            <li>
+                <a href="#tab_LC001_4" data-toggle="tab">Other Expense </a>
+            </li>
+            <li>
+                <a href="#tab_LC001_2" data-toggle="tab">Attach File </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <!--Tracking-->
+            <div class="tab-pane active" id="tab_LC001_1">
+                <form action="#" class="form-horizontal">
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Ref No.</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtRefNo", vm.RefNo, new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Admin</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtAdmin", vm.Admin, new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Request Date</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtRequestDate", cm.DateDisplay(vm.RequestDate), new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Legal OA</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtLegalOA", vm.LegalOA, new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Remark</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtRemark", vm.Remark, new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Assign OA Date</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtAssignOADate", cm.DateDisplay(vm.AssignOADate), new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Legal Case</label>
+                                <div class="col-xs-6 col0">
+                                    @Html.TextBox("txtLegalCaseName", vm.LegalCaseName, new { @class = "form-control", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="@("dv_tracking_" + vm.RefNo)">
+                        @Html.Action("_LegalTracking", "LegalInfo", new { refNo = vm.RefNo, readOnly = vm.ReadOnly, contractNo = vm.ContractNo, legalCase = vm.LegalCase })
+                    </div>
+                </form>
+                <br />
+            </div>
+            <!--Attach File-->
+            <div class="tab-pane" id="tab_LC001_2">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tbOtherAttach">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th>No</th>
+                                <th>File Name</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var at in vm.ListOfAttachment)
+                            {
+                                <tr>
+                                    <td>@(i++)</td>
+                                    <td>@at.ATTACH_FILE_NAME</td>
+                                    <td style="text-align: center;">
+                                        <a href="@Url.Content("~/Common/DownloadLegalAttachment?fileName=" + at.ATTACH_FILE_NAME)">
+                                            <i class="fa fa-save"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--Court Fees-->
+            <div class="tab-pane" id="tab_LC001_3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light bordered">
+                            <div class="portlet-body">
+                                <table class="table table-hover  nowrap" id="tbLossCourtFee">
+                                    <thead style="text-align: center">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Payment No</th>
+                                            <th>Legal OA</th>
+                                            <th>Court Name</th>
+                                            <th>Filing Date</th>
+                                            <th>Amount Claimed</th>
+                                            <th>Court Fees</th>
+                                            <th>Receive Back</th>
+                                            <th>Remark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cf in vm.ListOfCourtFee)
+                                        {
+                                            <tr>
+                                                <td>@cf.SEQ_NO</td>
+                                                <td>@cf.PAYMENT_NO</td>
+                                                <td>@cf.LEGAL_OA</td>
+                                                <td>@cf.COURT_NAME</td>
+                                                <td>@cm.DateDisplay(cf.FILING_DATE)</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(cf.AMOUNT_CLAIMED)</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(cf.COURT_FEE)</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(cf.RECEIVE_BACK)</td>
+                                                <td>@cf.REMARK</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                    <tfoot style="text-align: right;">
+                                        <tr>
+                                            <td style="text-align: center">Total</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalCourtFee)</td>
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalReceiveBack)</td>
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalCourtFee - vm.totalReceiveBack)</td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Other Expense-->
+            <div class="tab-pane" id="tab_LC001_4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light bordered">
+                            <div class="portlet-body">
+                                <table class="table table-hover nowrap" id="tbLossExpense">
+                                    <thead style="text-align: center">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Payment No</th>
+                                            <th>Payment  Date</th>
+                                            <th>Legal OA</th>
+                                            <th>Expense Code</th>
+                                            <th>Expense Name</th>
+                                            <th>VAT</th>
+                                            <th>WHT</th>
+                                            <th>Payment Amount</th>
+                                            <th>Net Amount</th>
+                                            <th>Remark</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var oe in vm.ListOfExpense)
+                                        {
+                                            <tr>
+                                                <td>@oe.SEQ_NO</td>
+                                                <td>@oe.PAYMENT_NO</td>
+                                                <td>@cm.DateDisplay(oe.PAYMENT_DATE)</td>
+                                                <td>@oe.LEGAL_OA</td>
+                                                <td>@oe.EXPENSE_CODE</td>
+                                                <td>@oe.EXPENSE_NAME</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(oe.VAT)</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(oe.WHT)</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(oe.PAYMENT_AMOUNT)</td>
+                                                <td style="text-align: right">@cm.DecimalDisplay(oe.NET_AMOUNT)</td>
+                                                <td>@oe.REMARK</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot style="text-align: right;">
+                                        <tr>
+                                            <td style="text-align: center">Total</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalExpenseVat)</td>
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalExpenseTax)</td>
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalExpensePayment)</td>
+                                            <td style="text-align: right">@cm.DecimalDisplay(vm.totalExpenseNet)</td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tbLossCourtFee').DataTable({ "bSort": false, "oLanguage": { "sSearch": "Search" } });
+        $('#tbLossExpense').DataTable({ "bSort": false, "oLanguage": { "sSearch": "Search" } });
+    });
+</script>
+

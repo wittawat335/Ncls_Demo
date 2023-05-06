@@ -1,0 +1,56 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.SP_SEARCH_BANKRUPTCY_FRAUD_Result>
+
+@{
+    Common cm = new Common();
+    int i = 0;
+}
+
+@if (Model.Count > 0)
+{
+    foreach (var m in Model)
+    {
+        <tr>
+            <td>  @(++i)</td>
+            <td>@m.BF_DOC_ID</td>
+            <td>@cm.DateDisplay(m.BF_CREATE_DATE)</td>
+            <td>@m.BF_TYPE</td>
+            <td>@cm.GetNameApproveStatus(m.BF_APPROVE_FLAG)</td>
+
+            @if (m.BF_TYPE == Constants.BankFraud_Type.Bankruptcy && m.BF_APPROVE_FLAG == Constants.ApproveStatus.Pending)
+                    {
+                <td onclick="popupBankrupcy('@m.BF_DOC_ID', '@Constants.Mode.Edit') " style="cursor: pointer; text-align: center">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </td>
+                        <td onclick=" popupBankrupcy('@m.BF_DOC_ID', '' ) " style="cursor: pointer; text-align: center">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </td>
+            }
+            else if (m.BF_TYPE == Constants.BankFraud_Type.Fraud && m.BF_APPROVE_FLAG == Constants.ApproveStatus.Pending)
+            {
+                <td onclick=" popupFraud('@m.BF_DOC_ID', '@Constants.Mode.Edit' ) " style="cursor: pointer; text-align: center">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </td>
+                        <td onclick=" popupFraud('@m.BF_DOC_ID', '' ) " style="cursor: pointer; text-align: center">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </td>
+            }
+            else if (m.BF_TYPE == Constants.BankFraud_Type.Bankruptcy)
+            {
+                <td></td>
+                        <td onclick=" popupBankrupcy('@m.BF_DOC_ID', '' ) " style="cursor: pointer; text-align: center">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </td>
+            }
+            else
+            {
+                <td></td>
+                        <td onclick=" popupFraud('@m.BF_DOC_ID', '' ) " style="cursor: pointer; text-align: center">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </td>
+            }
+        </tr>
+    }
+}
+
+

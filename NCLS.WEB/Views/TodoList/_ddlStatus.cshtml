@@ -1,0 +1,7 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.SP_SEARCH_STATUS_BY_CASE_Result>
+<label class="col-xs-4 control-label"> Status </label>
+<div class="col-xs-6 col0">
+    @Html.DropDownList("ddlCaseStatus", new SelectList(Model, "STS_CODE", "STS_NAME_TH"), @Constants.SelectOption.SelectAll, new { @class = "form-control select2" })
+</div>
+

@@ -1,0 +1,98 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Models.ViewModels.BankrupcyFraudC.WriteOffUploadViewModel>
+
+@{
+    int i = 0;
+    Common cm = new Common();
+}
+@foreach (var m in Model)
+{
+    <tr>
+        <td>
+            <div hidden="hidden">
+                @Html.TextBox("model[" + @i + "].UploadType", m.UploadType)
+                @Html.TextBox("model[" + @i + "].CitizenId", m.CitizenId)
+                @Html.TextBox("model[" + @i + "].Firstname", m.Firstname)
+                @Html.TextBox("model[" + @i + "].Lastname", m.Lastname)
+                @Html.TextBox("model[" + @i + "].Courtname", m.Courtname)
+                @Html.TextBox("model[" + @i + "].Redcode", m.Redcode)
+                @Html.TextBox("model[" + @i + "].ComplainantName", m.ComplainantName)
+                @Html.TextBox("model[" + @i + "].DefendantName", m.DefendantName)
+                @Html.TextBox("model[" + @i + "].ReceivingOrderDate", m.ReceivingOrderDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].SubmitDueDate", m.SubmitDueDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].CancelReceivingOrderDate", m.CancelReceivingOrderDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].CompromiseBeforeDate", m.CompromiseBeforeDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].CancelCompromiseBeforeDate", m.CancelCompromiseBeforeDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].OrderBankrupcyDate", m.OrderBankrupcyDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].CompromiseAfterDate", m.CompromiseAfterDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].CancelCompromiseAfterDate", m.CancelCompromiseAfterDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].SubmitAfterDueDate", m.SubmitAfterDueDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].CancelBankrupcyDate", m.CancelBankrupcyDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].DischangedBankrupcyDate", m.DischangedBankrupcyDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].DismissalDate", m.DismissalDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].DisposeCaseDate", m.DisposeCaseDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @Html.TextBox("model[" + @i + "].FilingDate", m.FilingDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @data_provide = "datepicker", @date_format = "dd/mm/yyyy" })
+                @*   @Html.TextBox("model[" + @i + "].ReceivingOrderDate", m.ReceivingOrderDate)
+                    @Html.TextBox("model[" + @i + "].SubmitDueDate", m.SubmitDueDate)
+                    @Html.TextBox("model[" + @i + "].CancelReceivingOrderDate", m.CancelReceivingOrderDate)
+                    @Html.TextBox("model[" + @i + "].CompromiseBeforeDate", m.CompromiseBeforeDate)
+                    @Html.TextBox("model[" + @i + "].CancelCompromiseBeforeDate", m.CancelCompromiseBeforeDate)
+                    @Html.TextBox("model[" + @i + "].OrderBankrupcyDate", m.OrderBankrupcyDate)
+                    @Html.TextBox("model[" + @i + "].CompromiseAfterDate", m.CompromiseAfterDate)
+                    @Html.TextBox("model[" + @i + "].CancelCompromiseAfterDate", m.CancelCompromiseAfterDate)
+                    @Html.TextBox("model[" + @i + "].SubmitAfterDueDate", m.SubmitAfterDueDate)
+                    @Html.TextBox("model[" + @i + "].CancelBankrupcyDate", m.CancelBankrupcyDate)
+                    @Html.TextBox("model[" + @i + "].DischangedBankrupcyDate", m.DischangedBankrupcyDate)
+                    @Html.TextBox("model[" + @i + "].DismissalDate", m.DismissalDate)
+                    @Html.TextBox("model[" + @i + "].DisposeCaseDate", m.DisposeCaseDate)
+                    @Html.TextBox("model[" + @i + "].FilingDate", m.FilingDate)*@
+            </div>
+            @(++i)
+
+        </td>
+        <td nowrap="nowrap">@m.MsgError</td>
+        <td nowrap="nowrap">@m.UploadType</td>
+        <td nowrap="nowrap">@m.CitizenId</td>
+        <td nowrap="nowrap">@m.Firstname</td>
+        <td nowrap="nowrap">@m.Lastname</td>
+        <td nowrap="nowrap">@m.Courtname</td>
+        <td nowrap="nowrap">@m.Redcode</td>
+        <td nowrap="nowrap">@m.ComplainantName</td>
+        <td nowrap="nowrap">@m.DefendantName</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.ReceivingOrderDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.SubmitDueDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.CancelReceivingOrderDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.CompromiseBeforeDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.CancelCompromiseBeforeDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.OrderBankrupcyDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.CompromiseAfterDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.CancelCompromiseAfterDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.SubmitAfterDueDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.CancelBankrupcyDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.DischangedBankrupcyDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.DismissalDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.DisposeCaseDate)</td>
+        <td nowrap="nowrap">@cm.DateDisplay(m.FilingDate)</td>
+
+
+    </tr>
+
+
+
+
+}
+
+<script>
+
+
+    $(function () {
+      if ('@ViewBag.ModeSave' == '@Constants.Result.True') {
+          $("#btnSaveBank").show(500);
+            alertMessage('@Constants.Msg.UploadCompleted');
+        } else {
+          $("#btnSaveBank").hide();
+            alertMessage('@Constants.Msg.UploadIncompleted');
+        }
+    });
+
+</script>

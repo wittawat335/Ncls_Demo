@@ -1,0 +1,117 @@
+﻿@using NCLS.WEB.Utility
+
+@model List<NCLS.WEB.Entities.SP_SEARCH_CANCEL_JOB_LEGAL_Result>
+@{
+    Common cm = new Common();
+    int i = 0;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div align="right">
+            <a href="#" class="btn btn-success" onclick="SaveCancelLegal()" id="btnCancelLegal">Save Cancel Legal</a>
+            <a href="#" class="btn btn-danger" onclick="clearModal();" id="btnReject">Close</a>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th "></i>
+                    <span class="caption-subject bold  ">Cancel  Legal</span>
+                </div>
+
+            </div>
+
+
+            <div class="protlet-body">
+                <table id="tbCancelLegal" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>@*<input type="checkbox" id="chkCancel" class="form-control" style="width:20px;height:34px;" />*@</th>
+                            @* <th><b>Legal Case</b></th>*@
+                            <th><b>Ref No.</b></th>
+                            <th><b>Contract No/Cheque No</b></th>
+                            <th><b>Borrower Name</b></th>
+                            @*    <th><b>Brand</b></th>
+                                <th><b>Model</b></th>
+                                <th><b>Plate No</b></th>*@
+                            <th><b>Outstanding Balance</b></th>
+                            <th><b>Overdue Days</b></th>
+                            <th><b>Admin</b></th>
+                            <th><b>Assign Date(Admin)</b></th>
+                            <th><b>Legal OA</b></th>
+                            <th><b>Assign Date(OA)</b></th>
+                            @* <th><b>Step Date</b></th>*@
+                            <th><b>Legal Status</b></th>
+                            <th><b>Repo Status</b></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var result in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.CheckBox("Item[" + @i + "].CheckCancel", new { @style = "width:20px;height:34px;", @class = "from-control" })
+                                    <div hidden="hidden">
+                                        @Html.TextBox("Item[" + @i + "].JOB_ID", result.JOB_ID)
+                                        @(++i)
+                                    </div>
+                                </td>
+
+                                @*   <td>@result.JOB_CASE_NAME</td>*@
+                                <td style="width:10%">@result.JOB_ID</td>
+                                <td>@result.JOB_CONTRACT_NO</td>
+                                <td style="width:15%">@result.JOB_CUST_NAME</td>
+                                @*<td>@result.JOB_BRAND</td>
+                                    <td>@result.JOB_MODEL</td>
+                                    <td>@result.JOB_PLATE_NO</td>*@
+                                <td>@cm.DecimalDisplay(result.JOB_OS_AMT_COL)</td>
+                                <td>@cm.DecimalDisplay(result.JOB_OVD_DAY_COL, 0)</td>
+                                <td>@result.JOB_ADMIN_NAME</td>
+                                <td>@cm.DateDisplay(result.JOB_ASSIGN_ADMIN_DATE)</td>
+                                <td>@result.JOB_OA_NAME</td>
+                                <td>@cm.DateDisplay(result.JOB_ASSIGN_OA_DATE)</td>
+                                @*  <td>@cm.DateDisplay(result.JOB_STEP_DATE)</td>*@
+                                <td>@result.JOB_LEGAL_STATUS_NAME</td>
+                                <td>@result.JOB_REPO_STATUS_NAME</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(function () {
+        $("#tbCancelLegal").DataTable({ "bSort": false, "iDisplayLength": @cm.PageSize,
+            "oLanguage": { "sSearch": "Search"}});
+    });
+    function SaveCancelLegal()
+    {
+        bootbox.confirm('@Constants.Msg.CancelLegal', function (confirm) {
+            if (confirm) {
+                var url = '@Constants.UrlAction.TodoListSacveCalcelLegal';
+                var table = $('#tbCancelLegal').DataTable();
+                var data = table.$('input, select').serialize();
+
+                $.post(url, data, function (result) {
+                    bootbox.alert(result.msg,function(){
+                        if(result.result == '@Constants.Result.True')
+                            clearModal();
+
+                        location.reload();
+                    });
+                });
+            }});
+    }
+</script>
+

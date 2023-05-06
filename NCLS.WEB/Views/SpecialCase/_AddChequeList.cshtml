@@ -1,0 +1,54 @@
+﻿@using NCLS.WEB.Models.ViewModels.SpecialCase
+@using NCLS.WEB.Utility
+
+@model List<NCLS.WEB.Models.ViewModels.SpecialCase.AddCheque>
+@{
+    var permission = true;
+    var vm = (List<AddCheque>)Model;
+    var cm = new Common();
+    string seq = ViewBag.Seq;
+    int i = 0;
+
+}
+
+@foreach (var item in vm)
+{
+    var ContractNoList = item.ContractNo.Split(',').ToList();
+    <tr id="@("r_" + item.ChequeNo + item.ContractNo)">
+        <td>@(i + 1)</td>
+        <td>@item.ChequeNo</td>
+        <td>@(cm.DateDisplay(item.ChequeDate))</td>
+        <td>@(cm.DecimalDisplay(item.ChequeAmount))</td>
+        <td>@item.BankName</td>
+        <td>@item.BranchName</td>
+
+        @*<td>@item.ContractNo</td>*@
+        <td>
+            @foreach (var x in ContractNoList)
+            {
+
+                <a onclick="viewContract('@x.Trim()');">
+                    @x
+                </a>
+
+            }
+        </td>
+        <td>@item.BorrowerName</td>
+        <td style="text-align:center"><a onclick="ChequeListEdit('@Constants.Mode.Edit','@(i)');" );"><i class="fa fa-edit"></i></a></td>
+        <td style="text-align:center"><a onclick="ChequeListTableDetail('@Constants.Mode.Delete','@(i++)');"><i class="fa fa-times"></i></a></td>
+
+        @*   <td style="text-align:center">
+                <a onclick="viewContract('@item.ContractNo');"><i class="fa fa-search"></i></a>
+                <div style="display:none">
+                    @Html.TextBox("chequeList[" + seq + "].ChequeNo", item.ChequeNo)
+                    @Html.TextBox("chequeList[" + seq + "].ChequeDate", item.ChequeDate)
+                    @Html.TextBox("chequeList[" + seq + "].ChequeAmount", item.ChequeAmount)
+                    @Html.TextBox("chequeList[" + seq + "].BankCode", item.BankCode)
+                    @Html.TextBox("chequeList[" + seq + "].BankName", item.BankName)
+                    @Html.TextBox("chequeList[" + seq + "].BranchName", item.BranchName)
+                    @Html.TextBox("chequeList[" + seq + "].ContractNo", item.ContractNo)
+                    @Html.TextBox("chequeList[" + seq + "].BorrowerName", item.BorrowerName)
+                 </div>
+            </td>*@
+    </tr>
+}

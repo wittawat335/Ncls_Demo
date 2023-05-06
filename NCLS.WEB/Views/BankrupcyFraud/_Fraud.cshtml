@@ -1,0 +1,135 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.SP_SEARCH_FRAUD_BY_DOC_Result>
+
+@{
+    var cm = new Common();
+    bool permApp = cm.IsPermission(Constants.ProgramCode.BankruptcyFraud, Constants.ActCode.BankruptcyFraudApprove);
+
+    int i = 0;
+    int y = 0;
+}
+
+<table id="tbResult" class="table table-hover">
+    <thead style="text-align: center">
+        <tr>
+            <td><b>No.</b></td>
+            <td><b>Doc No</b></td>
+            <td><b>Type</b></td>
+            <td><b>Contract No</b></td>
+            <td><b>Borrower Code</b></td>
+
+            <td><b>Borrower Name</b></td>
+
+            <td><b>Remark</b></td>
+
+        </tr>
+
+    </thead>
+    <tbody style="text-align: center" id="tbResultBody">
+        @foreach (var m in Model)
+        {
+
+            <tr>
+                <td>
+                    <div hidden="hidden">
+                        @Html.TextBox("model[" + @i + "].DocNo", m.BF_DOC_ID)
+                        @Html.TextBox("model[" + @i + "].ContractNo", m.CONTRACT_NO)
+                        @Html.TextBox("model[" + @i + "].Remark")
+
+                    </div>     @(++i)
+                </td>
+                <td style="text-align: left;white-space: nowrap">@m.BF_DOC_ID</td>
+                <td style="text-align: left;white-space: nowrap">@m.BF_TYPE</td>
+                <td style="text-align: left;white-space: nowrap">@m.CONTRACT_NO</td>
+                <td style="text-align: left;white-space: nowrap">@m.CUSTOMER_CODE</td>
+                <td style="text-align: left;white-space: nowrap">@m.CUSTOMER_NAME</td>
+                @if (ViewBag.Mode == Constants.Mode.Edit)
+                {
+                    <td>
+
+                        <input type="text" id="txtRemark[@y]" onchange=" remarkchange(@y, this.value) " />
+                        <div hidden="hidden">@(y++)</div>
+                    </td>
+                }
+                else
+                {
+                    <td style="text-align: left;white-space: nowrap">@m.BFD_REMARK</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+        <div class="pull-right">
+
+            @if (ViewBag.Mode == Constants.Mode.Edit && permApp)
+            {
+                <button id="btnSave" class="btn green" onclick="Approve()"><i class="glyphicon glyphicon-ok" />&nbsp;Approve</button>
+                <button id="btnReject" class="btn red-flamingo" onclick="Reject()"><i class="fa fa-trash" />&nbsp;Reject</button>
+            }
+
+            <a class="btn btn-outline dark" onclick=" clearModal() "><i class="glyphicon glyphicon-off" />&nbsp;Close</a>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(function() {
+        $('#tbResult').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+             "sSearch": "Search"
+         }});
+     });
+
+    function Approve() {
+        bootbox.confirm('@Constants.Msg.ConfirmApprove', function (confirm) {
+            if (confirm) {
+                var table = $('#tbResult').DataTable();
+                var data = table.$('input, select').serialize();
+                var url = '@Constants.UrlAction.ApproveBf';
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                        clearModal();
+                        document.getElementById('btnSearch').click();
+                    } else {
+                        alertMessage(result.message);
+                    }
+                });
+            }
+        });
+    }
+
+    function Reject() {
+        bootbox.confirm('@Constants.Msg.ConfirmReject', function (confirm) {
+            if (confirm) {
+                var table = $('#tbResult').DataTable();
+                var data = table.$('input, select').serialize();
+                var url = '@Constants.UrlAction.RejectBf';
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                        clearModal();
+                        document.getElementById('btnSearch').click();
+                    } else {
+                        alertMessage(result.message);
+                    }
+                });
+            }
+        });
+    }
+    function remarkchange(id, value) {
+
+        var idname = "#model_" + id + "__Remark";
+        $(idname).val(value);
+
+
+
+    }
+
+</script>
+

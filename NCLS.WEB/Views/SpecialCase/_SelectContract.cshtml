@@ -1,0 +1,97 @@
+﻿<div class="row" id="DivSelectContract">
+    <div class="col-md-12">
+        <div class="portlet-body form">
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <select id="ddlSelectContract" required="required" class="form-control" style="width:340px"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @*  <a class="btn green" type="submit" onclick="addThisContract();">
+                                        Select
+                                    </a>*@
+                                <button type="submit" class="btn green">&nbsp;Select</button>
+                                <a class="btn default" onclick="clearModalLv2();">
+                                    Close
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+
+
+        $('#DivSelectContract').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                addThisContract();
+            }
+        });
+    });
+
+    $.fn.modal.Constructor.prototype.enforceFocus = (function () {
+        $("#ddlSelectContract").select2({
+            placeholder: "Search for contract",
+            minimumInputLength: 3,
+            ajax: {
+                url: '@Url.Content("~/SpecialCase/SearchContract")',
+                type: "POST",
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        term: params.term,
+                        page: params.page,
+                        listContract: $('#txtChqContractList').val()
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                    };
+                }
+            }
+        });
+    });
+
+    function addThisContract() {
+        var returnTo;
+        var oldVal = '';
+        if ('@ViewBag.Mode' == 'Cheque') {
+            returnTo = $('#txtChqContractList');
+            oldVal = returnTo.val();
+
+        }
+        else {
+            returnTo = $('#txtOthContractNo');
+
+        }
+
+        var newVal = $('#ddlSelectContract').val();
+        $('#ddlSelectContract').select2("val", "");
+        if (newVal != '') {
+            if (oldVal != '') oldVal = oldVal + ', ';
+            returnTo.val(oldVal + newVal);
+
+        }
+        if ('@ViewBag.Mode' == 'Other') {
+
+            clearModalLv2();
+        }
+    }
+</script>
+

@@ -1,0 +1,304 @@
+﻿@using NCLS.WEB.Utility
+@using NCLS.WEB.Models.ViewModels.LegalCase
+@model LegalCase
+@{
+    var permission = true;
+    var vm = (LegalCase)Model;
+    var cm = new Common();
+}
+
+<!-- Page Bar -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-legal"></i>
+            <span>Legal Information</span>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span>Special Case</span>
+        </li>
+    </ul>
+</div>
+<br />
+
+<!-- Search Panel -->
+<div class="row">
+    <div class="col-md-12" id="dvSearch">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-search"></i>
+                    <span class="caption-subject bold">Search Special Case</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Ref No.</label>
+                                    <div class="col-md-6">
+                                        @*   @Html.DropDownList("ddlRefNo", cm.ListItemsSpecialRefNo, Constants.SelectOption.SelectAll, new { @class = "form-control select2" })
+                                        *@
+                                        <select class="form-control select2" id="ddlRefNo" name="ddlRefNo"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Admin</label>
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("ddlAdmin", cm.ListItemsUser, Constants.SelectOption.SelectAll, new { @class = "form-control select2" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Legal OA</label>
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("ddlLegalOA", cm.ListItemsOA, Constants.SelectOption.SelectAll, new { @class = "form-control select2" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Status</label>
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("ddlStatus", new SelectList(cm.GetListStatus(), "CODE", "TEXT"), Constants.SelectOption.SelectAll, new { @class = "form-control " })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Contract No.</label>
+                                    <div class="col-md-6">
+                                        @Html.TextBox("txtContractNo", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Cheque No.</label>
+                                    <div class="col-md-6">
+                                        @Html.TextBox("txtChequeNo", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Case Type</label>
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("ddlCaseType", cm.ListItemsCaseType, Constants.SelectOption.SelectAll, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Legal Case</label>
+                                    <div class="col-md-6">
+                                        @Html.DropDownList("ddlLegalCase", cm.ListItemsLegalCaseSpecial, Constants.SelectOption.SelectAll, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-2">&nbsp;</div>
+                            <div class="col-md-offset-3 col-md-4">
+                                <a class="btn green" onclick="searchData();">
+                                    <i class="fa fa-search"></i>
+                                    Search
+                                </a>
+                                <a class="btn default" onclick="clearCriteria();">
+                                    <i class="fa fa-times"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--- Result Panel -->
+<div class="row">
+    <div class="col-md-12" id="dvResult">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th"></i>
+                    <span class="caption-subject bold">Special Case</span>
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" class="btn green" onclick="addRecord()">
+                        <i class="fa fa-plus"></i>
+                        Add
+                    </a>
+                    <a href="javascript:;" class="btn red" onclick="OnChecked();">
+                        <i class="fa fa-times"></i>
+                        Reject
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table id="tbResult" class="table table-hover">
+                    <thead style="text-align: center">
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="form-control" id="chk_head">
+                            </th>
+                            <th>Edit</th>
+                            <th>Ref No.</th>
+                            <th>Contract No./Cheque No.</th>
+                            <th>Admin</th>
+                            <th>Legal OA</th>
+                            <th>Case Type</th>
+                            <th>Legal Case</th>
+                            <th>Legal Status</th>
+                            <th>Document</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbdResult">
+                        <!--Search Result-->
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $('#ddlAdmin').select2({
+                placeholder: '@Constants.SelectOption.SelectAll',
+                allowClear: true
+            });
+
+            $('#ddlLegalOA').select2({
+                placeholder: '@Constants.SelectOption.SelectAll',
+                allowClear: true
+            });
+
+            $('#ddlRefNo').select2({
+                placeholder: '@Constants.SelectOption.SelectAll',
+                allowClear: true
+            });
+
+            $('#chk_head').on('click', function(){
+                var table = $('#tbResult').DataTable();
+                var rows = table.rows({ 'search': 'applied' }).nodes();
+                $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                ShowDetail();
+            });
+
+            $("#ddlRefNo").select2({
+
+                placeholder: '@Constants.SelectOption.SelectAll',
+                   minimumInputLength: 3,
+                   dropdownAutoWidth: 'true',
+                   width: '100%',
+                   ajax: {
+                       url: '@Constants.UrlAction.SpecialCaseSearchRefNo',
+                        dataType: 'json',
+                        quietMillis: 100,
+                        data: function (params) {
+                            return { q: params.term };
+                        },
+                        processResults: function (data) {
+                            return {
+                                results: $.map(data, function (obj) {
+                                    return { id: obj.JOB_ID, text: obj.JOB_ID };
+                                })
+                            };
+                        }
+                    }
+               });
+        });
+
+        function addRecord() {
+            modalGET('Add Special Case', 'SpecialCase', '_Edit', true);
+        }
+
+        function OnChecked()
+        {
+            var table = $('#tbResult').DataTable();
+            var $table   = table.rows({ 'search': 'applied' }).nodes();
+            var $chkbox_checked  = $('input[type="checkbox"]:checked', $table);
+
+            if($chkbox_checked.length == 0)
+            {
+                bootbox.alert("Plese select data", function () {});
+            }
+            else
+            {
+                bootbox.confirm('@Constants.Msg.ConfirmReject', function (confirm) {
+                    if (confirm) {
+                        rejectRecord();
+                    }});
+            }
+
+        }
+        function rejectRecord() {
+
+            var table = $('#tbResult').DataTable();
+            var data = table.$('input, select').serialize();
+
+            url = '@Constants.UrlAction.SpecialCaseReject';
+            $.post(url, data, function (response) {
+                bootbox.confirm(response.message, function () {});
+		     if(response.result == '@Constants.Result.True'){
+		         searchData();
+		     }
+
+		 });
+
+        }
+
+        function searchData() {
+            var data = {
+                "contractNo": $('#txtContractNo').val(),
+                "chequeNo": $('#txtChequeNo').val(),
+                "admin": $('#ddlAdmin').val(),
+                "legalOA": $('#ddlLegalOA').val(),
+                "refNo": $('#ddlRefNo').val(),
+                "caseType": $('#ddlCaseType').val(),
+                "legalCase": $('#ddlLegalCase').val(),
+                "status": $('#ddlStatus').val()
+            };
+            var url = '@Url.Content("~/SpecialCase/_SearchData")'
+            $.post(url, data, function (response) {
+                if (!response.Error) {
+                    $('#tbResult').DataTable().destroy();
+                    $('#tbResult tbody').empty();
+                    $('#tbdResult').html('');
+                    $('#tbdResult').append(response);
+                    $('#tbResult').DataTable({ "bSort": false, "iDisplayLength": @cm.PageSize,
+                        "oLanguage": { "sSearch": "Search"}});
+
+                }
+            });
+        }
+
+        function clearCriteria() {
+            bootbox.confirm('@Constants.Msg.ConfirmClear', function (confirm) {
+                if (confirm) {
+                    $('#txtContractNo').val('');
+                    $('#txtChequeNo').val('');
+                    $('#ddlAdmin').select2('val', '');
+                    $('#ddlLegalOA').select2('val', '');
+                    $('#ddlRefNo').select2('val', '');
+                    $('#ddlCaseType').val('');
+                    $('#ddlLegalCase').val('');
+                    $('#ddlStatus').val('');
+                }
+            });
+        }
+
+        function editRecord(refNo) {
+            modalPOST('Edit Special Case', 'SpecialCase', '_Edit', { "refNo": refNo, "mode": 'Edit' }, true);
+
+        }
+
+
+
+
+    </script>
+}

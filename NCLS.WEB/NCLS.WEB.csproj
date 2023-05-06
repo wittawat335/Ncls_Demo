@@ -215,12 +215,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AssignRepoOaController.cs" />
+    <Compile Include="Controllers\BankrupcyFraudController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BucketController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LegalInfoController.cs" />
+    <Compile Include="Controllers\SpecialCaseController.cs" />
+    <Compile Include="Controllers\TodoListController.cs" />
     <Compile Include="Entities\COL_USER.cs">
       <DependentUpon>NCLSEntities.tt</DependentUpon>
     </Compile>
@@ -628,9 +632,16 @@
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\ViewModels\AssignRepoOA\AssignRepoOAViewModel.cs" />
+    <Compile Include="Models\ViewModels\BankrupcyFraudC\BankruptcyFraudViewModel.cs" />
+    <Compile Include="Models\ViewModels\BankrupcyFraudC\DocViewModel.cs" />
+    <Compile Include="Models\ViewModels\BankrupcyFraudC\WriteOffUploadViewModel.cs" />
     <Compile Include="Models\ViewModels\Bucket\BucketMaintenance.cs" />
     <Compile Include="Models\ViewModels\Dashboard\DashboardMaintenance.cs" />
     <Compile Include="Models\ViewModels\Error\ErrorMaintenance.cs" />
+    <Compile Include="Models\ViewModels\LegalCase\LegalCase.cs" />
+    <Compile Include="Models\ViewModels\SpecialCase\SpecialCase.cs" />
+    <Compile Include="Models\ViewModels\TodoList\TodoListMaintenance.cs" />
+    <Compile Include="Models\ViewModels\TodoList\TodoListSearch.cs" />
     <Compile Include="Models\ViewModels\User\UserMaintenance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BucketRepository.cs" />
@@ -698,7 +709,6 @@
     <Folder Include="Assets\img\" />
     <Folder Include="Assets\plugins\" />
     <Folder Include="Assets\scripts\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -737,6 +747,36 @@
     <Content Include="Views\AssignRepoOa\_SearchGen.cshtml" />
     <Content Include="Views\AssignRepoOa\_Search.cshtml" />
     <Content Include="Views\AssignRepoOa\_AssignRepo.cshtml" />
+    <Content Include="Views\BankrupcyFraud\Index.cshtml" />
+    <Content Include="Views\BankrupcyFraud\_UploadShowFraud.cshtml" />
+    <Content Include="Views\BankrupcyFraud\_UploadShowBank.cshtml" />
+    <Content Include="Views\BankrupcyFraud\_Upload.cshtml" />
+    <Content Include="Views\BankrupcyFraud\_SearchBankAndFraud.cshtml" />
+    <Content Include="Views\BankrupcyFraud\_Fraud.cshtml" />
+    <Content Include="Views\BankrupcyFraud\_Bankrupcy.cshtml" />
+    <Content Include="Views\TodoList\Index.cshtml" />
+    <Content Include="Views\TodoList\_Search.cshtml" />
+    <Content Include="Views\TodoList\_Details.cshtml" />
+    <Content Include="Views\TodoList\_ddlStatus.cshtml" />
+    <Content Include="Views\TodoList\_CancelLegal.cshtml" />
+    <Content Include="Views\TodoList\_CancelRepo.cshtml" />
+    <Content Include="Views\SpecialCase\Index.cshtml" />
+    <Content Include="Views\SpecialCase\_SelectCustomer.cshtml" />
+    <Content Include="Views\SpecialCase\_SelectContract.cshtml" />
+    <Content Include="Views\SpecialCase\_SelectCheque.cshtml" />
+    <Content Include="Views\SpecialCase\_SearchData.cshtml" />
+    <Content Include="Views\SpecialCase\_Edit.cshtml" />
+    <Content Include="Views\SpecialCase\_AddChequeList.cshtml" />
+    <Content Include="Views\SpecialCase\_AddAttach.cshtml" />
+    <Content Include="Views\SpecialCase\_Add.cshtml" />
+    <Content Include="Views\LegalInfo\LegalCase.cshtml" />
+    <Content Include="Views\LegalInfo\_RepossessionCase.cshtml" />
+    <Content Include="Views\LegalInfo\_RehabilitationCase.cshtml" />
+    <Content Include="Views\LegalInfo\_RecallCase.cshtml" />
+    <Content Include="Views\LegalInfo\_OtherExpenseCase.cshtml" />
+    <Content Include="Views\LegalInfo\_OtherCase.cshtml" />
+    <Content Include="Views\LegalInfo\_ONCBCase.cshtml" />
+    <Content Include="Views\LegalInfo\_OCPBCase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

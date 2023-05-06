@@ -1,0 +1,161 @@
+﻿@using NCLS.WEB.Models.ViewModels.LegalCase
+@model LegalCase
+@{
+    var permission = true;
+    var vm = (LegalCase)Model;
+}
+
+<style type="text/css">
+    li.active a.nav-case {
+        border-top-color: #3fc9d5 !important;
+        border-top-width: 3px !important;
+    }
+
+    .legal-nav {
+        padding-right: 0px !important;
+    }
+
+    .legal-body {
+        padding-left: 4px !important;
+    }
+
+    .no-data {
+        pointer-events: none;
+        cursor: default;
+        color: silver;
+    }
+</style>
+
+<!-- Page Bar -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-legal"></i>
+            <span>Legal Information</span>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span>Legal Case</span>
+        </li>
+    </ul>
+</div>
+<br />
+
+<!-- Contract Info -->
+<div class="row">
+    <div class="col-md-12" id="dvViewContract">
+    </div>
+</div>
+
+<!--- Legal Tracking -->
+<div class="row">
+    <div class="col-md-12" id="dvLegalTracking">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th"></i>
+                    <span class="caption-subject bold">Legal Case Tracking</span>
+                </div>
+                <div class="inputs">
+                    <div class="portlet-input input-inline input-medium">
+                        <div class="input-group">
+                            <input type="text" id="txtSearchContract" class="form-control input-circle-left" placeholder="Contract No...">
+                            <span class="input-group-btn">
+                                <button id="btnSearchContract" class="btn btn-circle-right btn-default">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body" id="dvLegalNav">
+                @Html.Action("_LegalCase", "LegalInfo", new { contractNo = vm.ContractNo, defaultRefNo = vm.DefaultRefNo })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        function bindContractData(contractNo) {
+            if (contractNo != '' && contractNo != 'undefined') {
+                var url = '@Url.Content("~/ContractInfo/_ViewContract")';
+                var data = {
+                    "contractNo": contractNo,
+                    "allowSearch": "Y",
+                    "allowPrint": "N",
+                    "toggleType": "hide",
+                    "pageSize": "10"
+                };
+                $.post(url, data, function (response) {
+                    if (response.error) {
+                        //alertMessage('Contract data not found');
+                    }
+                    else {
+                        $("#dvViewContract").html('');
+                        $("#dvViewContract").html(response);
+                    }
+                });
+            }
+        }
+
+        $(function () {
+            $("#ddlLegal").change(function () {
+                dvShow();
+            });
+
+            $('#tbResult').DataTable();
+        });
+
+        function dvShow() {
+            hideAll();
+            var selectedValue = $("#ddlLegal").find("option:selected").val();
+            if (selectedValue == 'Case1') {
+                $("#dvCase1").show();
+            }
+            else if (selectedValue == 'Case2') {
+                $("#dvCase2").show();
+            }
+            else if (selectedValue == 'Case3') {
+                $("#dvCase3").show();
+            }
+        }
+
+        function hideAll() {
+            $("#dvCase1").hide();
+            $("#dvCase2").hide();
+            $("#dvCase3").hide();
+        }
+
+        $(document).ready(function () {
+            dvShow();
+            bindContractData('@vm.ContractNo');
+            $('#dvViewContract.portlet-body').hide();
+        });
+
+        $('#btnSearchContract').click(function () {
+
+            $('#dvLegalNav').html('');
+            $("#dvViewContract").html('');
+
+            var url = '@Url.Content("~/LegalInfo/_LegalCase")';
+            url = url + '?defaultRefNo=&contractNo=' + $('#txtSearchContract').val();
+            $.get(url, function (response) {
+                if (response.error) {
+                    //alertMessage('Data not found');
+                }
+                else {
+                    $('#dvLegalNav').html('');
+                    $('#dvLegalNav').html(response);
+                    bindContractData($('#txtSearchContract').val());
+                }
+            })
+
+
+        });
+
+
+
+    </script>
+}
+

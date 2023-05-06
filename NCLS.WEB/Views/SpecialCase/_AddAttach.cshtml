@@ -1,0 +1,21 @@
+﻿@using NCLS.WEB.Models.ViewModels.SpecialCase
+@model Attachment
+
+@{
+    var vm = (Attachment)Model;
+}
+<tr id="@("r_" + @vm.FileName)">
+    <td>@vm.FileName</td>
+    <td>@vm.Description</td>
+    <td style="text-align: center;">
+        <a href="@Url.Content("~/Common/DownloadLegalAttachment?fileName=" + vm.FileName)">
+            <i class="fa fa-save"></i>
+        </a>
+    </td>
+    <td style="text-align: center;">
+        <a onclick="deleteAttach('@vm.FileName')">
+            <i class="fa fa-times"></i>
+        </a>
+    </td>
+</tr>
+

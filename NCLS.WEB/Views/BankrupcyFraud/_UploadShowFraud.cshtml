@@ -1,0 +1,46 @@
+﻿
+@using NCLS.WEB.Utility
+
+@model List<NCLS.WEB.Models.ViewModels.BankrupcyFraudC.WriteOffUploadViewModel>
+
+@{
+    int i = 0;
+    Common cm = new Common();
+}
+@foreach (var m in Model)
+{
+    <tr>
+        <td>
+            <div hidden="hidden">
+                @Html.TextBox("model[" + @i + "].UploadType", m.UploadType)
+                @Html.TextBox("model[" + @i + "].ContractNo", m.ContractNo)
+
+            </div>
+            @(++i)
+
+        </td>
+        <td>@m.MsgError</td>
+        <td>@m.UploadType</td>
+        <td>@m.ContractNo</td>
+
+    </tr>
+
+
+
+
+}
+
+<script>
+
+
+    $(function () {
+      if ('@ViewBag.ModeSave' == '@Constants.Result.True') {
+          $("#btnSaveFraud").show(500);
+            alertMessage('@Constants.Msg.UploadCompleted');
+        } else {
+          $("#btnSaveFraud").hide();
+            alertMessage('@Constants.Msg.UploadIncompleted');
+        }
+    });
+
+</script>

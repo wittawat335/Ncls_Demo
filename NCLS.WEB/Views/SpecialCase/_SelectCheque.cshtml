@@ -1,0 +1,76 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body form">
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <select id="ddlSelectCheque" class="form-control" style="width:340px"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <a class="btn green" onclick="addThisCheque();">
+                                    Select
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.fn.modal.Constructor.prototype.enforceFocus = (function () {
+            $("#ddlSelectCheque").select2({
+                placeholder: "Search for cheque",
+                minimumInputLength: 3,
+                ajax: {
+                    url: '@Url.Content("~/SpecialCase/SearchCheque")',
+                type: "POST",
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        term: params.term,
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                    };
+                }
+            }
+        });
+         });
+    });
+
+
+    function addThisCheque() {
+        var chequeNo = $('#ddlSelectCheque').val();
+        $.post('@Url.Content("~/SpecialCase/GetChequeDetail")', { "chequeNo": chequeNo }, function (res) {
+            $('#txtChqNo').val(res.chequeNo);
+            $('#txtChqDate').val(res.chequeDate);
+            $('#txtChqAmount').val(res.chequeAmount);
+            $('#txtChqBranchName').val(res.branchName);
+            $('#ddlChqBank').val(res.bankCode);
+            getContractListByCheque(chequeNo);
+           // checkValidateInput();
+
+            clearModalLv2();
+        });
+    }
+
+    function getContractListByCheque(chequeNo) {
+        $.post('@Url.Content("~/SpecialCase/GetContractListByCheque")', { "chequeNo": chequeNo }, function (res) {
+            $('#txtChqContractList').val(res.contractList);
+        });
+    }
+
+</script>

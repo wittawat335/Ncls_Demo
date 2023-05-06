@@ -1,0 +1,166 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.SP_SEARCH_BANKRUPTCY_BY_DOC_Result>
+
+@{
+    var cm = new Common();
+    bool permApp = cm.IsPermission(Constants.ProgramCode.BankruptcyFraud, Constants.ActCode.BankruptcyFraudApprove);
+    int i = 0;
+    int y = 0;
+}
+
+<table id="tbResult" class="datatable table table-hover">
+    <thead style="text-align: center">
+        <tr>
+            <td><b>No.</b></td>
+            <td><b>Doc No</b></td>
+            <td><b>Type</b></td>
+            <td><b>Citizen ID</b></td>
+            <td><b>Name</b></td>
+            <td nowrap="nowrap"><b>ชื่อศาล</b></td>
+            <td nowrap="nowrap"><b>หมายเลขคดีแดง</b></td>
+            <td nowrap="nowrap"><b>ชื่อโจทก์</b></td>
+            <td nowrap="nowrap"><b>ชื่อจำเลย</b></td>
+            <td nowrap="nowrap"><b>วันที่ศาลมีคำสั่งพิทักษ์ทรัพย์เด็ดขาด</b></td>
+            <td nowrap="nowrap"><b>วันที่ครบกำหนดยื่นคำขอรับชำระหนี้</b></td>
+            <td nowrap="nowrap"><b>พิทักษ์ทรัพย์เด็ดขาด</b></td>
+            <td nowrap="nowrap"><b>วันที่ประนอมหนี้ก่อนล้มละลาย</b></td>
+            <td nowrap="nowrap"><b>วันที่ยกเลิกประนอมหนี้ก่อนล้มและพิพากษาให้ล้มละลาย</b></td>
+            <td nowrap="nowrap"><b>วันที่ศาลมีคำสั่งพิพากษาให้ล้มละลาย</b></td>
+            <td nowrap="nowrap"><b>วันที่ประนอมหนี้หลังล้มละลาย</b></td>
+            <td nowrap="nowrap"><b>วันที่ยกเลิกประนอมหนี้หลังล้มและพิพากษาให้ล้ม</b></td>
+            <td nowrap="nowrap"><b>วันที่ครบกำหนดยื่นคำขอรับชำระหนี้หลังล้ม</b></td>
+            <td nowrap="nowrap"><b>วันที่ยกเลิกการล้มละลาย</b></td>
+            <td nowrap="nowrap"><b>วันที่ปลดจากการเป็นบุคคลล้มละลาย</b></td>
+            <td nowrap="nowrap"><b>วันที่ยกฟ้อง</b></td>
+            <td nowrap="nowrap"><b>วันที่จำหน่ายคดี</b></td>
+            <td nowrap="nowrap"><b>วันที่ฟ้อง</b></td>
+
+            <td><b>Remark</b></td>
+
+        </tr>
+
+    </thead>
+    <tbody style="text-align: center" id="tbResultBody">
+        @foreach (var m in Model)
+        {
+
+            <tr>
+                <td>
+                    <div hidden="hidden">
+                        @Html.TextBox("model[" + @i + "].DocNo", m.BF_DOC_ID)
+                        @Html.TextBox("model[" + @i + "].CitizenId", m.ID_NUMBER)
+                        @Html.TextBox("model[" + @i + "].Remark")
+
+                    </div>     @(++i)
+                </td>
+                <td style="text-align: left;white-space: nowrap">@m.BF_DOC_ID</td>
+                <td style="text-align: left;white-space: nowrap">@m.BF_TYPE</td>
+                <td style="text-align: left;white-space: nowrap">@m.ID_NUMBER</td>
+                <td style="text-align: left;white-space: nowrap">@m.FULLNAME</td>
+                <td style="text-align: left;white-space: nowrap">@m.BFD_COURTNAME</td>
+                <td style="text-align: left;white-space: nowrap">@m.BFD_REDCODE</td>
+                <td style="text-align: left;white-space: nowrap">@m.BFD_PLAINTIFF_NAME</td>
+                <td style="text-align: left;white-space: nowrap">@m.BFD_DEFENDANT_NAME</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_RECEIVING_ORDER_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_SUBMIT_DUE_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_CANCEL_RECEIVING_ORDER_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_COMPROMISE_BEFORE_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_CANCEL_COMPROMISE_BAFORE_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_ORDER_BANKRUPCTY_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_COMPROMISE_AFTER_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_CANCEL_COMPROMISE_AFTER_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_SUBMIT_AFTER_DUE_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_CANCEL_BANKRUPTCY_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_DISCHANGED_BANKRUPTCY_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_DISMISSAL_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_DISPOSE_CASE_DATE)</td>
+                <td nowrap="nowrap">@cm.DateDisplay(m.BFD_FILING_DATE)</td>
+
+
+                @if (ViewBag.Mode == Constants.Mode.Edit)
+                {
+                    <td>
+
+                        <input type="text" id="txtRemark[@y]" onchange=" remarkchange(@y, this.value) " />
+                        <div hidden="hidden">@(y++)</div>
+                    </td>
+                }
+                else
+                {
+                    <td style="text-align: left;white-space: nowrap">@m.BFD_REMARK</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+        <div class="pull-right">
+
+            @if (ViewBag.Mode == Constants.Mode.Edit && permApp)
+            {
+                <button id="btnSave" class="btn green" onclick="Approve()"><i class="glyphicon glyphicon-ok" />&nbsp;Approve</button>
+                <button id="btnReject" class="btn red-flamingo" onclick="Reject()"><i class="fa fa-trash" />&nbsp;Reject</button>
+            }
+
+            <a class="btn btn-outline dark" onclick=" clearModal() "><i class="glyphicon glyphicon-off" />&nbsp;Close</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(function() {
+        $('#tbResult').DataTable({ "bSort": false,"ordering": false, "iDisplayLength": @cm.PageSize,"responsive": false,"oLanguage": {
+            "sSearch": "Search"
+        }});
+    });
+
+    function remarkchange(id, value) {
+
+        var idname = "#model_" + id + "__Remark";
+        $(idname).val(value);
+
+
+
+    }
+    function Approve() {
+        bootbox.confirm('@Constants.Msg.ConfirmApprove', function (confirm) {
+            if (confirm) {
+                var table = $('#tbResult').DataTable();
+                var data = table.$('input, select').serialize();
+                var url = '@Constants.UrlAction.ApproveBf';
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                        clearModal();
+                        document.getElementById('btnSearch').click();
+                    } else {
+                        alertMessage(result.message);
+                    }
+                });
+            }
+        });
+    }
+
+    function Reject() {
+        bootbox.confirm('@Constants.Msg.ConfirmReject', function (confirm) {
+            if (confirm) {
+                var table = $('#tbResult').DataTable();
+                var data = table.$('input, select').serialize();
+                var url = '@Constants.UrlAction.RejectBf';
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                        clearModal();
+                        document.getElementById('btnSearch').click();
+                    } else {
+                        alertMessage(result.message);
+                    }
+                });
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,357 @@
+﻿@using NCLS.WEB.Utility
+
+@{
+    Common cm = new Common();
+}
+<style>
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+        text-align: right;
+        visibility: hidden;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+
+            <div class="portlet-body form form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">
+                                Upload Type
+                                <label class="label-red">*</label>
+                            </label>
+                            <div class="col-md-3 col0">
+                                <select class="form-control input-sm" id="ddlCategory" style="text-align: center">
+                                    <option value="C1">Fraud</option>
+                                    <option value="C2">Bankruptcy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-md-5 control-label">File </label>
+                            <div class="col-md-3 col0">
+
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="input-group input-group-sm">
+                                        <div class="form-control" data-trigger="fileinput">
+                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                            <span class="fileinput-filename"></span>
+                                        </div>
+                                        <span class="input-group-addon btn default btn-file">
+                                            <span class="fileinput-new">Select file </span>
+                                            <span class="fileinput-exists">Change </span>
+                                            <input type="file" name="files" id="files" required="required">
+                                        </span>
+                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-5 col-md-offset-6">
+                            <input type="button" class="btn btn-info" value="Load File" id="btnUploadFraud" />
+                            <input type="button" class="btn btn-info" value="Load File" id="btnUploadBank" />
+                            <input type="button" class="btn btn-warning" onclick="Clear() " value="Clear">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row" id="dCase1">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-th "></i>
+                                <span class="caption-subject bold  ">Fraud Detail</span>
+                            </div>
+
+
+                        </div>
+                        <div class="portlet-body">
+
+                            <table class="table table-hover" id="tbFraud">
+                                <thead style="text-align: center">
+                                    <tr style="width: 10px">
+                                        <th>No</th>
+                                        <th>Validate</th>
+                                        <th>Upload Type</th>
+
+                                        <th>Contract No</th>
+
+
+                                    </tr>
+                                    <tr id="trfilterFraud" style="width: 10px">
+                                        <th>No</th>
+                                        <th>Validate</th>
+                                        <th>Upload Type</th>
+
+                                        <th>Contract No</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody style="text-align: left" id="tbFraudResult"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="dCase2">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-th "></i>
+                                <span class="caption-subject bold  ">Bankruptcy Detail</span>
+                            </div>
+
+
+                        </div>
+                        <div class="portlet-body table-responsive">
+
+                            <table class="table table-hover" id="tbBankruptcy">
+                                <thead style="text-align: center">
+                                    <tr>
+                                        <th><b>No</b></th>
+                                        <th><b>Validate</b></th>
+                                        <th style="white-space: nowrap"><b>Upload Type</b></th>
+                                        <!--<th><b>Status</b></th>-->
+                                        <th style="white-space: nowrap"><b>เลขที่บัตรประชาชนจำเลย</b></th>
+                                        <th style="white-space: nowrap"><b>ชื่อ</b></th>
+                                        <th style="white-space: nowrap"><b>นามสกุล</b></th>
+                                        <th style="white-space: nowrap"><b>ชื่อศาล</b></th>
+                                        <th style="white-space: nowrap"><b>หมายเลขคดีแดง</b></th>
+                                        <th style="white-space: nowrap"><b>ชื่อโจทก์</b></th>
+                                        <th style="white-space: nowrap"><b>ชื่อจำเลย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ศาลมีคำสั่งพิทักษ์ทรัพย์เด็ดขาด</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ครบกำหนดยื่นคำขอรับชำระหนี้</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ศาลมีคำสั่งเพิกถอนพิทักษ์ทรัพย์เด็ดขาด</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ประนอมหนี้ก่อนล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ยกเลิกประนอมหนี้ก่อนล้มและพิพากษาให้ล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ศาลมีคำสั่งพิพากษาให้ล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ประนอมหนี้หลังล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ยกเลิกประนอมหนี้หลังล้มและพิพากษาให้ล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ครบกำหนดยื่นคำขอรับชำระหนี้หลังล้ม</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ยกเลิกการล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ปลดจากการเป็นบุคคลล้มละลาย</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ยกฟ้อง</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่จำหน่ายคดี</b></th>
+                                        <th style="white-space: nowrap"><b>วันที่ฟ้อง</b></th>
+                                    </tr>
+
+                                </thead>
+                                <tbody style="text-align: center" id="tbBankruptcyResult"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+        <div class="pull-right">
+
+            <button id="btnSaveFraud" class="btn green" onclick="SaveUploadFraud()"><i class="fa fa-floppy-o" />&nbsp; Save</button>
+            <button id="btnSaveBank" class="btn green" onclick="SaveUploadBank()"><i class="fa fa-floppy-o" />&nbsp; Save</button>
+            <a class="btn btn-outline dark" onclick=" clearModal(); "><i class="fa fa-close" />&nbsp; Close</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+
+        $("#btnSaveBank").hide();
+        $("#btnUploadFraud").hide();
+        $("#btnUploadBank").hide();
+        $("#btnSaveFraud").hide();
+        $("#ddlCategory").change(function () {
+            dvShow();
+        });
+        dvShow();
+
+
+
+        $('#btnUploadFraud').click(function () {
+            if (($('#files').val()) == '') {
+                alertMessage('Please Select File');
+            } else {
+                bootbox.confirm('Do you want to import data?', function (confirm) {
+                    if (confirm) {
+                        var fileName = $('#files').val();
+                        if (fileName.trim() != '') {
+                            var formData = new FormData();
+                            var fileInput = document.getElementById('files');
+                            formData.append(fileInput.files[0].name, fileInput.files[0]);
+                            $.ajax({
+                                type: "POST",
+                                url: '@Constants.UrlAction.UploadFraud',
+                                data: formData,
+                                //dataType: 'Json',
+                                contentType: false,
+                                processData: false,
+                                success: function (rs) {
+                                    if (rs.result == '@Constants.Result.False') {
+                                        alertMessage(rs.message);
+
+                                    } else {
+                                        $('#tbFraud').DataTable().destroy();
+                                        $('#tbFraud tbody').empty();
+                                        $('#tbFraud tbody').html(rs);
+                                        $('#tbFraud').DataTable({ "paging": false });
+
+
+                                    }
+
+                                },
+                                error: function (error) {
+                                    alertMessage('error');
+                                }
+                            });
+
+                            }
+                        }
+                });
+                }
+        });
+
+        $('#btnUploadBank').click(function () {
+            if (($('#files').val()) == '') {
+                alertMessage('Please Select File');
+            } else {
+                bootbox.confirm('Do you want to import data?', function (confirm) {
+                    if (confirm) {
+                        var fileName = $('#files').val();
+                        if (fileName.trim() != '') {
+                            var formData = new FormData();
+                            var fileInput = document.getElementById('files');
+                            formData.append(fileInput.files[0].name, fileInput.files[0]);
+                            $.ajax({
+                                type: "POST",
+                                url: '@Constants.UrlAction.UploadBank',
+                                data: formData,
+                                //dataType: 'Json',
+                                contentType: false,
+                                processData: false,
+                                success: function (rs) {
+                                    if (rs.result == '@Constants.Result.False') {
+                                        alertMessage(rs.message);
+
+                                    } else {
+                                        $('#tbBankruptcy').DataTable().destroy();
+                                        $('#tbBankruptcy tbody').empty();
+                                        $('#tbBankruptcy tbody').html(rs);
+
+                                        $('#tbBankruptcy').DataTable({ "paging": false, "responsive": true });
+                                    }
+
+                                },
+                                error: function (error) {
+                                    alertMessage('Format');
+                                }
+                            });
+
+                            }
+                        }
+                });
+                }
+        });
+
+
+    });
+
+        function Clear() {
+            $('#tbFraud').DataTable().destroy();
+            $('#tbFraud tbody').empty();
+            $('#tbFraud tbody').remove();
+            $("#trfilterFraud").hide(500);
+
+            $('#tbBankruptcy').DataTable().destroy();
+            $('#tbBankruptcy tbody').empty();
+            $('#tbBankruptcy tbody').remove();
+            $("#btnSaveBank").hide(500);
+            $("#btnSaveFraud").hide(500);
+
+        }
+
+        function dvShow() {
+            hideAll();
+            var selectedValue = $("#ddlCategory").find("option:selected").val();
+            if (selectedValue == 'C1') {
+                Clear()
+                $("#dCase2").hide();
+                $("#dCase1").show(500);
+                $("#btnUploadBank").hide();
+                $("#btnUploadFraud").show();
+
+            }
+            else if (selectedValue == 'C2') {
+                Clear()
+                $("#dCase1").hide();
+                $("#dCase2").show(500);
+                $("#btnUploadFraud").hide();
+                $("#btnUploadBank").show();
+            }
+
+        }
+
+
+        function hideAll() {
+            $("#dCase1").hide();
+            $("#dCase2").hide();
+
+        }
+        function SaveUploadFraud() {
+            bootbox.confirm('@Constants.Msg.ConfirmSave', function (confirm) {
+                if (confirm) {
+                    var url = '@Constants.UrlAction.SaveFraud';
+                var table = $('#tbFraud').DataTable();
+                var data = table.$('input, select').serialize();
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                         clearModal();
+                         document.getElementById('btnSearch').click();
+                     } else {
+                         alertMessage(result.message);
+                     }
+                 });
+                 }
+            });
+
+         }
+
+         function SaveUploadBank() {
+             bootbox.confirm('@Constants.Msg.ConfirmSave', function (confirm) {
+            if (confirm) {
+                var url = '@Constants.UrlAction.SaveBank';
+                var table = $('#tbBankruptcy').DataTable();
+                var data = table.$('input, select').serialize();
+                $.post(url, data, function (result) {
+
+                    if (result.result == '@Constants.Result.True') {
+                        clearModal();
+                        document.getElementById('btnSearch').click();
+                    } else {
+                        alertMessage(result.message);
+                    }
+                });
+                }
+        });
+
+        }
+
+</script>
+

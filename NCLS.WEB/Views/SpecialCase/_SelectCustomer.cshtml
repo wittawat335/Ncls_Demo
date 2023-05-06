@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body form">
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <select id="ddlSelectCustomer" class="form-control" style="width:340px"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <a class="btn green" onclick="addThisCustomer();">
+                                    Select
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        $.fn.modal.Constructor.prototype.enforceFocus = (function () {
+            $("#ddlSelectCustomer").select2({
+                placeholder: "Search for customer",
+                minimumInputLength: 3,
+                ajax: {
+                    url: '@Url.Content("~/SpecialCase/SearchCustomer")',
+                type: "POST",
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        term: params.term,
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                    };
+                }
+            }
+        });
+         });
+    });
+
+
+    function addThisCustomer() {
+        var custCode = $('#ddlSelectCustomer').val();
+        $.post('@Url.Content("~/SpecialCase/GetCustDetail")', { "custCode": custCode }, function (res) {
+            $('#txtChqPayerName').val(res.custName);
+            $('#txtChqCitizenId').val(res.citizenId);
+            $('#txtChqAddress').val(res.address);
+            clearModalLv2();
+        });
+    }
+
+</script>

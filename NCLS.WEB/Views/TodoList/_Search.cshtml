@@ -1,0 +1,90 @@
+﻿@using NCLS.WEB.Utility
+@model List<NCLS.WEB.Entities.SP_SEARCH_TODOLIST_Result>
+@{
+    Common cm = new Common();
+}
+@if (Model.Count > 0)
+{
+    foreach (var result in Model)
+    {
+        <tr>
+
+            @if (result.JOB_DOC_FLAG == "0" && result.JOB_STATUS == "A")
+            {
+                <td nowrap onclick="PopupDocument('@result.JOB_ID')" style="cursor:pointer;">   <i class="fa fa-file"></i> @result.JOB_CASE_NAME</td>
+            }
+            else
+            {
+
+                if (result.JOB_STATUS == "I")
+                {
+                    <td nowrap>
+                        <i class="fa fa-car"></i>
+                        @result.JOB_CASE_NAME
+                    </td>
+                }
+                else if (result.JOB_CASE_CODE == Constants.LegalCase.LC011)
+                {
+                    <td nowrap style="cursor: pointer;" onclick="popupRepo('@result.JOB_ID','@result.JOB_CONTRACT_NO','@Constants.Mode.Edit') ">
+                        <i class="fa fa-car"></i>
+                        @result.JOB_CASE_NAME
+                    </td>
+                }
+                else
+                {
+
+                    <td nowrap style="cursor: pointer;" onclick=" window.location.href='@Url.Content("~/LegalInfo/LegalCase/" + result.JOB_ID)' "> <i class="fa fa-university"></i> @result.JOB_CASE_NAME</td>
+                }
+            }
+
+            <td nowrap>@result.JOB_ID</td>
+            <td nowrap>@result.JOB_CONTRACT_NO</td>
+            <td nowrap>@result.JOB_CUST_NAME</td>
+            <td nowrap>@result.JOB_BRAND</td>
+            <td nowrap>@result.JOB_MODEL</td>
+            <td>@result.JOB_PLATE_NO</td>
+            <td style="text-align: right">@cm.DecimalDisplay(result.JOB_OS_AMT_COL)</td>
+            <td style="text-align: center">@cm.DecimalDisplay(result.JOB_OVD_DAY_COL, 0)</td>
+            <td nowrap>@result.JOB_ADMIN_NAME</td>
+            <td>@cm.DateDisplay(result.JOB_ASSIGN_ADMIN_DATE)</td>
+            <td nowrap>@result.JOB_OA_NAME</td>
+            <td>@cm.DateDisplay(result.JOB_ASSIGN_OA_DATE)</td>
+            <td>@cm.DateDisplay(result.JOB_STEP_DATE)</td>
+            @if (!string.IsNullOrEmpty(@result.JOB_CASE_STATUS_COLOR))
+            {
+                <td style="text-align: center"><span class="badge" style='background-color: @result.JOB_CASE_STATUS_COLOR'>@result.JOB_HANDLE_DAY</span></td>
+            }
+            else
+            {
+                <td style="text-align: center">@result.JOB_HANDLE_DAY</td>
+            }
+            <td nowrap>@result.JOB_LEGAL_STATUS_NAME</td>
+            <td nowrap>@result.JOB_REPO_STATUS_NAME</td>
+            @if (result.JOB_DOC_FLAG == "0" && result.JOB_STATUS == "A")
+            {
+                <td onclick="PopupDocument('@result.JOB_ID')" style="cursor:pointer;text-align: center"><i class="glyphicon glyphicon-remove"></i></td>
+            }
+            else
+            {
+                <td style="text-align: center"><i class="glyphicon glyphicon-ok"></i></td>
+            }
+
+            @if (result.JOB_CASE_CODE != Constants.LegalCase.LC012)
+            {
+
+                <td onclick="PopupContract('@result.JOB_CONTRACT_NO')" style="cursor:pointer; text-align: center;"> <span class="glyphicon glyphicon-search" /> </td>
+            }
+            else
+            {
+                <td style="text-align: center;">   </td>
+            }
+
+        </tr>
+    }
+}
+
+
+
+
+
+

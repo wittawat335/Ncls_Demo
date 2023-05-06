@@ -1,0 +1,41 @@
+﻿@using NCLS.WEB.Entities
+@using NCLS.WEB.Utility
+
+@model List<NCLS.WEB.Entities.SP_SEARCH_SPECIAL_CASE_Result>
+@{
+    var permission = true;
+    var vm = (List<SP_SEARCH_SPECIAL_CASE_Result>)Model;
+    var cm = new Common();
+    int i = 0;
+}
+@foreach (var item in Model)
+{
+
+    <tr>
+        <td style="text-align:center; padding-left:22px">
+            @Html.CheckBox("Use[" + @i + "].CheckBox", false, new { @style = "width: 18px;height: 18px;" })
+
+            <div hidden="hidden">
+                @Html.TextBox("Use[" + @i + "].RefNo", item.RefNo)
+                @(++i)
+
+            </div>
+
+        </td>
+        <td style="text-align:center">
+            @if (item.JobStatus == Constants.Status.Active)
+            {
+                <a onclick="editRecord('@(item.RefNo)');"><i class="fa fa-edit"></i></a>
+            }
+        </td>
+        <td>@item.RefNo</td>
+        <td>@item.ContractOrCheque</td>
+        <td>@item.LegalAdmin</td>
+        <td>@item.LegalOA</td>
+        <td>@item.CaseType</td>
+        <td>@item.LegalCase</td>
+        <td>@item.LegalStatus</td>
+        <td>@item.DocumentStatus</td>
+    </tr>
+}
+

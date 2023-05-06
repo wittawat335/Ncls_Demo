@@ -1,0 +1,421 @@
+﻿@using NCLS.WEB.Utility
+@using NCLS.WEB.Models.ViewModels.TodoList
+@model TodoListSearch
+@{
+    var common = new Common();
+}
+
+<!-- Page Bar -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-list-ol"></i>
+            <span>To-do List</span>
+        </li>
+    </ul>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-search "></i>
+                    <span class="caption-subject  bold ">Search</span>
+                    <span class="caption-helper">enter search criteria...</span>
+                </div>
+                <div class="tools">
+                    <a class="expand" data-original-title="" title=""></a>
+                </div>
+            </div>
+            <div class="portlet-body form" style="display: none">
+                <form action="#" id="frmSearch" class="form-horizontal">
+                    <div class="row" id="dvSearchPanel">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Ref No </label>
+                                <div class="col-xs-6 col0">
+                                    <select class="form-control select2" id="ddlRefNo" name="ddlRefNo"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Borrower Name </label>
+                                <div class="col-xs-6 col0">
+                                    <select class="form-control select2" id="ddlCustCode" name="ddlCustCode"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Admin </label>
+                                <div class="col-xs-6 col0">
+                                    @Html.DropDownList("ddlAdmin", new SelectList(Model.AdminList, "USER_LOGIN", "USER_FIRST_NAME"), @Constants.SelectOption.SelectOne, new { @class = "form-control select2" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">OA </label>
+                                <div class="col-xs-6 col0">
+                                    @Html.DropDownList("ddlOA", new SelectList(Model.OAList, "OA_CODE", "OA_NAME_TH"), @Constants.SelectOption.SelectOne, new { @class = "form-control select2" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Assign Date(Admin) From </label>
+                                <div class="col-xs-6 col0">
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy" data-date="+0d">
+                                        <input type="text" id="dpAdminDateStart" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Assign Date(OA) From </label>
+                                <div class="col-xs-6 col0">
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy" data-date="+0d">
+                                        <input type="text" id="dpOADateStart" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Data Status </label>
+                                <div class="col-xs-6 col0">
+                                    @Html.DropDownList("ddlStatus", new SelectList(common.GetListStatus(), "CODE", "TEXT"), @Constants.SelectOption.SelectOne, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Contract No / Cheque No</label>
+                                <div class="col-xs-6 col0">
+                                    <input type="text" class="form-control" id="txtContractNo" name="txtContractNo">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Legal Case </label>
+                                <div class="col-xs-6 col0">
+                                    @Html.DropDownList("ddlLegalCase", new SelectList(Model.LegalCaseList, "CASE_CODE", "CASE_NAME_TH"), new { @class = "form-control select2", onchange = "BindLegalStatus();" })
+                                </div>
+                            </div>
+                            <div class="form-group" id="divLegalStatus">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Traffic Light </label>
+                                <div class="col-xs-6 col0">
+                                    <div class="col-xs-6 col0">
+                                        @Html.DropDownList("ddlTraffic", new SelectList(Model.TrafficList, "CODE", "TEXT"), @Constants.SelectOption.SelectOne, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Assign Date(Admin)  To </label>
+                                <div class="col-xs-6 col0">
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy" data-date="+0d">
+                                        <input type="text" class="form-control" id="dpAdminDateEnd" name="dpAdminDateEnd">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">Assign Date(OA)  To</label>
+                                <div class="col-xs-6 col0">
+                                    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy" data-date="+0d">
+                                        <input type="text" class="form-control" id="dpOADateEnd" name="dpOADateEnd">
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-7">
+                                <a class="btn green" id="btnSearch">
+                                    <i class="fa fa-search"></i>
+                                    Search
+                                </a>
+                                <a class="btn default" id="btnClear">
+                                    <i class="fa fa-close"></i>
+                                    Clear
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th "></i>
+                    <span class="caption-subject bold  ">List</span>
+                    <span class="caption-helper">search result...</span>
+
+                    <a href="@Constants.UrlAction.TodoListDownloadExcelFile" class="btn blue" id="btnExportExcel">
+                        <i class="fa fa-save"></i>
+                        &nbsp;Excel
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                <table id="tbSearh" class="datatable table table-hover table-striped">
+                    <thead style="text-align: center">
+                        <tr>
+                            <td><b>Legal Case</b></td>
+                            <td><b>Ref No.</b></td>
+                            <td><b>Contract No/Cheque No</b></td>
+                            <td><b>Borrower Name</b></td>
+                            <td><b>Brand</b></td>
+                            <td><b>Model</b></td>
+                            <td><b>Plate No</b></td>
+                            <td><b>Outstanding Balance</b></td>
+                            <td><b>Overdue Days</b></td>
+                            <td><b>Admin</b></td>
+                            <td><b>Assign Date(Admin)</b></td>
+                            <td><b>Legal OA</b></td>
+                            <td><b>Assign Date(OA)</b></td>
+                            <td><b>Step Date</b></td>
+                            <td><b>Handle Day</b></td>
+                            <td><b>Legal Status</b></td>
+                            <td><b>Repo Status</b></td>
+                            <td><b>Document</b></td>
+                            <td><b>Contract Info</b></td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbdSearchResult"></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    $(function() {
+
+        $('#dpAdminDateStart').change(function () {
+            $('#dpAdminDateEnd').val($('#dpAdminDateStart').val());
+        });
+
+        $('#dpOADateStart').change(function () {
+            $('#dpOADateEnd').val($('#dpOADateStart').val());
+        });
+
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            orientation: "left",
+            autoclose: true
+        });
+
+        $('#btnClear').click(function () {
+            bootbox.confirm('Do you want to clear data?', function (confirm) {
+                if (confirm) {
+                    SearchDefault('0');
+                }
+            });
+        });
+
+        $("#ddlRefNo").select2({
+            placeholder: '@Constants.SelectOption.SelectOne',
+            minimumInputLength: 3,
+            dropdownAutoWidth: 'true',
+            width: '100%',
+            allowClear: true,
+            ajax: {
+                url: '@Constants.UrlAction.TodoListsearchRefNo',
+                dataType: 'json',
+                quietMillis: 1000,
+                data: function(params) {
+                    return { q: params.term };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(obj) {
+                            return { id: obj.JOB_ID, text: obj.JOB_ID };
+                        })
+                    };
+                }
+            }
+        });
+
+        $("#ddlCustCode").select2({
+            placeholder: '@Constants.SelectOption.SelectOne',
+            minimumInputLength: 3,
+            dropdownAutoWidth: 'true',
+            width: '100%',
+            allowClear: true,
+            ajax: {
+                url: '@Constants.UrlAction.TodoListsearchCustomer',
+                dataType: 'json',
+                quietMillis: 200,
+                data: function(params) {
+                    return { q: params.term };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(obj) {
+                            return { id: obj.CUST_CODE, text: obj.CUST_NAME };
+                        })
+                    };
+                }
+            }
+        });
+
+        $("#ddlLegalCase").select2({
+            width: '100%',
+            placeholder: '@Constants.SelectOption.SelectOne',
+            allowClear: true
+        });
+        $("#ddlLegalCase").on("select2:unselect", function (e) {
+            $("#ddlLegalCase").select2({
+                width: '100%',
+                placeholder: '@Constants.SelectOption.SelectOne',
+                allowClear: true
+            }).select2('val', $('.select2 option:eq(1)').val());
+        });
+
+
+        BindLegalStatus();
+
+        SearchDefault('@Model.DefaultCase');
+
+    });
+    function BindLegalStatus() {
+        var url = '@Constants.UrlAction.TodoListsearchLegalStatus';
+        var data = {"legalCase" : $('#ddlLegalCase').val()};
+        $.post(url, data, function (response) {
+            $('#divLegalStatus').html("");
+            $('#divLegalStatus').html(response);
+
+        });
+    }
+
+    function BindDataLagalStatusByCase() {
+        var data = { "refNo": refNo, "caseCode": caseCode, "contractNo": contractNo };
+        modalPOST("Document", "TodoList", "_Details", data, false);
+    }
+
+
+    function SearchDefault(defaultCase) {
+
+        var url = '@Constants.UrlAction.TodoListSearch';
+        var data =
+        {   "searchDefault" : defaultCase,
+            "succStatus" : '@Constants.Status.Active'
+        }
+
+    ClearValueByDiv('dvSearchPanel');
+    $('#ddlRefNo').select2("val", "");
+    $('#ddlCustCode').select2("val", "");
+    $('#ddlAdmin').select2("val", "");
+    $('#ddlOA').select2("val", "");
+    $('#ddlLegalCase').select2("val", "");
+    $('#ddlStatus').val('@Constants.Status.Active');
+        $.post(url, data, function (response)
+        {
+            $('#tbSearh').DataTable().destroy();
+            $('#tbSearh tbody').empty();
+            $('#tbdSearchResult').html(response);
+            $('#tbSearh').DataTable({ "bSort": false, "iDisplayLength": @common.PageSize ,"scrollX": true});
+        });
+
+        }
+
+
+        $('#btnSearch').click(function () {
+
+
+
+            var url = '@Constants.UrlAction.TodoListSearch';
+        var data =
+        {   "searchDefault" : '1',
+            "refNo" : $('#ddlRefNo').val(),
+            "contractNo" : $('#txtContractNo').val(),
+            "custCode" : $('#ddlCustCode').val(),
+            "caseCode" : $('#ddlLegalCase').val(),
+            "cuseStatus" : $('#ddlCaseStatus').val(),
+            "trafficCode" : $('#ddlTraffic').val(),
+            "adminCode" : $('#ddlAdmin').val(),
+            "oaCode" : $('#ddlOA').val(),
+            "adminDateStart" : $('#dpAdminDateStart').val(),
+            "adminDateEnd" : $('#dpAdminDateEnd').val(),
+            "oaDateStart" : $('#dpOADateStart').val(),
+            "oaDateEnd" : $('#dpOADateEnd').val(),
+            "succStatus" : $('#ddlStatus').val()
+        }
+
+
+        $.post(url, data, function (response)
+
+        {
+            if(response.result=='F')
+            {
+                alert(response.msg);
+            }
+            else
+            {
+                $('#tbSearh').DataTable().destroy();
+                $('#tbSearh tbody').empty();
+                $('#tbdSearchResult').html(response);
+                $('#tbSearh').DataTable({ "bSort": false, "iDisplayLength": @common.PageSize ,"scrollX": true });
+            }
+        });
+
+    });
+
+    function PopupDocument(refNo) {
+        var data = { "refNo": refNo};
+        modalPOST("Document", "TodoList", "_Details", data, 50);
+    }
+
+    function PopupContract(refNo) {
+        var data = { "contractNo": refNo};
+        modalPOST("ContractInfo", "ContractInfo", "_ViewContract", data, 90);
+    }
+
+    function popupRepo(code, contractNo, mode) {
+        var data = { "code" : code, "contractNo" : contractNo, "mode" : mode};
+        modalPOST('Tracking Car Receives', 'ReceiveCar', '_Tracking', data, 90);
+    }
+
+    function rejectSpCase()
+    {
+
+    }
+
+</script>

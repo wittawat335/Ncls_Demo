@@ -1,0 +1,1429 @@
+﻿@using NCLS.WEB.Models.ViewModels.SpecialCase
+@using NCLS.WEB.Utility
+@model NCLS.WEB.Models.ViewModels.SpecialCase.SpecialCase
+@{
+    var docStatus = "0";
+    if (ViewBag.DocStatus != null)
+    {
+        docStatus = ViewBag.DocStatus;
+    }
+    var permission = true;
+    var vm = (SpecialCase)Model;
+    var cm = new Common();
+    var listOfAttach = new List<Attachment>();
+    if (vm.LegalCase == "LC012")
+    {
+        listOfAttach = vm.Cheque.ListOfAttach;
+    }
+    else
+    {
+        listOfAttach = vm.Other.ListOfAttach;
+    }
+    var otherDisplay = "";
+    var chequeDisplay = "";
+    if (ViewBag.SpCase == "Cheque")
+    {
+        chequeDisplay = "inline";
+        otherDisplay = "none";
+    }
+    else
+    {
+        chequeDisplay = "none";
+        otherDisplay = "inline";
+    }
+
+}
+
+@*
+    //------------------------------------
+    //--- LC015	ฟ้องเรียกทรัพย์
+    //--- LC016	ฟ้องขาดทุน
+    //--- LC010	AMLO คดี ปปง
+    //--- LC009	ONCB คดี ปปส
+    //--- LC003 Embezzle ยักยอกทรัพย์
+    //--- LC008	Exhibit ร้องคืนของกลาง
+    //--- LC006 Bankruptcy ล้มละลาย
+    //--- LC014 Claim เคลมประกัน
+    //--- LC002 OCPB สคบ
+    //--- LC001 Other คดีอื่นๆ
+    //--- LC012 Cheque เช็ค
+    //--- LC007	Rehabilitation ฟื้นฟูกิจการ
+    //------------------------------------
+*@
+
+
+<form action="#" class="form-horizontal" id='formValidate'>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Special Case</label>
+                    <div class="col-md-8">
+                        @if (ViewBag.Mode == "Edit")
+                        {
+                            @Html.DropDownListFor(x => x.LegalCase,
+                                                     cm.ListItemsLegalCaseSpecial, new { @class = "form-control", @disabled = "disabled" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(x => x.LegalCase,
+                                                     cm.ListItemsLegalCaseSpecial, new { @class = "form-control" })
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Ref No.</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("txtRefNo", vm.RefNo, new { @class = "form-control", disabled = "disabled", placeholder = "Auto generate", id = "txtRefNo" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane">
+            <div class="tabbable-custom tabbable-tabdrop">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab_general" data-toggle="tab">General Information</a>
+                    </li>
+                    <li>
+                        <a href="#tab_attachment" data-toggle="tab">Attachment</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    @*--- Tab General ---*@
+                    <div class="tab-pane active" id="tab_general">
+
+                        @*------------- คดีเช็ค -------------*@
+                        <div id="dvCheque" style="display: @chequeDisplay">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Payer Name</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group" style="text-align: left">
+                                                    @Html.TextBox("txtChqPayerName", vm.Cheque.PayerName, new { @class = "form-control" })
+                                                    <span class="input-group-btn">
+                                                        <a onclick="selectPayer();" class="btn green">
+                                                            <i class="fa fa-search"></i>
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Citizen ID</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("txtChqCitizenId", vm.Cheque.CitizenId, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Admin</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("txtChqAdmin", vm.Cheque.Admin, new { @class = "form-control", @style = "display:none" })
+                                                @Html.TextBox("txtChqAdminName", cm.GetNameUserByCode(vm.Cheque.Admin), new { @class = "form-control", @disabled = "disabled" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Request Date</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                    @Html.TextBox("txtChqRequestDate", cm.DateDisplay(vm.Cheque.RequestDate), new { @class = "form-control" })
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default" type="button">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Address</label>
+                                            <div class="col-md-8">
+                                                @Html.TextArea("txtChqAddress", vm.Cheque.Address, new { @class = "form-control", rows = "3" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Remark</label>
+                                            <div class="col-md-8">
+                                                @Html.TextArea("txtChqRemark", vm.Cheque.Remark, new { @class = "form-control", rows = "3" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="padding-bottom: 8px; padding-top: 0px;"></div>
+
+
+                            <div data-toggle="validator" id="chequeInput">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Cheque No.
+                                                    <label class="label-red">*</label>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <div class="input-group" style="text-align: left">
+                                                        @Html.TextBox("txtChqNo", "", new { @class = "form-control" })
+                                                        <span class="input-group-btn">
+                                                            <a onclick="selectCheque();" class="btn green">
+                                                                <i class="fa fa-search"></i>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Cheque Date
+                                                    <label class="label-red">*</label>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                        @Html.TextBox("txtChqDate", "", new { @class = "form-control" })
+                                                        <span class="input-group-btn">
+                                                            <button class="btn default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Cheque Amount
+                                                    <label class="label-red">*</label>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBox("txtChqAmount", "", new { @class = "form-control", @MaxLength = "10", @onkeypress = "return NumKey(event,this,'double',2);", @onblur = "NumFormat(this,2);", @onfocus = "OnFocus(this)", @style = "text-align:right;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Bank Name
+                                                    <label class="label-red">*</label>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownList("ddlChqBank", cm.ListItemsBank, Constants.SelectOption.SelectOne, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Branch Name
+                                                    <label class="label-red">*</label>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBox("txtChqBranchName", "", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Contract No
+                                                    <label class="label-red">*</label>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <div class="input-group" style="text-align: left">
+                                                        @Html.TextBox("txtChqContractList", "", new { @class = "form-control", @disabled = "disabled" })
+                                                        <span class="input-group-btn">
+                                                            <a onclick="selectContract('Cheque');" class="btn green">
+                                                                <i class="fa fa-search"></i>
+                                                            </a>
+                                                            <a onclick="clearChequeContract();" class="btn red">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-offset-3 col-md-4">
+                                            <input name="row" id="row" type="hidden" />
+                                            <input name="mode_detail" id="mode_detail" type="hidden" />
+
+                                            <button type="button" id="nameButton" onclick="return checkValidateInput();" class="btn green">
+                                                <i class="fa fa-plus"></i>
+                                                Add
+                                            </button>
+                                            <a class="btn default" onclick="clearValueCheque();">
+                                                <i class="fa fa-times"></i>
+                                                Clear
+                                            </a>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions" style="padding-bottom: 0px; padding-top: 0px;"></div>
+                            <div class="row">
+                                <div class="col-md-12" id="dvChequeList">
+                                    <table id="tbChqList" class="table table-hover">
+                                        <thead>
+                                            <tr style="text-align: center">
+                                                <th>No.</th>
+                                                <th>Cheque No.</th>
+                                                <th>Cheque Date</th>
+                                                <th>Cheque Amount</th>
+                                                <th>Bank Name</th>
+                                                <th>Branch Name</th>
+                                                <th>Contract No.</th>
+                                                <th>Borrower Name</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                                @*   <th>Contract Info</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdChqList"></tbody>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @*---------------------------------*@
+
+                        @*------------- คดีอื่นๆ -------------*@
+                        @*
+                            ContractNo
+                            Admin
+                            RequestDate
+                            Requestor
+                            LegalOA
+                            AssignOADate
+                            AMLOrderNo
+                            ShortFall
+                            CarReceivePlace
+                            TheCompanyPlan
+                            OrderedReh
+                            ReceiveOrderDate
+                            AnnounceDate
+                            AppointedDate
+                            LastDueDate
+                            PlaintiffName
+                            Insurer
+                            AssuredAmount
+                            TotalLossAmount
+                            Remark
+                        *@
+                        <div id="dvOther" style="display: @otherDisplay">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Contract No.</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group" style="text-align: left">
+                                                @Html.TextBox("txtOthContractNo", vm.ContractNo, new { @class = "form-control", @disabled = "disabled" })
+                                                <span class="input-group-btn">
+                                                    <a onclick="selectContract('Other');" class="btn green">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                    <a onclick="viewContract(document.getElementById('txtOthContractNo').value);" class="btn default" style="margin-left: 4px;">View Contract</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Admin</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthAdmin", vm.Other.Admin, new { @class = "form-control", @disabled = "disabled", @style = "display:none" })
+                                            @Html.TextBox("txtOthAdminName", cm.GetNameUserByCode(vm.Cheque.Admin), new { @class = "form-control", @disabled = "disabled" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Request Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthRequestDate", cm.DateDisplay(vm.Other.RequestDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Requestor</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthRequestor", vm.Other.Requestor, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Car Receive Place</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthCarReceivePlace", vm.Other.CarReceivePlace, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Car Receive Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthReceiveCarDate", cm.DateDisplay(vm.Other.CarReceiveDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">The Company's Plan</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthTheCompanyPlan", vm.Other.TheCompanyPlan, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Ordered Rehabilitation</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthOrderedReh", vm.Other.OrderedReh, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Receive Order Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthReceiveOrderDate", cm.DateDisplay(vm.Other.ReceiveOrderDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Announce Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthAnnounceDate", cm.DateDisplay(vm.Other.AnnounceDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Appointed Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthAppointedDate", cm.DateDisplay(vm.Other.AppointedDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Legal OA</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthLegalOA", vm.Other.LegalOA, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Assign OA Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthAssignOADate", cm.DateDisplay(vm.Other.AssignOADate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">AML Order No.</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthAMLOrderNo", vm.Other.AMLOrderNo, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">AML Order Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthAMLOrderDate", cm.DateDisplay(vm.Other.AMLOrderDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Short Fall</label>
+                                        <div class="col-md-8">
+                                            @* @Html.TextBox("txtOthShortFall", cm.DecimalDisplay(vm.Other.ShortFall), new { @class = "form-control" })*@
+                                            @Html.TextBox("txtOthShortFall", cm.DecimalDisplay(vm.Other.ShortFall), new { @class = "form-control", @id = "txtOthShortFall", @style = "text-align:right", @onkeypress = "return NumKey(event,this,'double',2);", @onblur = "NumFormat(this,2);", @onfocus = "OnFocus(this)" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Last Due Date</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group date date-picker" data-date="+0d" data-date-format="dd/mm/yyyy">
+                                                @Html.TextBox("txtOthLastDueDate", cm.DateDisplay(vm.Other.LastDueDate), new { @class = "form-control" })
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Plaintiff Name</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthPlaintiffName", vm.Other.PlaintiffName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Insurer</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthInsurer", vm.Other.Insurer, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Assured Amount</label>
+                                        <div class="col-md-8">
+                                            @*  @Html.TextBox("txtOthAssuredAmount", cm.DecimalDisplay(vm.Other.AssuredAmount), new { @class = "form-control" })*@
+                                            @Html.TextBox("txtOthAssuredAmount", cm.DecimalDisplay(vm.Other.AssuredAmount), new { @class = "form-control", @id = "txtOthAssuredAmount", @style = "text-align:right", @onkeypress = "return NumKey(event,this,'double',2);", @onblur = "NumFormat(this,2);", @onfocus = "OnFocus(this)" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Total Loss Amount</label>
+                                        <div class="col-md-8">
+                                            @* @Html.TextBox("txtOthTotalLossAmount", cm.DecimalDisplay(vm.Other.TotalLossAmount), new { @class = "form-control" })*@
+                                            @Html.TextBox("txtOthTotalLossAmount", cm.DecimalDisplay(vm.Other.TotalLossAmount), new { @class = "form-control", @id = "txtOthTotalLossAmount", @style = "text-align:right", @onkeypress = "return NumKey(event,this,'double',2);", @onblur = "NumFormat(this,2);", @onfocus = "OnFocus(this)" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Legal Case</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthLegalCase", vm.Other.LegalCase, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Remark</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBox("txtOthRemark", vm.Other.Remark, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*---------------------------------*@
+
+                    </div>
+
+                    @*--- Tab Attachement ---*@
+                    <div class="tab-pane" id="tab_attachment">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Attach File</label>
+                                    <div class="col-md-8">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-group-sm">
+                                                <div class="form-control" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                    <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <input type="file" name="files" id="files">
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Description</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBox("txtAttachDesc", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8">
+                                        <a class="btn green" onclick="uploadFile();">Upload</a>
+                                        <a class="btn default" onclick="clearFile();">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="tbAttach" class="table table-hover">
+                                    <thead>
+                                        <tr style="text-align: center">
+                                            <th>File Name</th>
+                                            <th>Description</th>
+                                            <th>Download</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbdAttach">
+                                        <!--Search Result-->
+                                        @foreach (var att in listOfAttach)
+                                        {
+                                            <tr id="@("r_" + att.FileName)">
+                                                <td>@att.FileName</td>
+                                                <td>@att.Description</td>
+                                                <td style="text-align: center;">
+                                                    <a href="@Url.Content("~/Common/DownloadLegalAttachment?fileName=" + att.FileName)"><i class="fa fa-save"></i></a>
+                                                </td>
+                                                <td style="text-align: center;"><a onclick="deleteAttach('@att.FileName')"><i class="fa fa-times"></i></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12" style="text-align: right;">
+            @if (docStatus != "1")
+            {
+                //<button type="submit" class="btn green" id="saveData" onclick="saveData();">Save</button>
+                <button type="submit" class="btn green" id="saveData">Save</button>
+            }
+            <a class="btn default" onclick="clearModal();">Close</a>
+        </div>
+    </div>
+</form>
+
+
+<script>
+
+    $(function () {
+
+        $('#formValidate').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                saveData();
+
+            }
+        });
+
+
+
+
+        //$('#chequeInput').validator().on('submit', function (e) {
+        //    if (e.isDefaultPrevented()) {
+        //        e.preventDefault();
+        //    } else {
+        //        e.preventDefault();
+        //        checkDuplicateCheque();
+
+        //    }
+        //});
+
+        if ('@ViewBag.Mode' == '@Constants.Mode.Edit')
+        {
+            ChequeListTableDetail('@Constants.Mode.Edit',0);
+            // ready set Mode detail = add
+            $('#mode_detail').val('@Constants.Mode.Add');
+        }
+
+        $('.date-picker>input').datepicker({
+            rtl: App.isRTL(),
+            orientation: "right",
+            autoclose: true
+
+        });
+        //$(".date-picker > input[type=text]").datepicker();
+        ReadOnlyByCase();
+
+
+
+        $.fn.modal.Constructor.prototype.enforceFocus = (function () {
+            $("#ddlSelectContract").select2({
+                placeholder: "Search for contract",
+                minimumInputLength: 3,
+                ajax: {
+                    url: '@Url.Content("~/SpecialCase/_SelectContractSearch")',
+                    type: "POST",
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            term: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                        };
+                    }
+                }
+            });
+
+            $("#ddlSelectCustomer").select2({
+                placeholder: "Search for customer",
+                minimumInputLength: 3,
+                ajax: {
+                    url: '@Url.Content("~/SpecialCase/SearchCustomer")',
+                    type: "POST",
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            term: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                        };
+                    }
+                }
+            });
+
+            $("#ddlSelectCheque").select2({
+                placeholder: "Search for cheque",
+                minimumInputLength: 3,
+                ajax: {
+                    url: '@Url.Content("~/SpecialCase/SearchCheque")',
+                    type: "POST",
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            term: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                        };
+                    }
+                }
+            });
+        });
+
+
+
+    });
+
+    function checkValidateInput(){
+
+        if($('#txtChqNo').val() == null || $('#txtChqNo').val().trim() == "")
+        {
+            alertMessage('Please input Cheque No');
+            return false;
+        }else if($('#txtChqDate').val() == null || $('#txtChqDate').val().trim() == "")
+        {
+            alertMessage('Please input Cheque Date');
+            return false;
+        }else if($('#txtChqAmount').val() == null || $('#txtChqAmount').val().trim() == "")
+        {
+            alertMessage('Please input Cheque Amount');
+            return false;
+        }
+        else if($('#ddlChqBank').val() == null || $('#ddlChqBank').val().trim() == "")
+        {
+            alertMessage('Please input Bank Name');
+            return false;
+        } else if($('#txtChqBranchName').val() == null || $('#txtChqBranchName').val().trim() == "")
+        {
+            alertMessage('Please input Branch Name');
+            return false;
+        } else if($('#txtChqContractList').val() == null || $('#txtChqContractList').val().trim() == "")
+        {
+            alertMessage('Please input Contract No');
+            return false;
+        }else{
+
+            checkDuplicateCheque();
+        }
+
+
+    }
+
+    function ChequeListTableDetail(mode,row){
+
+        var url = '@Url.Content("~/SpecialCase/_ChequeListTableDetail")';
+
+        var data = { "mode":mode , "row":row };
+        $.post(url, data, function (response) {
+
+            $('#tbChqList').DataTable().destroy();
+            $('#tbChqList tbody').empty();
+            $('#tbdChqList').html(response);
+            $("#tbChqList").DataTable({ "bSort": false, "iDisplayLength": @cm.PageSize,
+                "oLanguage": { "sSearch": "Search"}});
+        });
+    }
+    function ChequeListEdit(mode,row)
+    {
+        var url = '@Url.Content("~/SpecialCase/ChequeListEdit")';
+        $('#row').val(row);
+        $('#mode_detail').val(mode);
+        var data = {"mode":mode , "row":row};
+        $.post(url, data, function (data) {
+            $('#txtChqNo').val(data.ChequeNo);
+            $('#txtChqAmount').val(data.ChequeAmount);
+            $('#ddlChqBank').val(data.BankCode);
+            $('#ddlChqBank :selected').text(data.BankName);
+            $('#txtChqBranchName').val(data.BranchName);
+            $('#txtChqContractList').val(data.ContractNo);
+            $('#txtChqRemark').val(data.Remark);
+            var date = (data.ChequeDate == null ? "":DateJsonToDatedd_MM_yyyy(data.ChequeDate));
+            $('#txtChqDate').val(date);
+            $("#nameButton").html("<i class='fa fa-plus'></i> Update")
+            // $("#nameButton").removeClass('disabled');
+
+        });
+    }
+    function saveOther() {
+        var url = '@Url.Content("~/SpecialCase/SaveData")';
+        var data = {
+            "LegalCase": $('#LegalCase').val(),
+            "ContractNo": $('#txtOthContractNo').val(),
+            "RefNo": $('#txtRefNo').val(),
+            "Other.HasData": 'true',
+            "Other.Admin": $('#txtOthAdmin').val(),
+            "Other.RequestDate": $('#txtOthRequestDate').val(),
+            "Other.LegalOA": $('#txtOthLegalOA').val(),
+            "Other.AssignOADate": $('#txtOthAssignOADate').val(),
+            "Other.AMLOrderNo": $('#txtOthAMLOrderNo').val(),
+            "Other.AMLOrderDate": $('#txtOthAMLOrderDate').val(),
+            "Other.ShortFall":parseFloat($('#txtOthShortFall').val().replace(/,/g, '')),
+            "Other.CarReceivePlace": $('#txtOthCarReceivePlace').val(),
+            "Other.CarReceiveDate": $('#txtOthCarReceiveDate').val(),
+            "Other.Requestor": $('#txtOthRequestor').val(),
+            "Other.TheCompanyPlan": $('#txtOthTheCompanyPlan').val(),
+            "Other.OrderedReh": $('#txtOthOrderedReh').val(),
+            "Other.ReceiveOrderDate": $('#txtOthReceiveOrderDate').val(),
+            "Other.AnnounceDate": $('#txtOthAnnounceDate').val(),
+            "Other.AppointedDate": $('#txtOthAppointedDate').val(),
+            "Other.LastDueDate": $('#txtOthLastDueDate').val(),
+            "Other.PlaintiffName": $('#txtOthPlaintiffName').val(),
+            "Other.Insurer": $('#txtOthInsurer').val(),
+            "Other.AssuredAmount":parseFloat($('#txtOthAssuredAmount').val().replace(/,/g, '')),
+            "Other.TotalLossAmount": parseFloat($('#txtOthTotalLossAmount').val().replace(/,/g, '')),
+            "Other.LegalCase": $('#txtOthLegalCase').val(),
+            "Other.Remark": $('#txtOthRemark').val()
+        }
+        $.post(url, data, function (res) {
+            if (res.result == '1') {
+                alertMessage('Save data success');
+                searchData();
+            }
+        });
+    }
+
+    function saveCheque() {
+
+        var url = '@Url.Content("~/SpecialCase/SaveData")';
+        var data = {
+            "LegalCase": $('#LegalCase').val(),
+            "ContractNo": '',
+            "RefNo": $('#txtRefNo').val(),
+            "Cheque.HasData": 'true',
+            "Cheque.Admin": $('#txtChqAdmin').val(),
+            "Cheque.PayerName": $('#txtChqPayerName').val(),
+            "Cheque.CitizenId": $('#txtChqCitizenId').val(),
+            "Cheque.Address": $('#txtChqAddress').val(),
+            "Cheque.RequestDate": $('#txtChqRequestDate').val(),
+            "Cheque.Remark": $('#txtChqRemark').val()
+        }
+        $.post(url, data, function (res) {
+            if (res.result == '1') {
+                saveChequeList();
+            }
+        });
+    }
+
+    function saveChequeList() {
+        var chequeData = $('#dvChequeList').serializeObject();
+        chequeData.refNo = $('#txtRefNo').val();
+        var url = '@Url.Content("~/SpecialCase/SaveChequeList")';
+        $.post(url, chequeData, function (response) {
+            alertMessage('Save data success');
+            searchData();
+        });
+    }
+    function checkDuplicateCheque()
+    {
+
+        if($('#mode_detail').val() == '@Constants.Mode.Add'){
+            var url = '@Constants.urlAction.SpecialCaseCheckDuplicateCheque'
+            var data  = {"chequeNo":$('#txtChqNo').val()};
+            $.post(url, data, function (response) {
+                if(response.result == '@Constants.Result.True')
+                {
+                    alertMessage('@Constants.Msg.Duplicate');
+                }
+                else
+                {
+                    addCheque();
+                }
+
+            });
+        }else{
+            addCheque();
+        }
+
+    }
+    function addCheque() {
+
+        var data = {
+            "row": $('#row').val(),
+            "mode":$('#mode_detail').val(),
+            "refNo": $('#txtRefNo').val(),
+            "chequeNo": $('#txtChqNo').val(),
+            "chequeAmount": parseFloat($('#txtChqAmount').val().replace(/,/g, '')),
+            "chequeBankCode": $('#ddlChqBank').val(),
+            "chequeBankName": $('#ddlChqBank :selected').text(),
+            "chequeBranchName": $('#txtChqBranchName').val(),
+            "chequeContractList": $('#txtChqContractList').val(),
+            "chequeRemark": $('#txtChqRemark').val(),
+            "chequeDate": $('#txtChqDate').val()
+
+        };
+
+        var url = '@Constants.urlAction.SpecialCaseAddChequeList';
+        $.post(url, data, function (response) {
+
+            $('#tbChqList').DataTable().destroy();
+            $('#tbChqList tbody').empty();
+            $('#tbdChqList').html(response);
+            $("#tbChqList").DataTable({ "bSort": false, "iDisplayLength":@cm.PageSize,"oLanguage": { "sSearch": "Search"} });
+
+
+            //clearValueCheque
+            $("#nameButton").html("<i class='fa fa-plus'></i> Add")
+            $('#row').val("-1");
+            $('#mode_detail').val('@Constants.Mode.Add');
+
+            clearValueCheque();
+            //   sortingCheque();
+
+        });
+    }
+
+    function deleteCheque(chequeNo, contractNo) {
+        $('#r_' + chequeNo + contractNo).remove();
+        sortingCheque();
+    }
+
+    function clearFile()
+    {
+        $('#txtAttachDesc').val('');
+        $('.red.fileinput-exists').click();
+    }
+
+    function uploadFile() {
+        if ($('#txtRefNo').val() == '')
+        {
+            alertMessage('Please save data before attach file.');
+        }
+        else
+        {
+            bootbox.confirm('Do you want to import data?', function (confirm) {
+                if (confirm) {
+                    var fileName = $('#files').val();
+                    if (fileName.trim() != '') {
+                        var formData = new FormData();
+                        var fileInput = document.getElementById('files');
+                        formData.append(fileInput.files[0].name, fileInput.files[0]);
+                        formData.append("refNo", $('#txtRefNo').val());
+                        formData.append("desc", $('#txtAttachDesc').val());
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Content("~/SpecialCase/_AddAttach")',
+                           data: formData,
+                           //dataType: 'Json',
+                           contentType: false,
+                           processData: false,
+                           success: function (response) {
+                               if (response.result == '@Constants.Result.False') {
+                                   alertMessage(response.Msg);
+
+                               } else {
+
+                                   $('#tbdAttach').append(response);
+                                   clearFile();
+                               }
+
+                           },
+                           error: function (error) {
+                               alertMessage('error');
+                           }
+                       });
+
+                       }
+
+                   }
+           })
+           }
+       }
+
+
+
+       function viewContract(contractNo) {
+           var data = {
+               "contractNo": contractNo,
+               "allowSearch": "N",
+               "allowPrint": "N",
+               "toggleType": "show",
+               "pageSize": "10"
+           };
+           modalPOSTLv2('Contract Information', 'ContractInfo', '_ViewContract', data, true);
+       }
+
+       function sortingCheque() {
+           $('#tbChqList > tbody  > tr').each(function (i, tr) {
+               tr.cells[0].innerText = (i + 1).toString();
+           });
+       }
+
+       function selectContract(mode) {
+           modalPOSTLv2('Select Contract', 'SpecialCase', '_SelectContract', { "mode": mode }, false);
+       }
+
+       function selectPayer() {
+           modalPOSTLv2('Select Customer', 'SpecialCase', '_SelectCustomer', {}, false);
+       }
+
+       function selectCheque() {
+           modalPOSTLv2('Select Cheque', 'SpecialCase', '_SelectCheque', {}, false);
+       }
+
+       function clearChequeContract() {
+           if ($('#txtChqContractList').val() != '') {
+               bootbox.confirm('Do you want to clear list of contract?',
+                   function (confirm) {
+                       if (confirm) {
+                           $('#txtChqContractList').val('');
+                       }
+                   });
+           }
+       }
+
+       $('#LegalCase').change(function () {
+           ClearValueByDiv('dvOther');
+           var spCase = $('#LegalCase').val();
+           if (spCase == 'LC012') {
+               $('#dvCheque').show();
+               $('#dvOther').hide();
+               ReadOnlyByCase()
+           }
+           else {
+               $('#dvOther').show();
+               ReadOnlyByCase()
+               $('#dvCheque').hide();
+           }
+       });
+
+
+
+
+       function ReadOnlyByCase()
+       {
+           SetReadOnly('txtOthContractNo', false);//
+           SetReadOnly('txtOthAdmin', false);//show
+           SetReadOnly('txtOthRequestor', false);//
+           SetReadOnly('txtOthCarReceivePlace', false);//
+           SetReadOnly('txtOthTheCompanyPlan', false);//
+           SetReadOnly('txtOthOrderedReh', false);//
+           SetReadOnly('txtOthReceiveOrderDate', false);//
+           SetReadOnly('txtOthAnnounceDate', false);//
+           SetReadOnly('txtOthAppointedDate', false);//
+           SetReadOnly('txtOthLegalOA', false); //show
+           SetReadOnly('txtOthAssignOADate', false); //show
+           SetReadOnly('txtOthAMLOrderNo', false);//
+           SetReadOnly('txtOthShortFall', false); //show
+           SetReadOnly('txtOthLastDueDate', false);//
+           SetReadOnly('txtOthPlaintiffName', false);//
+           SetReadOnly('txtOthInsurer', false);//
+           SetReadOnly('txtOthAssuredAmount', false);//
+           SetReadOnly('txtOthTotalLossAmount', false);//
+           SetReadOnly('txtOthRemark', false);//
+           SetReadOnly('txtOthReceiveCarDate', false);
+           SetReadOnly('txtOthLegalCase', false);
+           SetReadOnly('txtOthAMLOrderDate', false);
+
+           SetReq('txtOthContractNo', false);//
+           SetReq('txtOthAdmin', false);//show
+           SetReq('txtOthRequestor', false);//
+           SetReq('txtOthCarReceivePlace', false);//
+           SetReq('txtOthTheCompanyPlan', false);//
+           SetReq('txtOthOrderedReh', false);//
+           SetReq('txtOthReceiveOrderDate', false);//
+           SetReq('txtOthAnnounceDate', false);//
+           SetReq('txtOthAppointedDate', false);//
+           SetReq('txtOthLegalOA', false); //show
+           SetReq('txtOthAssignOADate', false); //show
+           SetReq('txtOthAMLOrderNo', false);//
+           SetReq('txtOthShortFall', false); //show
+           SetReq('txtOthLastDueDate', false);//
+           SetReq('txtOthPlaintiffName', false);//
+           SetReq('txtOthInsurer', false);//
+           SetReq('txtOthAssuredAmount', false);//
+           SetReq('txtOthTotalLossAmount', false);//
+           SetReq('txtOthRemark', false);//
+           SetReq('txtOthReceiveCarDate', false);
+           SetReq('txtOthLegalCase', false);
+           SetReq('txtOthAMLOrderDate', false);
+           SetReq('txtOthRequestDate', false);
+
+
+           var spCase = $('#LegalCase').val();
+           if (spCase == 'LC001')
+           {
+               //LC001	คดีอื่นๆ
+               SetReadOnly('txtLegalCaseOther', true);
+               SetReadOnly('txtOthRemark', true);
+               SetReadOnly('txtOthLegalCase', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthLegalCase', true);
+
+           }
+           else if (spCase == 'LC002')
+           {
+               //LC002	คดีสคบ
+               SetReadOnly('txtOthAppointedDate', true);
+               SetReadOnly('txtOthRequestor', true);
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthRequestor', true);
+               SetReq('txtOthAppointedDate', true);
+
+
+           }
+           else if (spCase == 'LC003') {
+               //LC003	คดียักยอกทร้พย์
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthRequestDate', true);
+
+
+           }
+           else if (spCase == 'LC004') {
+               //LC004	คดีฉ้อโกง
+               SetReadOnly('txtOthRemark', true);
+               SetReq('txtOthRequestDate', true);
+
+           }
+           else if (spCase == 'LC005') {
+               //LC005	คดีโกงเจ้าหนี้
+               SetReadOnly('txtOthRemark', true);
+               SetReq('txtOthRequestDate', true);
+           }
+           else if (spCase == 'LC006') {
+               //LC006	คดีล้มละลาย
+               SetReadOnly('txtOthReceiveOrderDate', true);
+               SetReadOnly('txtOthAnnounceDate', true);
+               SetReadOnly('txtOthLastDueDate', true);
+               SetReadOnly('txtOthAppointedDate', true);
+               SetReadOnly('txtOthPlaintiffName', true);
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthLastDueDate', true);
+               SetReq('txtOthPlaintiffName', true);
+               SetReq('txtOthReceiveOrderDate', true);
+               SetReq('txtOthAnnounceDate', true);
+               SetReq('txtOthAppointedDate', true);
+
+
+           }
+           else if (spCase == 'LC007') {
+               //LC007	คดีฟิ้นฟูกิจการ
+               SetReadOnly('txtOthRequestor', true);
+               SetReadOnly('txtOthTheCompanyPlan', true);
+               SetReadOnly('txtOthOrderedReh', true);
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthRequestor', true);
+               SetReq('txtOthTheCompanyPlan', true);
+               SetReq('txtOthOrderedReh', true);
+
+
+
+           }
+           else if (spCase == 'LC008') {
+               //LC008	คดีร้องคืนของกลาง
+               SetReadOnly('txtOthCarReceivePlace', true);
+               SetReadOnly('txtOthReceiveCarDate', true);
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthCarReceivePlace', true);
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthReceiveCarDate', true);
+
+
+           }
+           else if (spCase == 'LC009') {
+               //LC009	คดีปปส
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthRequestDate', true);
+
+           }
+           else if (spCase == 'LC010') {
+               //LC010	คดีปปง
+               SetReadOnly('txtOthAMLOrderNo', true);
+               SetReadOnly('txtOthAMLOrderDate', true);
+               SetReadOnly('txtOthRemark', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthAMLOrderNo', true);
+               SetReq('txtOthAMLOrderDate', true);
+
+           }
+               //else if (spCase == 'LC012') {
+               //    //LC012	คดีเช็ค
+               //}
+           else if (spCase == 'LC013') {
+               //LC013	คดีรถหาย
+               SetReadOnly('txtOthRemark', true);
+               SetReadOnly('txtOthInsurer', true);
+               SetReadOnly('txtOthAssuredAmount', true);
+               SetReadOnly('txtOthTotalLossAmount', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthInsurer', true);
+               SetReq('txtOthAssuredAmount', true);
+               SetReq('txtOthTotalLossAmount', true);
+
+
+           }
+           else if (spCase == 'LC014') {
+               //LC014	เสียหายโดยสิ้นเชิง
+               SetReadOnly('txtOthRemark', true);
+               SetReadOnly('txtOthInsurer', true);
+               SetReadOnly('txtOthAssuredAmount', true);
+               SetReadOnly('txtOthTotalLossAmount', true);
+
+               SetReq('txtOthRequestDate', true);
+               SetReq('txtOthInsurer', true);
+               SetReq('txtOthAssuredAmount', true);
+               SetReq('txtOthTotalLossAmount', true);
+
+           }
+           else if (spCase == 'LC016') {
+               //LC016	ฟ้องส่วนขาดทุน
+               SetReadOnly('txtOthRemark', true);
+               SetReadOnly('txtOthShortFall', true);
+               SetReadOnly('txtOthRequestDate', true);
+
+
+               SetReq('txtOthShortFall', true);
+               SetReq('txtOthRequestDate', true);
+
+
+           }
+
+           $('#txtOthAdmin').val('@vm.Other.Admin');
+            $('#txtOthAdminName').val('@cm.GetNameUserByCode(vm.Cheque.Admin)');
+
+
+        }
+
+        function saveData() {
+            var spCase = $('#LegalCase').val();
+            var contractNo = '';
+            if (spCase == 'LC012') { contractNo = 'No validate' }
+            else { contractNo = $('#txtOthContractNo').val(); }
+
+            //--- Validate data
+            var ChequePayerName =  $('#txtChqPayerName').val();
+            var validateMsg = '';
+            if (spCase == '')
+                validateMsg += '- Please select Legal Case <br/>';
+            if (contractNo == '')
+                validateMsg += '- Please select Contract No.<br/>';
+
+            if(spCase == 'LC012'&&ChequePayerName == "")
+            {
+                validateMsg += "Payer Name is blank";
+            }
+
+            if (validateMsg != '') {
+                alertMessage(validateMsg);
+                return;
+            }
+
+            if (contractNo == 'No validate') contractNo = '';
+
+            if ($('#txtRefNo').val() == '') {
+
+                if(spCase == 'LC012'){
+                    var totalRecords =$("#tbChqList").DataTable().page.info().recordsTotal;
+                    //test if dataTable is empty
+                    if(totalRecords === 0)
+                    {
+                        bootbox.alert('data is empty');
+                    }else
+                    {
+                        var checkDup = "";
+                        $.post('@Url.Content("~/SpecialCase/GenerateRefNo")',
+                        { "contractNo": contractNo, "legalCase": spCase ,"checkDup":checkDup },
+                        function (res) {
+                            $('#txtRefNo').val(res.refNo);
+                            saveCheque();
+                        });
+                    }
+                }
+                else{
+
+                    $.post('@Url.Content("~/SpecialCase/CheckDuplicateAdd")',
+                                 { "contractNo": contractNo, "legalCase": spCase },
+                                   function (res) {
+                                       if(res.result == "true"){
+
+                                           // alert message
+                                           var checkDup = '@Constants.Status.Active';
+
+                                       bootbox.dialog({
+                                           message: "Do you want to inactive previous case and active the new one?",
+                                           title: "Confirm",
+                                           buttons: {
+                                               Yes: {
+                                                   label: "Yes",
+                                                   className: "green",
+                                                   callback: function() {
+                                                       $.post('@Url.Content("~/SpecialCase/GenerateRefNo")',
+                                                        { "contractNo": contractNo, "legalCase": spCase,"checkDup":'@Constants.Status.Inactive' },
+                                                     function (res) {
+                                                         $('#txtRefNo').val(res.refNo);
+                                                         saveOther();
+                                                       });
+                                                   }
+                                               },
+                                               No: {
+                                                   label: "No",
+                                                   className: "green",
+                                                   callback: function() {
+                                                       $.post('@Url.Content("~/SpecialCase/GenerateRefNo")',
+                                                         { "contractNo": contractNo, "legalCase": spCase,"checkDup":'@Constants.Status.Active' },
+                                                         function (res) {
+                                                        $('#txtRefNo').val(res.refNo);
+                                                             saveOther();
+                                                   });
+                                                   }
+                                               },
+                                               Cancal: {
+                                                   label: "Cancel",
+                                                   className: "default",
+                                                   callback: function() {
+
+                                                   }
+                                               }
+                                           }
+                                       });
+                                   }
+                                   else
+                                   {
+                                           bootbox.confirm('Do you want to save?',
+                             function (confirm) {
+                                 if (confirm) {
+                                     $.post('@Url.Content("~/SpecialCase/GenerateRefNo")',
+                                                  { "contractNo": contractNo, "legalCase": spCase,"checkDup":'@Constants.Status.Active' },
+                                                         function (res) {
+                                                             $('#txtRefNo').val(res.refNo);
+                                                             saveOther();
+                                                   });
+                                       }});
+                                   }
+                               });
+                           }
+                       }
+                       else {
+                //-- Update data
+                           if (spCase == 'LC012') {
+                               saveCheque();
+                               //saveAttachment();
+                           }
+                           else {
+                               saveOther();
+                               //saveAttachment();
+                           }
+                       }
+                   }
+                   function downloadAttach(fileName) {
+
+                   }
+                   function deleteAttach(fileName) {
+
+                       bootbox.confirm('Do you want to delete attachment?',
+                           function (confirm) {
+                               if (confirm) {
+                                   $.post('@Url.Content("~/SpecialCase/DeleteAttach")', { "fileName": fileName },
+                       function (res) {
+                           $('#r_' + fileName.replace('.', '\\.')).remove();
+                       });
+            }
+        });
+    }
+
+    function clearValueCheque()
+    {
+        $('#txtChqContractList').val('');
+        $('#txtChqDate').val('');
+        $('#txtChqNo').val('');
+        $('#ddlChqBank').val('');
+        $('#txtChqAmount').val('');
+        $('#txtChqBranchName').val('');
+
+
+        $("#nameButton").html("<i class='fa fa-plus'></i> Add")
+
+
+        $('#row').val("-1");
+        $('#mode_detail').val('@Constants.Mode.Add');
+            }
+</script>
+

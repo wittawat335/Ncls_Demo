@@ -1,0 +1,118 @@
+﻿@using NCLS.WEB.Models.ViewModels.LegalCase
+@using NCLS.WEB.Utility
+@model LegalCase
+
+@{
+    var vm = (LegalCase)Model;
+    var cm = new Common();
+    int i = 1;
+}
+
+<div class="row form-horizontal">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Repossession Date</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtRepoDate", cm.DateDisplay(vm.Repo.REPO_DATE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Auction Date</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtAuctionDate", cm.DateDisplay(vm.Repo.AUCTION_DATE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Auction Price</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtAuctionDate", cm.DecimalDisplay(vm.Repo.AUCTION_PRICE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Auction Fee</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtAuctionFee", cm.DecimalDisplay(vm.Repo.AUCTION_FEE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Repossession Fee</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtRepoFee", cm.DecimalDisplay(vm.Repo.REPO_FEE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Auction House</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtAuctionHouse", vm.Repo.AUCTION_HOUSE, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Outsouce Agent</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtRepoOA", vm.Repo.REPO_OA, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Principal Remaining</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtPrincipalRemain", cm.DecimalDisplay(vm.Repo.PRINCIPAL_REMAINING), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Total Remaining</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtTotalRemain", cm.DecimalDisplay(vm.Repo.TOTAL_REMAINING), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Comment</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtComment", vm.Repo.COMMENT, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="col-xs-4 control-label">R3 Date</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtR3Date", cm.DateDisplay(vm.Repo.R3_DATE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Penalty Interrest</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtPI", cm.DecimalDisplay(vm.Repo.PENALTY_INTEREST), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Redemption Date</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtRedemDate", cm.DateDisplay(vm.Repo.REDEMPTION_DATE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">AFT Date</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtAftDate", cm.DateDisplay(vm.Repo.AFT_DATE), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Redemption Amount</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtRedemAmount", cm.DecimalDisplay(vm.Repo.REDEMPTION_AMOUNT), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">AFT Amount</label>
+            <div class="col-xs-6 col0">
+                @Html.TextBox("txtAftAmount", cm.DecimalDisplay(vm.Repo.AFT_AMOUNT), new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+    });
+</script>

@@ -1,0 +1,191 @@
+﻿@using NCLS.WEB.Utility
+@model NCLS.WEB.Models.ViewModels.TodoList.TodoListMaintenance
+@{
+    var cm = new Common();
+    int i = 0;
+}
+
+
+<form id="frmDetails" data-toggle="validator">
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="tbDoc" class="table-bordered table-hover table-striped" style="width: inherit;">
+                <thead style="text-align: center;">
+                    <tr>
+                        <th style="padding: 5px;"><b>Document</b></th>
+                        <th style="padding: 5px;"><b>Complete</b></th>
+                        <th style="padding: 5px; white-space: nowrap;"><b>Not Complete</b></th>
+                        <th style="padding: 5px;"><b>Reason</b></th>
+                        <th style="padding: 5px;"><b>Remark</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.DocumentList.Count > 0)
+                    {
+                        foreach (var result in Model.DocumentList)
+                        {
+
+                            <tr>
+                                <td id="tr+@i" style="padding: 5px;">
+                                    <div hidden="hidden">
+                                        @Html.TextBox("Doc[" + @i + "].DocJobId", result.DocJobId)
+                                        @Html.TextBox("Doc[" + @i + "].DocContractNo", result.DocContractNo)
+                                        @Html.TextBox("Doc[" + @i + "].DocCode", result.DocCode)
+                                        @Html.CheckBox("Doc[" + @i + "].DocReq", result.DocReq)
+                                    </div>
+                                    @result.DocName
+                                </td>
+                                <td style="text-align: center">
+                                    @Html.CheckBox("Doc[" + @i + "].DocSuccFlag", result.DocSuccFlag, new { @onclick = "OnClickSucc(" + @i + ");", @style = "cursor:pointer" })
+                                </td>
+                                <td style="text-align: center">
+                                    @Html.CheckBox("Doc[" + @i + "].DocFailFlag", result.DocFailFlag, new { @onclick = "OnClickFail(" + @i + ");", @style = "cursor:pointer" })
+                                </td>
+                                <td>
+                                    @Html.DropDownList("Doc[" + @i + "].DocReasonCode", new SelectList(Model.ReasonList, "MASTER_CODE", "MASTER_NAME_TH", result.DocReasonCode), @Constants.SelectOption.SelectOne, new { @class = "form-control " })
+
+                                </td>
+                                <td>
+                                    @Html.TextBox("Doc[" + @i + "].DocRemark", result.DocRemark, new { @class = "form-control " })
+                                </td>
+                                <td hidden="hidden">
+                                    <div hidden="hidden">
+                                        @(++i)
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <hr />
+        <div class="form-group" id="divSendOA" hidden="hidden">
+            <div class="col-md-3">
+                @*  @Html.CheckBox("chSendOA", Model.DocFlag, new { @onclick = "SendOA();",@style = "cursor:pointer" })*@
+                <label for="chSendOA" style="cursor:pointer"> Send To Legal OA </label>
+
+            </div>
+            <div class="col-md-5">
+
+                @Html.DropDownList("ddlOACode", new SelectList(Model.OAList, "OA_CODE", "OA_NAME_TH"), @Constants.SelectOption.SelectOne, new { @class = "form-control" })
+
+            </div>
+            <div hidden="hidden">
+                <input type="text" name="txtCaseCode" value='@Model.CaseCode' readonly="true" />
+                <input type="text" name="txtRefNo" value='@Model.RefNo' readonly="true" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn blue-dark"><i class="fa fa-floppy-o" />&nbsp;&nbsp;Save</button>
+                    <a class="btn blue-dark" onclick=" clearModal() "><i class="fa fa-close" />&nbsp;&nbsp;Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+
+        $('#frmDetails').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                Save();
+            }
+        });
+    });
+
+    function SendOA() {
+
+        if ($('#chSendOA').is(":checked")) {
+            $('#ddlOACode').val('@Model.OADummy');
+            SetReq('ddlOACode', true);
+            SetReadOnly('ddlOACode', true);
+        }
+        else {
+
+            SetReq('ddlOACode', false);
+            SetReadOnly('ddlOACode', false);
+            $('#ddlOACode').val('');
+        }
+    }
+    function OnClickFail(index) {
+
+        $("#Doc_" + index + "__DocSuccFlag").prop('checked', false);
+        CheckDocument();
+    }
+    function OnClickSucc(index) {
+
+        $("#Doc_" + index + "__DocFailFlag").prop('checked', false);
+        CheckDocument();
+
+    }
+
+    function CheckDocument() {
+        var result = true;
+
+        for (var index = 0; index < '@i'; index++) {
+            if ($("#Doc_" + index + "__DocReq").is(":checked")) {
+                if (!$("#Doc_" + index + "__DocSuccFlag").is(":checked")) {
+                    result = false;
+                    break;
+                }
+
+            }
+        }
+
+        if (result) {
+            $('#divSendOA').show();
+            // SetReadOnly('ddlOACode', false);
+
+            $('#ddlOACode').val('@Model.OADummy');
+            SetReq('ddlOACode', true);
+            SetReadOnly('ddlOACode', true);
+        }
+        else {
+
+          //  $("#chSendOA").prop('checked', false);
+            $('#ddlOACode').val('');
+            SetReadOnly('ddlOACode', false);
+            $('#divSendOA').hide();
+
+            SetReq('ddlOACode', false);
+        }
+
+
+    }
+
+    function Save() {
+        bootbox.confirm('@Constants.Msg.ConfirmSave', function (confirm) {
+            if (confirm) {
+
+                var url = '@Constants.UrlAction.TodoListSave';
+                var data = $('#frmDetails').serializeObject();
+                $.post(url, data, function (result) {
+                    bootbox.alert(result.message, function () {
+                        if (result.result == '@Constants.Result.True') {
+                            clearModal();
+                            document.getElementById('btnSearch').click();
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+
+
+
+</script>
+
